@@ -5,6 +5,17 @@ tags:
   - 摘抄
 date: 2025-01-20
 ---
+
+> [!quote] 
+>  From Peter Drucker
+>  
+>  You can't manage what you can't measure 
+>  
+
+
+--- 
+
+
 > [!quote] 
 > From 北大bbs
 > 
