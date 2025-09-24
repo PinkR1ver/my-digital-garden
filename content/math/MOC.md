@@ -15,7 +15,7 @@ date: 2023-12-03
 ## Significance Test
 
 * [Basic about significance test](math/statistic/significance_test/whats_the_significance_test.md)
-* [McNemar Test and Kappa Test](math/statistic/significance_test/McNemarTest_and_KappaTest.md)
+* [McNemar Test and Kappa Test](math/statistic/significance_test/McNemarTest_and_ChiSquaredTest.md)
 * [MANOVA](math/statistic/significance_test/MANOVA.md)
 * [ANOVA](math/statistic/significance_test/ANOVA.md)
 
