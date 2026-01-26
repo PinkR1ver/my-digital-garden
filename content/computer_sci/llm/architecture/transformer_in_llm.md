@@ -11,6 +11,7 @@ tags:
 
 ![Transformer模型架构图](computer_sci/llm/architecture/attachments/transformer-model-architecture.png)
 <center>图1: 原始Transformer模型架构图</center>
+
 ## Architecture Detail
 
 ### Self-Attention
@@ -40,7 +41,7 @@ $$
 3. 归一化（Softmax），将Scpre转化为0-1的概率分布，代表每个单词对当前单词的“重要程度”；（Softmax后得到Attntion Weights，每一行都代表当前单词和剩下单词的关联程度的概率分布，每一行 sum = 1）
 4. 加权求和（MatMul），将得到的权重乘以对应的 Value ($V$) 并求和。这样得到的向量就融合了全句的信息。
 
-![](computer_sci/llm/architecture/attachments/Pasted%20image%2020260119150218.png)
+![](computer_sci/llm/architecture/attachments/self-attention-cal-del.png)
 <center>图3: Scaled Dot-Product Attention的计算流程图</center>
 
 即，
@@ -54,6 +55,217 @@ $$
 >  * **并行化：** 不需要像 RNN 那样等待前一个词算完，所有词可以同时计算。
 
 Self-Attention具体计算过程见：[self_attention_example](computer_sci/llm/architecture/self_attention_example.md)
+
+
+### Multi-Head Attention
+
+单头注意力只能从一个“视角”来关注信息。为了让模型能从多个不同的角度理解数据（例如，同时关注语法结构、语义关系等），Transformer引入了多头注意力。
+
+它通过在多个“子空间”中并行进行注意力计算来实现。每个头独立学习不同的注意力模式，然后将所有头的输出拼接起来，通过一个线性变换得到最终结果。
+
+![](computer_sci/llm/architecture/attachments/multi-head-attention.png)
+<center>图4: 多头注意力机制示意图，输入被投影到多个头，并行计算注意力后拼接输出</center>
+
+
+具体例子见：[multi_head_attention](computer_sci/llm/architecture/multi_head_attention.md)
+
+
+### Positional Encoding
+
+#### Traditional Positional Encoding
+
+Positional Encoding的传统做法（《Attention Is All You Need》原论文中）如下：
+
+- **单词变向量：** $X_{embed} = \text{Embedding}(X)$
+- **生成位置向量：** $P = \text{Positional Encoding}(pos)$
+- **暴力相加：** $Input = X_{embed} + P$
+
+其中，位置向量不是通过简单的 $1, 2, 3, 4$（数值会无限变大，破坏权重）,也不想用训练式的 Embedding（当时认为这无法处理比训练集更长的句子）。
+
+对于第 $pos$ 个位置（比如第 5 个词），它的位置向量 $PE$ 的第 $i$ 个维度（偶数维度用 sin，奇数维度用 cos）的计算方式是：
+
+$$PE_{(pos, 2i)} = \sin\left(\frac{pos}{10000^{2i/d_{model}}}\right)$$
+$$PE_{(pos, 2i+1)} = \cos\left(\frac{pos}{10000^{2i/d_{model}}}\right)$$
+
+- $pos$: 单词在句子中的位置（0, 1, 2...）。
+- $i$: 向量维度的索引。
+- $d_{model}$: 向量的总维度（比如 512）。
+
+为了理解这个公式，别看数学，看**物理逻辑**。
+想象一下我们要用数字表示位置：
+
+- **十进制：** 0, 1, 2, ..., 9, 10 (个位变了，十位才变)。
+- **二进制：**
+    
+    - 00**0**
+    - 00**1** (最后一位变化最快)
+    - 01**0** (中间位变化慢一点)
+    - 01**1**
+    - 10**0** (第一位变化最慢)
+        
+
+Transformer 的这套公式，其实就是**连续版本的二进制**。
+
+- **低维度（$i$ 很小）：** 分母小，频率高。正弦波震荡得非常快。这就像时钟的**秒针**，稍微动一下位置，数值就变了。
+- **高维度（$i$ 很大）：** 分母大 ($10000^{...}$)，频率低。正弦波震荡得非常慢。这就像时钟的**时针**，走了很多步，数值才变一点点。
+
+结论：
+
+每一个位置 $pos$，都会生成一个独一无二的波纹指纹。模型看到这个指纹，就能反推出：“哦，你是第 5 个词”。
+
+![](computer_sci/llm/architecture/attachments/Absolute%20Positional%20Encoding.gif)
+<center>图5: 位置编码热力图</center>
+
+
+原作者选择正弦函数，不仅仅是因为它有周期性，更因为一个**黄金数学性质**：**它可以让模型学会“相对位置”。**
+在三角函数公式中：
+
+$$\sin(\alpha + \beta) = \sin\alpha \cos\beta + \cos\alpha \sin\beta$$
+$$\cos(\alpha + \beta) = \cos\alpha \cos\beta - \sin\alpha \sin\beta$$
+
+这意味着：
+
+位置 $pos+k$ 的编码，可以表示为位置 $pos$ 的编码的线性变换（Linear Function）。
+
+虽然我们给的是绝对位置（第1个，第2个...），但因为这个数学性质，模型在 Attention 做矩阵乘法时，理论上能够自动推导出来：“只要知道了我在 pos，我就能轻松算出 pos+k 的特征。
+这就是为什么 Google 当时认为这套方案是完美的：既给了绝对位置，又隐含了相对位置信息。
+
+**第一反应可能是：** _“等等，Embedding 是语义信息（比如‘猫’），P 是位置信息（比如‘第1个’）。直接把这两个向量加起来，难道不会把‘猫’的含义搞乱吗？”_
+
+**答案是：不会（或者说影响可控）。**
+
+- **高维空间的稀疏性：** Transformer 的维度通常很大（比如 512 或 4096）。在这个高维空间里，语义信息和位置信息往往分布在不同的子空间里。虽然数值加在一起了，但模型在训练中能学会把它们“拆”开来看。
+
+
+同时，Absolute Positional Encoding有个大问题是，“I walk my dog every day”和“every day I walk my dog”，这两个含义完全相同的句子，tokens却获得了全新的位置编码；因此 Relative Positional Encoding非常关键，可以帮助我们知道sequence order而无需担心它们的精确位置
+
+#### PoRE(Rotary Positional Embedding)
+
+PoRE的设的设计初衷是**直接保证并利用相对位置信息**，这是它相较于传统绝对位置编码（如Sinusoidal PE）的核心优势。
+
+传统方法将位置信息“加”到词嵌入上，模型需要从绝对位置中“学习”相对关系。而PoRE的设计哲学是：**让Attention分数（即$Q$和$K$的点积）本身就只依赖于词向量内容和它们之间的相对位置**，从而在机制上先天保证相对位置的建模。
+
+这可以用一个关键公式来说明。在应用PoRE后，处于位置$m$的词$Q_m$和处于位置$n$的词$K_n$，它们的点积计算结果是：
+
+$$
+Q_m^T K_n = (\boldsymbol{R}_{\theta, m} \boldsymbol{W}_q \boldsymbol{x}_m)^T (\boldsymbol{R}_{\theta, n} \boldsymbol{W}_k \boldsymbol{x}_n)
+$$
+
+其中，$\boldsymbol{R}_{\theta, m}$和$\boldsymbol{R}_{\theta, n}$是分别由位置$m$和$n$决定的旋转矩阵。这个设计的精妙之处在于，利用旋转矩阵的性质（$\boldsymbol{R}_{\theta, m}^T \boldsymbol{R}_{\theta, n} = \boldsymbol{R}_{\theta, n-m}$），上面的公式可以简化为：
+
+$$
+Q_m^T K_n = (\boldsymbol{W}_q \boldsymbol{x}_m)^T \boldsymbol{R}_{\theta, n-m} (\boldsymbol{W}_k \boldsymbol{x}_n)
+$$
+
+**这个最终公式清晰地揭示了PoRE的设计初衷：** 词$m$对词$n$的注意力分数$Q_m^T K_n$，**仅仅依赖于**原始的词向量投影$(\boldsymbol{W}_q \boldsymbol{x}_m)$、$(\boldsymbol{W}_k \boldsymbol{x}_n)$以及它们之间的**相对位置差$(n-m)$**。
+
+**总结一下：**
+*   **初衷：** 让自注意力机制能够直接、显式地建模**相对位置**关系，而不是依赖模型从绝对位置中推断。
+*   **实现方式：** 通过对每一层的$Q$和$K$向量施加旋转变换（而非在输入层简单相加）。
+*   **核心公式体现：** $Q_m^T K_n = (\boldsymbol{W}_q \boldsymbol{x}_m)^T \boldsymbol{R}_{\theta, n-m} (\boldsymbol{W}_k \boldsymbol{x}_n)$。这个结果保证了注意力分数是词内容与相对位置$(n-m)$的函数，完美达成了设计目标。这使得模型在处理如“I walk my dog every day”和“every day I walk my dog”这样的句子时，能更好地理解词序变化下的语义一致性。
+
+![](computer_sci/llm/architecture/attachments/RoPE.png)
+<center>图6: PoRE</center>
+
+---
+
+
+在实现detail上， PoRE**不在输入层，而在每一层的 Attention 内部。**
+
+- **传统：** `Embedding + Position` $\to$ 进入 Layer 1。
+- **RoPE：** `Embedding` $\to$ 变成 $Q, K, V$ $\to$ **只对 $Q$ 和 $K$ 进行旋转** $\to$ 计算 $Q \cdot K^T$。
+
+$$x \xrightarrow{\text{Linear}} Q, K \xrightarrow{\text{RoPE (旋转)}} Q', K' \xrightarrow{\text{Dot Product}} \text{Attention Scores}$$
+
+RoPE 的核心思想是将向量看作复数平面上的点，通过**旋转角度**来注入位置信息。
+
+- **分组：** 把 $Q$ 和 $K$ 向量两两分组（比如 64 维分为 32 对）。
+- **定义角度：** 第 $m$ 个位置的 token，旋转角度为 $m\theta$。
+- **旋转：** 对每一对数值 $(x_1, x_2)$ 乘以一个旋转矩阵：
+    
+    $$\begin{pmatrix} \cos m\theta & -\sin m\theta \\ \sin m\theta & \cos m\theta \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \end{pmatrix}$$
+例如，
+$$Q = [\mathbf{1.0}, \mathbf{0.0}, \mathbf{1.0}, \mathbf{0.0}]$$
+RoPE 的第一步是 “切分” (Pairing)：它把这个 4 维向量，切成了 2 对 双胞胎。
+
+- **第一对双胞胎 (Pair 1):** 取前两个数 $[1.0, 0.0]$。
+    
+    - 这里 $x_1 = 0.0$
+    - 这里 $x_2 = 1.0$
+        
+- **第二对双胞胎 (Pair 2):** 取后两个数 $[1.0, 0.0]$。
+    
+    - 这里 $x_1 = 1.0$
+    - 这里 $x_2 = 0.0$
+        
+
+**这就是 $(x_1, x_2)$ 的真面目：它们就是向量里原本就有的数字，只是被我们两个两个地拎出来处理了。**
+
+ 第二步，计算“转速” $\theta$（这是变慢的关键！）。RoPE 规定，每一对的旋转基础角度 $\theta_i$ 是通过固定公式算出来的：
+
+$$\theta_i = \frac{1}{10000^{2i/d}}$$
+
+- $d = 4$ (总维度)
+- $i$ = 当前是第几对
+
+#### 1. 第 0 对 ($i=0$) 的转速：
+
+$$\theta_0 = \frac{1}{10000^{2 \times 0 / 4}} = \frac{1}{10000^0} = \frac{1}{1} = \mathbf{1}$$
+
+结论： 第 0 对的基础转速是 1 弧度/步（约 57 度）。非常快！
+
+#### 2. 第 1 对 ($i=1$) 的转速：
+
+$$\theta_1 = \frac{1}{10000^{2 \times 1 / 4}} = \frac{1}{10000^{0.5}} = \frac{1}{\sqrt{10000}} = \frac{1}{100} = \mathbf{0.01}$$
+
+结论： 第 1 对的基础转速是 0.01 弧度/步（约 0.57 度）。超级慢！
+
+第一对每次转 57 度，像风扇一样狂转。 第二对每次只转 0.5 度，像乌龟一样挪动。这就是“频率衰减”。
+
+现在从第一个单词开始，所以 $m=1$。 我们需要旋转的总角度是：$\text{总角度} = m \times \theta$。
+
+**处理第 0 对：高速组 $[1.0, 0.0]$**
+- **旋转角度：** $1 \times 1 = 1$ 弧度。
+- **计算：**
+    
+    $$ \begin{pmatrix} x'_0 \\ x'_1 \end{pmatrix} = \begin{pmatrix} \cos(1) & -\sin(1) \\ \sin(1) & \cos(1) \end{pmatrix} \begin{pmatrix} 1.0 \\ 0.0 \end{pmatrix}$$
+    
+    _(查表得：$\cos(1) \approx 0.54, \sin(1) \approx 0.84$)_
+    $$ x'_0 = 1.0 \times 0.54 - 0.0 \times 0.84 = \mathbf{0.54}$$$$x'_1 = 1.0 \times 0.84 + 0.0 \times 0.54 = \mathbf{0.84}$$
+    
+    **结果：** 向量从 $[1, 0]$ 变成了 $[0.54, 0.84]$。**变化非常大！**
+
+**处理第 1 对：低速组 $[1.0, 0.0]$**
+
+- **旋转角度：** $1 \times 0.01 = 0.01$ 弧度。
+- **计算：**
+    $$ \begin{pmatrix} x'_2 \\ x'_3 \end{pmatrix} = \begin{pmatrix} \cos(0.01) & -\sin(0.01) \\ \sin(0.01) & \cos(0.01) \end{pmatrix} \begin{pmatrix} 1.0 \\ 0.0 \end{pmatrix}$$
+    
+    _(近似：$\cos(0.01) \approx 1.0, \sin(0.01) \approx 0.01$)_
+    
+    $$ x'_2 = 1.0 \times 1.0 - 0.0 \times 0.01 \approx \mathbf{1.0}$$$$ x'_3 = 1.0 \times 0.01 + 0.0 \times 1.0 \approx \mathbf{0.01}$$
+    **结果：** 向量从 $[1, 0]$ 变成了 $[1.0, 0.01]$。**几乎没动！**
+
+我们把最终结果拼起来看：
+
+- **原始向量：** `[1.0, 0.0, 1.0, 0.0]`
+- **RoPE后向量：** `[0.54, 0.84, 1.0, 0.01]`
+    
+
+**这说明了什么？**
+
+1. 前两维（快针）：**它是“秒针”**。 如果单词从位置 1 挪到位置 2，这两维的数值会剧烈跳变（比如转到负数去）。它们负责告诉模型：**“我是第 1 个词，不是第 2 个词”。**（区分近距离）
+2. 后两维（慢针）：**它是“时针”**。 单词从位置 1 挪到位置 2，它几乎不动。只有当单词挪到第 100 个位置时，它才会转过明显的角度。它们负责告诉模型：**“我在句子的前半段，不在后半段”。**（区分长距离）
+    
+
+
+**解决周期性问题**：如果所有维度都像“秒针”一样高速旋转，那么位置$m$和位置$m+360$的编码在经过360度旋转后会变得完全相同，模型将无法区分它们。**低速维**的存在避免了这一点，因为它们在长距离内才会累积出显著变化，从而为超长序列中的每个位置生成一个**几乎唯一**的复合编码“指纹”。
+
+**实现多尺度感知**：模型可以同时利用不同频率的维度。当判断两个词是否相邻时，它更依赖**高速维**的显著差异；当判断两个词是否属于同一个长段落或章节时，它则参考**低速维**的相似性。
+
+---
+
+通过高速纬和低速纬，
 
 
 ## Interview-Question
@@ -168,3 +380,11 @@ Softmax 的导数特点是：**只有当两个分数的竞争非常激烈时，�
     
 
 所以，Scaling ($\div \sqrt{d_k}$) 就像是我们要使用 Softmax 这把“利剑”所必须支付的“保养费”。为了它的聚焦能力，这个代价是值得的。
+
+
+## Refernece
+
+[Understanding Transformer Sinusoidal Position Embedding](https://medium.com/@hirok4/understanding-transformer-sinusoidal-position-embedding-7cbaaf3b9f6a)
+[Understanding Positional Encoding in Transformers](https://erdem.pl/2021/05/understanding-positional-encoding-in-transformers)
+[How Rotary Position Embedding Supercharges Modern LLMs](https://www.youtube.com/watch?v=SMBkImDWOyQ)
+![RoPE PPT Slides](computer_sci/llm/architecture/attachments/RoPE.pptx)
