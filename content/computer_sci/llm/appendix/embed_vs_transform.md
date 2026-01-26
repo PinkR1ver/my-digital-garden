@@ -3,7 +3,7 @@ title: Embed vs. Transform
 tags:
   - basic
   - English
-date: 2025-01-26
+date: 2026-01-26
 ---
 虽然在计算机科学（特别是AI领域）经常一起出现，但在英文原本的**语意逻辑（Semantics）**上，Transform 和 Embedding 表达的并不是同一个概念。
 
