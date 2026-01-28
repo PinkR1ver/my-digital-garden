@@ -230,8 +230,11 @@ $$\theta_1 = \frac{1}{10000^{2 \times 1 / 4}} = \frac{1}{10000^{0.5}} = \frac{1}
     
     $$ \begin{pmatrix} x'_0 \\ x'_1 \end{pmatrix} = \begin{pmatrix} \cos(1) & -\sin(1) \\ \sin(1) & \cos(1) \end{pmatrix} \begin{pmatrix} 1.0 \\ 0.0 \end{pmatrix}$$
     
-    _(查表得：$\cos(1) \approx 0.54, \sin(1) \approx 0.84$)_
-    $$ x'_0 = 1.0 \times 0.54 - 0.0 \times 0.84 = \mathbf{0.54}$$$$x'_1 = 1.0 \times 0.84 + 0.0 \times 0.54 = \mathbf{0.84}$$
+    (查表得：$\cos(1) \approx 0.54, \sin(1) \approx 0.84$)
+    
+    $$ x'_0 = 1.0 \times 0.54 - 0.0 \times 0.84 = \mathbf{0.54}$$
+    
+    $$x'_1 = 1.0 \times 0.84 + 0.0 \times 0.54 = \mathbf{0.84}$$
     
     **结果：** 向量从 $[1, 0]$ 变成了 $[0.54, 0.84]$。**变化非常大！**
 
@@ -241,9 +244,11 @@ $$\theta_1 = \frac{1}{10000^{2 \times 1 / 4}} = \frac{1}{10000^{0.5}} = \frac{1}
 - **计算：**
     $$ \begin{pmatrix} x'_2 \\ x'_3 \end{pmatrix} = \begin{pmatrix} \cos(0.01) & -\sin(0.01) \\ \sin(0.01) & \cos(0.01) \end{pmatrix} \begin{pmatrix} 1.0 \\ 0.0 \end{pmatrix}$$
     
-    _(近似：$\cos(0.01) \approx 1.0, \sin(0.01) \approx 0.01$)_
+    (近似：$\cos(0.01) \approx 1.0, \sin(0.01) \approx 0.01$)
     
-    $$ x'_2 = 1.0 \times 1.0 - 0.0 \times 0.01 \approx \mathbf{1.0}$$$$ x'_3 = 1.0 \times 0.01 + 0.0 \times 1.0 \approx \mathbf{0.01}$$
+    
+    $$ x'_2 = 1.0 \times 1.0 - 0.0 \times 0.01 \approx \mathbf{1.0}$$
+    $$ x'_3 = 1.0 \times 0.01 + 0.0 \times 1.0 \approx \mathbf{0.01}$$
     **结果：** 向量从 $[1, 0]$ 变成了 $[1.0, 0.01]$。**几乎没动！**
 
 我们把最终结果拼起来看：
@@ -265,7 +270,62 @@ $$\theta_1 = \frac{1}{10000^{2 \times 1 / 4}} = \frac{1}{10000^{0.5}} = \frac{1}
 
 ---
 
-通过高速纬和低速纬，
+
+同时，RoPE技术还跟Training Context Length有很大的关系，这部分我们详细见：[RoPE_detail](computer_sci/llm/architecture/RoPE_detail.md)
+
+
+## Transformer Arch
+
+### Encoder-Decoder
+
+2017 年《Attention is All You Need》论文中的原始形态，最初是为**机器翻译**设计的。
+
+* ***Encoder（编码器）：** 负责“理解”。它通过多层 Self-Attention 查看整个输入句子，把每个词转化成包含上下文信息的向量。
+* **Decoder（解码器）：** 负责“生成”。它比 Encoder 多了一个 **Cross-Attention（交叉注意力）** 层。
+	* **Cross-Attention：** Decoder 会拿着自己已经生成的词，去询问 Encoder：“原文里哪些信息对我生成下一个词最重要？”
+
+
+- **输入端：** Input $\rightarrow$ Embedding + Positional Embedding $\rightarrow$ Encoder。
+- **中间桥梁：** Encoder 输出的“特征矩阵”被送往 Decoder 的每一层。
+- **输出端：** Decoder 结合已生成的词和 Encoder 的信息，逐个预测下一个词。
+
+### Encoder-only & Decoder-only
+
+随着研究深入，人们发现这两个模块其实可以拆开单独使用，这也开启了 NLP 的两个大时代。
+
+#### Encoder-only (代表作：BERT)
+
+- **结构：** 只保留左半边。
+- **特点：** “全向看”。计算某个词时，它能看到句子中左边和右边所有的词。
+- **擅长：** 文本分类、命名实体识别、阅读理解。因为它能透彻地理解上下文，但由于它“预知了未来（看到了右边的词）”，所以很难用来做流畅的文本生成。
+    
+
+#### Decoder-only (代表作：GPT 系列)
+
+- **结构：** 只保留右半边，但去掉了 Cross-Attention（因为没有 Encoder 了）。
+- **特点：** “向左看”。由于使用了 **Masked Self-Attention（掩码自注意力）**，它在生成第 $n$ 个词时，只能看到前 $n-1$ 个词。
+- **擅长：** 预测下一个词。
+
+
+### LLM：Decoder-only？
+
+从 BERT（Encoder-only）统治世界到 GPT（Decoder-only）一统江湖，主要有以下几个深层原因：
+
+#### A. 训练效率与规模化（Scalability）
+
+Encoder-Decoder 结构虽然强大，但参数量分布在两个模块中。研究发现，将所有参数集中在一个统一的 Decoder 架构下，模型在海量数据上的学习效率更高。随着参数规模达到千亿级，Decoder-only 展现出了更强的**涌现能力（Emergent Abilities）**。
+
+#### B. 任务的统一性
+
+LLM 的本质是“文本续写”。
+
+- **Encoder-only** 适合判别任务，但生成能力弱。
+- **Encoder-Decoder** 适合翻译，但在处理复杂的开放式对话、逻辑推理时，Encoder 的预处理有时反而限制了模型生成的自由度。
+- **Decoder-only** 把一切任务（翻译、分类、代码、创作）都转化成了“预测下一个词”。这种极简的逻辑在工程实现上极其稳定。
+    
+#### C. 零样本推理（Zero-shot Learning）
+
+Decoder-only 架构在预训练阶段就是在做“根据上文填空”。这让它天然适应 Prompt（提示词）模式。你给它一段指令，它会自然而然地沿着指令往下补全，这种特性是 BERT 等模型很难模拟的。
 
 
 ## Interview-Question
@@ -384,7 +444,7 @@ Softmax 的导数特点是：**只有当两个分数的竞争非常激烈时，�
 
 ## Refernece
 
-[Understanding Transformer Sinusoidal Position Embedding](https://medium.com/@hirok4/understanding-transformer-sinusoidal-position-embedding-7cbaaf3b9f6a)
-[Understanding Positional Encoding in Transformers](https://erdem.pl/2021/05/understanding-positional-encoding-in-transformers)
-[How Rotary Position Embedding Supercharges Modern LLMs](https://www.youtube.com/watch?v=SMBkImDWOyQ)
-![RoPE PPT Slides](computer_sci/llm/architecture/attachments/RoPE.pptx)
+* [Understanding Transformer Sinusoidal Position Embedding](https://medium.com/@hirok4/understanding-transformer-sinusoidal-position-embedding-7cbaaf3b9f6a)
+* [Understanding Positional Encoding in Transformers](https://erdem.pl/2021/05/understanding-positional-encoding-in-transformers)
+* [How Rotary Position Embedding Supercharges Modern LLMs](https://www.youtube.com/watch?v=SMBkImDWOyQ)
+* [RoPE PPT Slides](computer_sci/llm/architecture/attachments/RoPE.pptx)
