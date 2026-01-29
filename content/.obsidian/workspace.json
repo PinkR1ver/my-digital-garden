@@ -8,29 +8,17 @@
         "type": "tabs",
         "children": [
           {
-            "id": "400f3b5c2f248987",
-            "type": "leaf",
-            "state": {
-              "type": "image",
-              "state": {
-                "file": "computer_sci/llm/architecture/attachments/Long-term-attention-decay.png"
-              },
-              "icon": "lucide-image",
-              "title": "Long-term-attention-decay"
-            }
-          },
-          {
             "id": "e0d9d462f5dd7c31",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "computer_sci/llm/architecture/RoPE_detail.md",
+                "file": "report/vestibular_device_market_analyze.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "RoPE_detail"
+              "title": "vestibular_device_market_analyze"
             }
           }
         ]
@@ -229,32 +217,35 @@
       "copilot:Open Copilot Chat": false
     }
   },
-  "active": "93a92ce4b44d39a4",
+  "active": "e0d9d462f5dd7c31",
   "lastOpenFiles": [
-    "computer_sci/llm/appendix/embed_vs_transform.md",
+    "report/attachments/Pasted image 20260129193956.png",
+    "report/attachments/Pasted image 20260129193938.png",
+    "report/attachments/Pasted image 20260129193847.png",
+    "report/attachments/Pasted image 20260129193822.png",
+    "report/attachments/Pasted image 20260129193759.png",
+    "report/attachments/Pasted image 20260129193721.png",
+    "report/attachments/Pasted image 20260129193510.png",
+    "report/attachments/Pasted image 20260129193256.png",
+    "report/attachments/Pasted image 20260129193215.png",
+    "report/attachments/Pasted image 20260129193158.png",
+    "report/attachments/Pasted image 20260129193101.png",
+    "computer_sci/llm/architecture/transformer_in_llm.md",
+    "report/vestibular_device_market_analyze.md",
     "computer_sci/llm/architecture/RoPE_detail.md",
+    "computer_sci/llm/appendix/embed_vs_transform.md",
     "computer_sci/llm/architecture/multi_head_attention.md",
     "computer_sci/llm/architecture/self_attention_example.md",
-    "computer_sci/llm/architecture/transformer_in_llm.md",
     "computer_sci/llm/basic/perplexity.md",
-    "computer_sci/llm/architecture/attachments/Long-term-attention-decay.png",
     "computer_sci/llm/basic",
     "computer_sci/llm/architecture/attachments/~$RoPE.pptx",
     "computer_sci/web/net_tool/tailscale.md",
     "computer_sci/terminal/tool",
     "computer_sci/terminal",
-    "computer_sci/llm/architecture/attachments/Absolute Positional Encoding.gif",
-    "computer_sci/llm/architecture/attachments/multi-head-attention.png",
-    "computer_sci/llm/architecture/attachments/RoPE.png",
     "math/statistic/basic_concepot/var_addition.md",
-    "computer_sci/llm/architecture/attachments/Pasted image 20260120154945.png",
-    "computer_sci/llm/architecture/attachments/Pasted image 20260126161339.png",
     "computer_sci/llm/architecture/attachments/RoPE.pptx",
     "computer_sci/llm/appendix",
-    "computer_sci/llm/architecture/attachments/self-attention-cal-del.png",
-    "computer_sci/llm/architecture/attachments/self-attention-example.png",
     "math/statistic/basic_concepot/quantile_concept.md",
-    "computer_sci/llm/architecture/attachments/transformer-model-architecture.png",
     "computer_sci/llm/architecture/attachments",
     "math/MOC.md",
     "math/statistic/significance_test/McNemarTest_and_ChiSquaredTest.md",
@@ -273,9 +264,7 @@
     "copilot/copilot-custom-prompts/Fix grammar and spelling.md",
     "copilot/copilot-custom-prompts",
     "copilot",
-    "math/statistic/significance_test/MANOVA.md",
     "hobbies/IELTS/talking",
-    "hobbies/IELTS/writing_template/attachments/Pasted image 20250605140636.png",
     "Untitled 1.canvas",
     "Untitled.canvas"
   ]
