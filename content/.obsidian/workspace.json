@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "report/vestibular_device_market_analyze.md",
+                "file": "computer_sci/llm/architecture/KV_cache.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "vestibular_device_market_analyze"
+              "title": "KV_cache"
             }
           }
         ]
@@ -217,8 +217,13 @@
       "copilot:Open Copilot Chat": false
     }
   },
-  "active": "95ce4e07732f009f",
+  "active": "2a339ecf3bc102e8",
   "lastOpenFiles": [
+    "computer_sci/llm/architecture/casual_self_attention.md",
+    "computer_sci/llm/architecture/KV_cache.md",
+    "computer_sci/llm/architecture/transformer_in_llm.md",
+    "computer_sci/llm/architecture/self_attention_example.md",
+    "report/product_propose.md",
     "report/vestibular_device_market_analyze.md",
     "report/2023.04.16 天线测试.md",
     "report/attachments/Pasted image 20260129193956.png",
@@ -231,11 +236,9 @@
     "report/attachments/Pasted image 20260129193256.png",
     "report/attachments/Pasted image 20260129193215.png",
     "report/attachments/Pasted image 20260129193158.png",
-    "computer_sci/llm/architecture/transformer_in_llm.md",
     "computer_sci/llm/architecture/RoPE_detail.md",
     "computer_sci/llm/appendix/embed_vs_transform.md",
     "computer_sci/llm/architecture/multi_head_attention.md",
-    "computer_sci/llm/architecture/self_attention_example.md",
     "computer_sci/llm/basic/perplexity.md",
     "computer_sci/llm/basic",
     "computer_sci/llm/architecture/attachments/~$RoPE.pptx",
@@ -259,9 +262,6 @@
     "copilot/copilot-custom-prompts/Emojify.md",
     "copilot/copilot-custom-prompts/Explain like I am 5.md",
     "copilot/copilot-custom-prompts/Simplify.md",
-    "copilot/copilot-custom-prompts/Summarize.md",
-    "copilot/copilot-custom-prompts/Translate to Chinese.md",
-    "copilot/copilot-custom-prompts/Fix grammar and spelling.md",
     "copilot/copilot-custom-prompts",
     "copilot",
     "hobbies/IELTS/talking",
