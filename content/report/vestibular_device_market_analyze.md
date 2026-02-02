@@ -82,10 +82,10 @@ VNG利用红外摄像头追踪瞳孔，评估前庭功能。
 
 | 品牌/型号 | 设备形态 | 核心功能 | 典型场景 | 估算价格 | 图片引用 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **VisualEyes™ 525** | 双目高速护目镜 (220fps) | 全功能旗舰 (扭转追踪, 3D回放) | 三级医院 | $45,000 - $60,000+ | <img src="./attachments/Pasted%20image%2020260129192658.png" width="100"/> [12] |
-| **ICS® Dizcovery** | 模块化护目镜 (无需暗室) | 高度集成 (无灯杆, 智能算法) | ENT 诊所 | $30,000 - $50,000 | <img src="./attachments/Pasted%20image%2020260129192643.png" width="100"/> [13] |
-| **VisualEyes™ 505** | 轻量化护目镜 | 临床实用 (基础VNG, 自动报告) | 基层医院 | $20,000 - $30,000 | <img src="./attachments/Pasted%20image%2020260129192607.png" width="100"/> [19] |
-| **Insight Pro+** | 红外视频 Frenzel 镜 | 基础观测 (无定量分析) | 诊所/筛查 | $2,800 | <img src="./attachments/Pasted%20image%2020260129192629.png" width="100"/> [20] |
+| **VisualEyes™ 525** | 双目高速护目镜 (220fps) | 全功能旗舰 (扭转追踪, 3D回放) | 三级医院 | $45,000 - $60,000+ | <img src="report/attachments/Pasted%20image%2020260129192658.png" width="100"/> [12] |
+| **ICS® Dizcovery** | 模块化护目镜 (无需暗室) | 高度集成 (无灯杆, 智能算法) | ENT 诊所 | $30,000 - $50,000 | <img src="report/attachments/Pasted%20image%2020260129192643.png" width="100"/> [13] |
+| **VisualEyes™ 505** | 轻量化护目镜 | 临床实用 (基础VNG, 自动报告) | 基层医院 | $20,000 - $30,000 | <img src="report/attachments/Pasted%20image%2020260129192607.png" width="100"/> [19] |
+| **Insight Pro+** | 红外视频 Frenzel 镜 | 基础观测 (无定量分析) | 诊所/筛查 | $2,800 | <img src="report/attachments/Pasted%20image%2020260129192629.png" width="100"/> [20] |
 
 ### **3.3 视频头脉冲测试系统 (vHIT)**
 
@@ -111,9 +111,9 @@ vHIT用于评估高频前庭功能（六个半规管）。
 
 | 品牌/型号 | 设备形态 | 核心功能 | 估算价格 | 图片引用 |
 | :--- | :--- | :--- | :--- | :--- |
-| **EyeSeeCam** | 超轻量专用护目镜 | 三维引导, 六管测试 | $13,000 - $18,000 | <img src="./attachments/Pasted%20image%2020260129193027.png" width="100"/> [21] |
-| **ICS® Impulse** | 多功能混合护目镜 | 金标准验证, SHIMP协议 | $20,000 - $30,000 | <img src="./attachments/Pasted%20image%2020260129193101.png" width="100"/> [23] |
-| **Synapsys VHIT** | 远程摄像头 (非穿戴) | 无滑动伪影, 适合儿童 | $10,000 - $25,000 | <img src="./attachments/Pasted%20image%2020260129192903.png" width="100"/> [24] |
+| **EyeSeeCam** | 超轻量专用护目镜 | 三维引导, 六管测试 | $13,000 - $18,000 | <img src="report/attachments/Pasted%20image%2020260129193027.png" width="100"/> [21] |
+| **ICS® Impulse** | 多功能混合护目镜 | 金标准验证, SHIMP协议 | $20,000 - $30,000 | <img src="report/attachments/Pasted%20image%2020260129193101.png" width="100"/> [23] |
+| **Synapsys VHIT** | 远程摄像头 (非穿戴) | 无滑动伪影, 适合儿童 | $10,000 - $25,000 | <img src="report/attachments/Pasted%20image%2020260129192903.png" width="100"/> [24] |
 | **手机App** | 手机 + App | 家庭低成本初筛 | 低 (软件订阅) | [25] |
 
 ### **3.4 旋转椅系统**
@@ -130,9 +130,9 @@ vHIT用于评估高频前庭功能（六个半规管）。
 
 | 品牌/型号 | 设备形态 | 核心功能 | 估算价格 | 图片引用 |
 | :--- | :--- | :--- | :--- | :--- |
-| **Orion Auto-Traverse** | 全封闭暗室舱体 | 离轴旋转, SVV测试 | $120k - $150k+ | <img src="./attachments/Pasted%20image%2020260129193158.png" width="100"/> [26] |
-| **Orion Reclining** | 开放/可躺式座椅 | 空间节约, 位置性测试 | $80k - $100k | <img src="./attachments/Pasted%20image%2020260129193215.png" width="100"/> [26] |
-| **Synapsys MED4** | 人体工学椅 | 旋转动力学测试 | $47k - $63k | <img src="./attachments/Pasted%20image%2020260129193256.png" width="100"/> [28] |
+| **Orion Auto-Traverse** | 全封闭暗室舱体 | 离轴旋转, SVV测试 | $120k - $150k+ | <img src="report/attachments/Pasted%20image%2020260129193158.png" width="100"/> [26] |
+| **Orion Reclining** | 开放/可躺式座椅 | 空间节约, 位置性测试 | $80k - $100k | <img src="report/attachments/Pasted%20image%2020260129193215.png" width="100"/> [26] |
+| **Synapsys MED4** | 人体工学椅 | 旋转动力学测试 | $47k - $63k | <img src="report/attachments/Pasted%20image%2020260129193256.png" width="100"/> [28] |
 
 ### **3.5 计算机动态姿势图 (CDP)**
 
@@ -144,7 +144,7 @@ vHIT用于评估高频前庭功能（六个半规管）。
 | 品牌/型号 | 设备形态 | 核心功能 | 估算价格 | 图片引用 |
 | :--- | :--- | :--- | :--- | :--- |
 | **Bertec CDP/IVR™** | 沉浸式 VR 系统 | 虚拟环境康复, 标准SOT | $80k - $150k | [29] |
-| **Bertec Portable Essential™** | 便携式测力台 | 静态平衡筛查 | $15k - $25k | <img src="./attachments/Pasted%20image%2020260129193510.png" width="100"/> [30] |
+| **Bertec Portable Essential™** | 便携式测力台 | 静态平衡筛查 | $15k - $25k | <img src="report/attachments/Pasted%20image%2020260129193510.png" width="100"/> [30] |
 
 ### **3.6 自动化耳石症诊疗系统 (中国特色)**
 
@@ -173,11 +173,11 @@ vHIT用于评估高频前庭功能（六个半规管）。
 
 | 设备类别 | 代表产品 | 核心价值 | 价格等级 | 目标用户 | 参考图片 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **高端 VNG** | VisualEyes 525 | 诊断金标准 | ($40k-$60k) | 耳鼻喉/神经科 | <img src="./attachments/Pasted%20image%2020260129193759.png" width="100"/> [12] |
-| **vHIT** | EyeSeeCam | 高频/早期筛查 | ($15k-$30k) | 门诊/听力中心 | <img src="./attachments/Pasted%20image%2020260129193822.png" width="100"/> [21] |
-| **旋转椅** | Orion Rotary | 双侧病变/科研 | ($100k+) | 大型医学中心 | <img src="./attachments/Pasted%20image%2020260129193847.png" width="100"/> [26] |
-| **CDP** | Bertec CDP | 平衡康复 | ($80k-$150k) | 康复科 | <img src="./attachments/Pasted%20image%2020260129193938.png" width="100"/> [29] |
-| **便携护目镜** | Vestibular First | BPPV筛查 | ($2.8k) | 诊所/急诊 | <img src="./attachments/Pasted%20image%2020260129193956.png" width="100"/> [20] |
+| **高端 VNG** | VisualEyes 525 | 诊断金标准 | ($40k-$60k) | 耳鼻喉/神经科 | <img src="report/attachments/Pasted%20image%2020260129193759.png" width="100"/> [12] |
+| **vHIT** | EyeSeeCam | 高频/早期筛查 | ($15k-$30k) | 门诊/听力中心 | <img src="report/attachments/Pasted%20image%2020260129193822.png" width="100"/> [21] |
+| **旋转椅** | Orion Rotary | 双侧病变/科研 | ($100k+) | 大型医学中心 | <img src="report/attachments/Pasted%20image%2020260129193847.png" width="100"/> [26] |
+| **CDP** | Bertec CDP | 平衡康复 | ($80k-$150k) | 康复科 | <img src="report/attachments/Pasted%20image%2020260129193938.png" width="100"/> [29] |
+| **便携护目镜** | Vestibular First | BPPV筛查 | ($2.8k) | 诊所/急诊 | <img src="report/attachments/Pasted%20image%2020260129193956.png" width="100"/> [20] |
 
 ## **第四章 市场规模评估**
 

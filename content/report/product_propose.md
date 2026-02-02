@@ -30,7 +30,7 @@ date: 2026-02-02
 本产品为一款轻量化的**头戴式视频采集设备**。与传统护目镜不同，它具有灵活的佩戴方式，支持镜头翻转或佩戴方向切换，实现“拍人”与“自拍”的兼容。
 
 <div align="center">
-  <img src="./attachments/product.png" width="60%" alt="设备佩戴形态示意图" />
+  <img src="report/attachments/product.png" width="60%" alt="设备佩戴形态示意图" />
   <br>
   <em>图：产品形态示意（支持医生第一视角佩戴与患者自拍佩戴）</em>
 </div>
