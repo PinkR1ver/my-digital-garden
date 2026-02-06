@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "computer_sci/llm/architecture/KV_cache.md",
+                "file": "computer_sci/llm/inference/KV_cache.md",
                 "mode": "source",
                 "source": false
               },
@@ -217,10 +217,13 @@
       "copilot:Open Copilot Chat": false
     }
   },
-  "active": "2a339ecf3bc102e8",
+  "active": "95ce4e07732f009f",
   "lastOpenFiles": [
+    "computer_sci/llm/GPT_code_practice.md",
+    "computer_sci/llm/architecture/GPT_code_practice.md",
+    "computer_sci/llm/inference/KV_cache.md",
+    "computer_sci/llm/inference",
     "computer_sci/llm/architecture/casual_self_attention.md",
-    "computer_sci/llm/architecture/KV_cache.md",
     "computer_sci/llm/architecture/transformer_in_llm.md",
     "computer_sci/llm/architecture/self_attention_example.md",
     "report/product_propose.md",
@@ -260,11 +263,8 @@
     "copilot/copilot-custom-prompts/Make longer.md",
     "copilot/copilot-custom-prompts/Make shorter.md",
     "copilot/copilot-custom-prompts/Emojify.md",
-    "copilot/copilot-custom-prompts/Explain like I am 5.md",
-    "copilot/copilot-custom-prompts/Simplify.md",
     "copilot/copilot-custom-prompts",
     "copilot",
-    "hobbies/IELTS/talking",
     "Untitled 1.canvas",
     "Untitled.canvas"
   ]
