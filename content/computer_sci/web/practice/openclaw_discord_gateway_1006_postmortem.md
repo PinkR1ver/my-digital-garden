@@ -12,8 +12,6 @@ tags:
 date: 2026-03-11
 ---
 
-# Discord Bot 连通性修复复盘（OpenClaw + Clash + TUN）
-
 > 目标：解释为什么 Telegram 正常、Discord 反复离线，以及最终如何修复。  
 > 场景：OpenClaw 网关在 Linux 主机上，通过 Clash/Mihomo 出海。
 
