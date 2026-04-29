@@ -95,6 +95,9 @@ Build defaults:
 - Source directory: `content`
 - Output directory: `public`
 - Local preview: `http://localhost:8080/` unless another port is provided
+- After every successful local build or preview setup, report the exact local
+  link address the user can open. For note edits, include the specific note URL,
+  not only the site root.
 
 Use `npx quartz build --help` for all options. Important flags:
 
@@ -120,6 +123,14 @@ This server supports Quartz clean URLs by trying the requested path, then
 
 If port `8080` is busy, change the port in the final `listen(...)` call and
 report the new URL.
+
+After starting the preview server, convert the edited note path to a clean URL.
+For example:
+
+```text
+content/computer_sci/llm/architecture/deepseek_v4_architecture_tricks.md
+-> http://localhost:8080/computer_sci/llm/architecture/deepseek_v4_architecture_tricks
+```
 
 ### Local Preview Pitfalls
 

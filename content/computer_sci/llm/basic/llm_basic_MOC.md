@@ -15,6 +15,8 @@ tags:
 ## Architecture
 
 - [[computer_sci/llm/architecture/transformer_in_llm|Transformer in LLM]]
+- [[computer_sci/llm/architecture/activated_params_in_moe|Activated Params in MoE Models]]
+- [[computer_sci/llm/architecture/deepseek_v4_architecture_tricks|DeepSeek V4 Architecture Tricks]]
 
 ## Evaluation
 
