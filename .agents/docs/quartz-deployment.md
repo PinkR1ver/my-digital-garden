@@ -104,6 +104,37 @@ Use `npx quartz build --help` for all options. Important flags:
 - `--port`: preview server port
 - `--concurrency`: worker count
 
+### Recommended Local Preview
+
+For a stable preview, prefer a one-shot Quartz build followed by a static server
+that serves `public/`:
+
+```bash
+npm ci
+npx quartz build
+node -e "import http from 'node:http'; import fs from 'node:fs'; import path from 'node:path'; const root=path.resolve('public'); const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'application/javascript; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.gif':'image/gif','.svg':'image/svg+xml','.mp4':'video/mp4'}; function send(res,file){fs.readFile(file,(err,data)=>{if(err){res.writeHead(404); res.end('Not found'); return} res.writeHead(200,{'Content-Type':types[path.extname(file)]||'application/octet-stream'}); res.end(data)})} http.createServer((req,res)=>{const url=new URL(req.url,'http://localhost'); let p=decodeURIComponent(url.pathname); let rel=p.replace(/^\/+/, ''); let candidates=[]; if(p==='/'||p==='') candidates.push(path.join(root,'index.html')); else {candidates.push(path.join(root,rel)); candidates.push(path.join(root,rel+'.html')); candidates.push(path.join(root,rel,'index.html'));} const file=candidates.find(f=>f.startsWith(root)&&fs.existsSync(f)&&fs.statSync(f).isFile()); send(res,file||path.join(root,'404.html'));}).listen(8080,()=>console.log('Serving Quartz static site at http://localhost:8080'));"
+```
+
+This server supports Quartz clean URLs by trying the requested path, then
+`path.html`, then `path/index.html`.
+
+If port `8080` is busy, change the port in the final `listen(...)` call and
+report the new URL.
+
+### Local Preview Pitfalls
+
+- `npm run docs` is an upstream Quartz documentation script. It runs
+  `npx quartz build --serve -d docs`, so it serves `docs/` instead of this
+  garden's `content/` notes. Do not use it to preview user content.
+- `npx quartz build --serve` is the normal Quartz hot-reload command, but in
+  this repository it can repeatedly trigger hard rebuilds after generated
+  output changes. If that happens, stop it with `Ctrl-C`, run `npx quartz build`
+  once, and serve `public/` with the static server above.
+- Python's `python3 -m http.server --directory public` can serve the generated
+  files, but it does not resolve Quartz clean URLs such as
+  `/computer_sci/.../note`; users would need to add `.html`. Prefer the Node
+  static server above for realistic previews.
+
 ## GitHub Pages Deployment
 
 Deployment is handled by `.github/workflows/deploy.yaml`.

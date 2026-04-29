@@ -50,7 +50,9 @@ in `.agents/`.
 - Main entry pages: `content/_index.md` and `content/atlas.md`
 - Deploy branch: `v4`
 - Deploy workflow: `.github/workflows/deploy.yaml`
-- Local preview command: `npx quartz build --serve`
+- Local preview: prefer `npx quartz build`, then serve `public/` with the
+  clean-URL Node static server documented in
+  `.agents/docs/quartz-deployment.md`.
 
 ## Do Not Do Without Explicit Request
 
