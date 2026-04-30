@@ -55,7 +55,7 @@ ul,
 
 strong {
   font-weight: $semiBoldWeight;
-  color: #81C7D4;
+  color: #81c7d4;
 }
 
 a {
@@ -135,13 +135,12 @@ a {
     }
 
     p > strong {
-      color: #81C7D4;
+      color: #81c7d4;
     }
 
     p > em {
-      color: #0089A7;
+      color: #0089a7;
     }
-
   }
 
   & > #quartz-body {
@@ -404,7 +403,7 @@ pre {
 
 code {
   font-size: 0.9em;
-  color: #D0104C;
+  color: #d0104c;
   font-family: var(--codeFont);
   border-radius: 5px;
   padding: 0.1rem 0.2rem;

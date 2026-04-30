@@ -9,20 +9,47 @@ const emitThemeChangeEvent = (theme: "light" | "dark") => {
   document.dispatchEvent(event)
 }
 
+const applyTheme = (theme: "light" | "dark") => {
+  document.documentElement.setAttribute("saved-theme", theme)
+  localStorage.setItem("theme", theme)
+  emitThemeChangeEvent(theme)
+}
+
+const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+type ViewTransitionDocument = Document & {
+  startViewTransition?: (callback: () => void) => { finished: Promise<void> }
+}
+
+const transitionThemeFromTopLeft = (theme: "light" | "dark") => {
+  const viewTransitionDocument = document as ViewTransitionDocument
+
+  if (!viewTransitionDocument.startViewTransition || prefersReducedMotion()) {
+    applyTheme(theme)
+    return
+  }
+
+  document.documentElement.classList.add("theme-curtain-transition")
+
+  const transition = viewTransitionDocument.startViewTransition(() => {
+    applyTheme(theme)
+  })
+
+  transition.finished.finally(() => {
+    document.documentElement.classList.remove("theme-curtain-transition")
+  })
+}
+
 document.addEventListener("nav", () => {
   const switchTheme = (e: Event) => {
     const newTheme = (e.target as HTMLInputElement)?.checked ? "dark" : "light"
-    document.documentElement.setAttribute("saved-theme", newTheme)
-    localStorage.setItem("theme", newTheme)
-    emitThemeChangeEvent(newTheme)
+    transitionThemeFromTopLeft(newTheme)
   }
 
   const themeChange = (e: MediaQueryListEvent) => {
     const newTheme = e.matches ? "dark" : "light"
-    document.documentElement.setAttribute("saved-theme", newTheme)
-    localStorage.setItem("theme", newTheme)
+    transitionThemeFromTopLeft(newTheme)
     toggleSwitch.checked = e.matches
-    emitThemeChangeEvent(newTheme)
   }
 
   // Darkmode toggle

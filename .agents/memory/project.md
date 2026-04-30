@@ -9,6 +9,11 @@
 - Deployment runs from GitHub Actions on pushes to branch `v4`.
 - GitHub Pages builds with Node.js 22 and publishes the generated `public/`
   directory.
+- 2026-04-29: Current `v4` branch is a fork of Quartz around `v4.2.3`
+  (`package.json` version `4.2.3`; merge base with `upstream/v4` is
+  `b9dee0775`, described as `v4.2.3-9-gb9dee0775`). Upstream has active
+  `v4` and `v5` branches; `v4` is at `4.5.2` plus later commits and `v5`
+  migrates configuration/layout to YAML plus community plugins.
 - Do not commit `public/`, `.quartz-cache/`, `node_modules/`, `content/.trash/`,
   or `content/copilot/`.
 - Treat `content/` as an Obsidian-style vault: preserve wikilinks, MOCs,

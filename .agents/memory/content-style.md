@@ -14,3 +14,11 @@
 - User preference: when adding references to notes, use inline citation links in
   the body that jump to a lightweight bibliography entry. Prefer numeric
   citations such as `[1]`, `[2]`, `[3]` in the body.
+- 2026-04-30: Use Catppuccin Latte for light mode and Catppuccin Frappe for dark
+  mode. Fonts match Jacky Zhao's stack: DM Serif Display headings, Bricolage
+  Grotesque body, JetBrains Mono code.
+- 2026-04-29: Date and metadata text should use a handwritten annotation feel;
+  current implementation uses `Caveat` in `quartz/styles/custom.scss`.
+- 2026-04-30: Theme toggling should feel like a curtain opening from the
+  top-left corner; current implementation uses the View Transition API with a
+  clip-path fallback to normal color transitions.

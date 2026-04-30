@@ -34,6 +34,9 @@ Guidelines:
 - Use `MOC` tag for map-of-content pages, matching the existing vault style.
 - Do not mark publishable pages as drafts unless the user asks. Quartz removes
   draft pages through `Plugin.RemoveDrafts()`.
+- Quartz renders the frontmatter `title` as the page heading. Do not repeat the
+  same title as a body-level `# H1`; start the note body at `##` unless there is
+  a deliberate separate top-level section.
 
 Existing notes are bilingual and informal in places. Preserve the author's voice
 and language choice. Do not mass-normalize spelling, casing, emoji, or folder
@@ -121,3 +124,10 @@ When editing notes:
 3. Maintain frontmatter.
 4. Update relevant MOCs and backlinks if adding or moving notes.
 5. Do not rewrite large note sets unless explicitly asked.
+
+## Formatting Boundary
+
+`content/` is intentionally excluded from Prettier. It is an Obsidian vault with
+local plugins, themes, mixed-language notes, and author-specific Markdown style.
+Use targeted manual formatting for edited notes instead of running Prettier over
+the vault.

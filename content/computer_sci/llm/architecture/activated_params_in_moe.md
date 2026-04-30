@@ -8,8 +8,6 @@ tags:
   - inference
 ---
 
-# Activated Params in MoE Models
-
 Activated Params 指的是：**模型在处理一个 token 时，实际参与前向计算的参数量**。
 
 它通常出现在 MoE（Mixture of Experts）模型里。MoE 模型会有很多 expert，但每个 token 只路由到其中一小部分 expert。因此，一个模型可以有非常大的 total params，但每个 token 实际只激活其中一部分参数。

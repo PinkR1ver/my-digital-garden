@@ -10,8 +10,6 @@ tags:
   - DeepSeek
 ---
 
-# DeepSeek V4 Architecture Tricks
-
 DeepSeek V4 的重点不是单纯把 MoE 做得更大，而是围绕 **1M-token context** 重新设计 attention、KV cache、训练优化和 agent 工具链。它代表了开源模型架构的一个新方向：模型不只要 benchmark 分数高，还要能在长上下文、多轮工具调用、长时间 agent 任务里跑得动。
 
 截至 2026-04-29，DeepSeek V4 Preview 包括两个开源权重模型：
