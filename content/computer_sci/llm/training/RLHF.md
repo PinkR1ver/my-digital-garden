@@ -11,7 +11,7 @@ date: 2024-01-17
 
 # Review: Reinforcement Learning Basics
 
-![](computer_sci/deep_learning_and_machine_learning/LLM/train/attachments/Pasted%20image%2020230628145009.png)
+![](computer_sci/llm/training/attachments/Pasted%20image%2020230628145009.png)
 
 
 Reinforcement learning is a mathematical framework. 
@@ -23,14 +23,14 @@ Demystify the reinforcement learning model, it's a open-ended model using reward
 
 ## Pre Deep RL
 
-![](Deep_Learning_And_Machine_Learning/LLM/train/attachments/Pasted%20image%2020230628160836.png)
+![](computer_sci/llm/training/attachments/Pasted%20image%2020230628160836.png)
 
 
 Before, Deep RL don't use neural network to represent policy. What this system did was a machine learning system that created a policy by having humans label the actions that an agent took as being kind of correct or incorrect. This was just a simple decision rule where humans labeled every actions as good or bad.  This was essentially a reward model and a policy put together.
 
 ## For Deep RL
 
-![](Deep_Learning_And_Machine_Learning/LLM/train/attachments/Pasted%20image%2020230628161627.png)
+![](computer_sci/llm/training/attachments/Pasted%20image%2020230628161627.png)
 
 --->
 
@@ -46,7 +46,7 @@ For RLHF training method, here are three core steps:
 
 Read this to learn how to train a LM:
 
-[Pretraining language models](computer_sci/deep_learning_and_machine_learning/LLM/train/train_LLM.md)
+[Pretraining language models](computer_sci/llm/training/train_LLM.md)
 
 OpenAI used a smaller version of GPT-3 for its first popular RLHF model - InstructGPT.
 
@@ -56,7 +56,7 @@ Nowadays, RLHF is new area, there's no answer to which model is the best for sta
 
 In reward model, we integrate human preferences into the system. 
 
-![](computer_sci/deep_learning_and_machine_learning/LLM/train/attachments/Pasted%20image%2020230629145231.png)
+![](computer_sci/llm/training/attachments/Pasted%20image%2020230629145231.png)
 
 
 

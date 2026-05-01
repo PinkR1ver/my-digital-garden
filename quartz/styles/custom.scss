@@ -18,6 +18,16 @@
     format("truetype");
 }
 
+@font-face {
+  font-family: "Ma Shan Zheng";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/l/font?kit=NaPecZTRCLxvwo41b4gvzkXaRMT0Dmr_xFQmPw&skey=13c999d73b164fc8&v=v17")
+    format("truetype");
+  unicode-range: U+6b22, U+8fce;
+}
+
 .content-meta,
 .recent-notes .meta,
 li.section-li > .section > .meta {
@@ -26,6 +36,102 @@ li.section-li > .section > .meta {
   font-weight: 600;
   line-height: 1.25rem;
   letter-spacing: 0;
+}
+
+body[data-slug="index"] .page-header {
+  display: none;
+}
+
+body[data-slug="index"] .article-title,
+body[data-slug="index"] .content-meta,
+body[data-slug="index"] .tags {
+  display: none;
+}
+
+body[data-slug="index"] article {
+  padding-top: 3.5rem;
+}
+
+body[data-slug="index"] .home-hero {
+  min-height: 54vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.7rem;
+}
+
+body[data-slug="index"] .home-kicker {
+  margin: 0;
+  color: var(--tertiary);
+  font-family: "Caveat", cursive;
+  font-size: 1.55rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+body[data-slug="index"] .home-hero h1 {
+  margin: 0 0 0.25rem;
+  color: var(--tertiary);
+  font-family: "Caveat", cursive;
+  font-size: clamp(2.5rem, 5vw, 3.7rem);
+  font-weight: 600;
+  line-height: 1;
+}
+
+body[data-slug="index"] .home-hero h1 > a[role="anchor"] {
+  display: none;
+}
+
+body[data-slug="index"] .home-hero p {
+  max-width: 42rem;
+  margin: 0.15rem 0;
+  color: var(--darkgray);
+  font-size: 1.1rem;
+  line-height: 1.75;
+}
+
+body[data-slug="index"] .home-hero p a {
+  background: transparent;
+  padding: 0;
+}
+
+body[data-slug="index"] .home-signoff {
+  color: var(--tertiary);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: min(42rem, 100%);
+  margin-top: 0.25rem;
+  line-height: 1;
+  gap: 0.2rem;
+}
+
+body[data-slug="index"] .home-signoff-welcome {
+  align-self: flex-start;
+  font-family: "Ma Shan Zheng", "Xingkai SC", "STXingkai", "Hannotate SC", cursive;
+  font-size: 1.32rem;
+  font-weight: 400;
+}
+
+body[data-slug="index"] .home-signoff-name {
+  align-self: flex-end;
+  font-family: "Caveat", cursive;
+  font-size: 1.55rem;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  body[data-slug="index"] article {
+    padding-top: 1.25rem;
+  }
+
+  body[data-slug="index"] .home-hero {
+    min-height: 34vh;
+  }
+
+  body[data-slug="index"] .home-hero h1 {
+    font-size: 2.65rem;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

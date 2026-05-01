@@ -13,9 +13,13 @@ date: 2024-02-28
 
 * [Signal](signal/signal_MOC.md)
 
+* [Electrical and Electronics](electrical_electronics/EE_MOC.md)
+
 * [Data Science](data_sci/data_sci_MOC.md)
 
 * [Math](math/MOC.md)
+
+* [Research Career](research_career/research_career_MOC.md)
 
 💻 Code Practice:
 
@@ -31,9 +35,19 @@ date: 2024-02-28
 
 * [🥐Food](hobbies/food/MOC.md)
 
+* [Music](hobbies/music/music_MOC.md)
+
+* [Language Learning](hobbies/language_learning_MOC.md)
+
+* [Game](hobbies/game/MOC.md)
+
 * [🎬Watching List](https://pinkr1ver.notion.site/5e136466f3664ff1aaaa75b85446e5b4?v=a41efbce52a84f7aa89d8f649f4620f6&pvs=4)
 
 * [🖌️Art](art/art_MOC.md)
+
+* [Design](design/design_moc.md)
+
+* [Toolkit](toolkit/toolkit_MOC.md)
 
 
 ⭐ Here to find my recent study:
@@ -42,4 +56,14 @@ date: 2024-02-28
 
 🎏 I also have some plans in my mind to do；
 
-* [Life List🚀](plan/life.md)
+* [Plan - MOC](plan/plan_MOC.md)
+
+🧾 Site and personal pages:
+
+* [News✨](news.md)
+
+* [Recent note](recent.md)
+
+* [Resume](resume.md)
+
+* [Log](log/log_MOC.md)

@@ -18,3 +18,8 @@ date: 2023-09-27
 ## Log 2023.09
 
 * [Log 2023.09.27 数学建模比赛结束的第二天](log/2023/9/log_27092023.md)
+
+# Study Logs
+
+* [kk's note](log/kk_unified_national_graduate_entrance_examination/kk_note.md)
+* [kk's Unified National Graduate Entrance Examination —— Study Plan](log/kk_unified_national_graduate_entrance_examination/study_plan.md)

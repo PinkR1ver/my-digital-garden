@@ -23,3 +23,11 @@ date: 2023-09-15
 ## Type of graph
 
 * [Spanning Tree](computer_sci/data_structure_and_algorithm/graph/spanning_tree.md)
+
+# String
+
+* [Knuth–Morris–Pratt algorithm](computer_sci/data_structure_and_algorithm/string/KMP.md)
+
+# Two Pointers
+
+* [Two Pointers](computer_sci/data_structure_and_algorithm/two_pointers.md)

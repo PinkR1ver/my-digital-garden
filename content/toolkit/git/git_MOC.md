@@ -6,3 +6,4 @@ tags:
 date: 2023-06-16
 ---
 * [GitHub Actions](toolkit/git/github_actions.md)
+* [Git Worktree in Vibe Coding](computer_sci/vibe_coding/git_worktree_introduction.md)

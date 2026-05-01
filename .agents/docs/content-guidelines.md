@@ -103,7 +103,8 @@ Already ignored:
 Agent rules:
 
 - Do not move private, trash, or Copilot material into public content without
-  explicit user approval.
+  explicit user approval. `content/copilot/` was deleted on 2026-05-01 at user
+  request; do not recreate a Copilot MOC for it.
 - Be careful with personal documents, transcripts, IDs, resume material, and
   unpublished research notes.
 - If a note looks sensitive, ask before making it more discoverable from public

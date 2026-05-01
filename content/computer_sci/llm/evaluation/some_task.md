@@ -2,7 +2,7 @@
 title: Tasks to evaluate BERT - Maybe can be deployed in other LM
 tags:
 - LLM
-- metircs
+- metrics
 - deep-learning
 - benchmark
 date: 2024-01-17
@@ -10,7 +10,7 @@ date: 2024-01-17
 
 # Overview
 
-![](computer_sci/deep_learning_and_machine_learning/LLM/metircs/attachments/Pasted%20image%2020230629140929.png)
+![](computer_sci/llm/evaluation/attachments/Pasted%20image%2020230629140929.png)
 
 # MNLI-m (Multi-Genre Natural Language Inference - Matched): 
 
@@ -33,5 +33,4 @@ SST-2 is a binary sentiment classification task based on the Stanford Sentiment 
 SQuAD is a widely known dataset and task for machine reading comprehension. It consists of questions posed by humans on a set of Wikipedia articles, where the answers to the questions are spans of text from the corresponding articles. The goal is to build models that can accurately answer the questions based on the provided context. SQuAD has been instrumental in advancing the field of question answering and evaluating models' reading comprehension capabilities.
 
 Overall, these tasks and datasets serve as benchmarks for evaluating natural language understanding and processing models. They cover a range of language understanding tasks, including natural language inference, paraphrase identification, sentiment analysis, and machine reading comprehension.
-
 

@@ -11,6 +11,14 @@ date: 2023-12-03
 ## Basic Concept
 
 * [Quantile Concept](math/statistic/basic_concepot/quantile_concept.md)
+* [Var Addition Theory](math/statistic/basic_concepot/var_addition.md)
+
+### Distributions
+
+* [Beta-Binomial Distribution](math/statistic/basic_concepot/distribution/beta_binomial.md)
+* [Poisson Distribution & Exponential Distribution](math/statistic/basic_concepot/distribution/exponential_distribution_and_poisson_distribution.md)
+* [Gamma Distribution](math/statistic/basic_concepot/distribution/gamma_distribution.md)
+* [Student's t-Distribution](math/statistic/basic_concepot/distribution/students_t_distribution.md)
 
 ## Significance Test
 
@@ -21,12 +29,24 @@ date: 2023-12-03
 
 ## Descriptive Statistic
 
-* 
+* [Intraclass correlation(ICC)](math/statistic/descriptive_statistic/intraclass_correlation.md)
 
 ## Anomaly Detection
 
 * [Z-Score](math/statistic/anomaly_detection/z_score.md)
 * [IQR](math/statistic/anomaly_detection/IQR.md)
+
+## Stochastic Process
+
+* [Markov Chain](math/statistic/stochastic_process/markov_chain.md)
+
+## Paradox
+
+* [Inspection Paradox & Simpon's Paradox](math/statistic/paradox/inspection_paradox_and_Simpons_paradox.md)
+
+## Game Theory
+
+* [Counterfactual Regret Minimization](math/statistic/game_theory/counterfactual_regret_minimization.md)
 
 # Discrete mathematics
 
@@ -39,6 +59,10 @@ date: 2023-12-03
 
 
 * [Quadratic Programming](math/optimization_problem/Quadratic_Programming.md)
+
+# Real Analysis
+
+* [Cauchy Principal Value](math/real_analysis/cauchy_principal_value.md)
 
 
 # Calculus

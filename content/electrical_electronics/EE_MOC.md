@@ -11,6 +11,15 @@ date: 2024-05-21
 
 ## Pinouts
 
+* [Pinouts for commonly used components](electrical_electronics/basic/pinouts/common_pinouts.md)
+
+# MCU
+
+* [Different Programming Interfaces](electrical_electronics/MCU/different_programming_interfaces.md)
+
+# Hardware
+
+* [Why USB-C still be confusion today?](electrical_electronics/hardware/USB-C_confusion.md)
 
 # RF About
 

@@ -14,3 +14,8 @@ In this MOC, it shows you the path to what I record for some interesting sentenc
 
 [🎏我的文字](hobbies/literature/article/article_MOC.md)
 
+## Poems by Year
+
+* [Poem in 2018](hobbies/literature/poem/2018.md)
+* [Poem in 2022](hobbies/literature/poem/2022.md)
+* [Poem in 2023](hobbies/literature/poem/2023.md)

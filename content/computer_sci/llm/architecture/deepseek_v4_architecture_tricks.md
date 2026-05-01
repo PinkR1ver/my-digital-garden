@@ -317,7 +317,7 @@ KV cache 不再只是推理实现细节。CSA/HCA/SWA 的设计会直接决定�
 - on-disk cache 怎么存。
 - prefix 命中后要重算哪些 tail states。
 
-这和 [[computer_sci/deep_learning_and_machine_learning/LLM/basic/llm_cache_hit|LLM cache hit]] 直接相关。
+这和 [[computer_sci/llm/inference/llm_cache_hit|LLM cache hit]] 直接相关。
 
 ### 4. Residual path 也成为 scaling axis
 

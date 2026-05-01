@@ -22,3 +22,27 @@
 - 2026-04-30: Theme toggling should feel like a curtain opening from the
   top-left corner; current implementation uses the View Transition API with a
   clip-path fallback to normal color transitions.
+- 2026-04-30: The home page should render as a welcome/entry page, not as a
+  normal note. It should hide article title metadata such as date, reading time,
+  and tags. Prefer Jacky Zhao-style invitation prose with a small Chinese touch;
+  avoid card/button navigation and avoid explaining all the blog's content areas.
+  Keep the welcome understated, include a plain path into notes via `atlas`, and
+  use Chinese only as a light handwritten signoff touch before Jude's name. Keep
+  the normal Quartz sidebars and layout on the home page; use CSS for home-only
+  presentation tweaks instead of conditional layout components. Include plain
+  inline paths to both `atlas` for notes and `resume` for About me. Keep the
+  final signoff split into two lines: small readable handwritten/xingshu-style
+  `欢迎` on the left, then `Jude` right-aligned below it. Avoid overly cursive
+  Chinese fonts that make the characters hard to read.
+- 2026-04-30: User rejected a single aggregate MOC as too shallow for broad
+  organization work. Use generated audits only as temporary analysis, then
+  integrate notes into nearest topic MOCs or create focused local MOCs. Avoid
+  publishing a catch-all index as the main navigation strategy.
+- 2026-05-01: `content/garden_index_MOC.md` was deleted after the distributed
+  MOC organization was verified. Do not recreate a giant garden-wide MOC unless
+  the user explicitly asks for an index artifact.
+- 2026-05-01: Computer Science organization should favor clear local MOC
+  hierarchies over long flat lists. LLM notes were consolidated under
+  `content/computer_sci/llm/` with child MOCs for architecture, training,
+  fine-tuning, and inference; do not split new LLM notes back into
+  `deep_learning_and_machine_learning/LLM/`.

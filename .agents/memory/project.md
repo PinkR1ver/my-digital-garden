@@ -14,7 +14,9 @@
   `b9dee0775`, described as `v4.2.3-9-gb9dee0775`). Upstream has active
   `v4` and `v5` branches; `v4` is at `4.5.2` plus later commits and `v5`
   migrates configuration/layout to YAML plus community plugins.
-- Do not commit `public/`, `.quartz-cache/`, `node_modules/`, `content/.trash/`,
-  or `content/copilot/`.
+- Do not commit `public/`, `.quartz-cache/`, `node_modules/`, or
+  `content/.trash/`.
+- 2026-05-01: User requested deletion of all Copilot-related content. Do not
+  recreate `content/copilot/` or a Copilot MOC unless explicitly asked.
 - Treat `content/` as an Obsidian-style vault: preserve wikilinks, MOCs,
   backlinks, tags, and the author's bilingual note style.

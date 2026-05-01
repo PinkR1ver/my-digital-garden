@@ -22,8 +22,9 @@ published as a static website.
 - `content/assets/`: public assets used by notes.
 - `content/.obsidian/`: local Obsidian configuration. Quartz ignores it.
 - `content/.trash/`: ignored trash folder. Do not publish or maintain it.
-- `content/copilot/`: ignored Copilot prompt/conversation exports. Do not publish
-  or maintain it unless the user explicitly asks.
+- `content/copilot/`: deleted on 2026-05-01 at user request. If Copilot
+  prompt/conversation exports reappear, treat them as ignored private tooling
+  exports and do not publish or maintain them unless the user explicitly asks.
 - `docs/`: upstream Quartz documentation.
 - `quartz/`: Quartz v4 implementation.
 - `quartz.config.ts`: site configuration, plugins, theme, link handling, filters,
@@ -34,6 +35,9 @@ published as a static website.
 ## Main Content Areas
 
 - `content/computer_sci/`: programming, algorithms, web, LLM, ML, software notes.
+  LLM has a dedicated canonical subtree at `content/computer_sci/llm/`; keep
+  LLM architecture, training, fine-tuning, inference, RAG, framework, and
+  evaluation notes there instead of under `deep_learning_and_machine_learning/`.
 - `content/data_sci/`: data science, fitting, stochastic processes, visualization.
 - `content/math/`: calculus, statistics, optimization, real analysis.
 - `content/physics/`: electromagnetism, optics, waves.

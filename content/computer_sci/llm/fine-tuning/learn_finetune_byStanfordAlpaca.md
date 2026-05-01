@@ -8,7 +8,7 @@ tags:
 date: 2024-01-17
 ---
 
-![](computer_sci/deep_learning_and_machine_learning/LLM/train/finr_tune/attachments/Pasted%20image%2020230627145954.png)
+![](computer_sci/llm/fine-tuning/attachments/Pasted%20image%2020230627145954.png)
 
 
 

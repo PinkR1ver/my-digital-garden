@@ -13,6 +13,14 @@ date: 2024-03-18
 * [Fourier transform pairs and properties derivation](signal/signal_processing/basic_knowledge/FT/fourier_transform_pairs_derivation.md)
 * [FBW - Fractional Band Width](signal/signal_processing/basic_knowledge/concept/FBW.md)
 * [What's Linear in Signal Mean?](signal/signal_processing/basic_knowledge/concept/linear.md)
+* [FM signal vs. AM signal - Learning Signal Transmitting](signal/signal_processing/basic_knowledge/concept/FM_vs_AM.md)
+* [Standing Wave Ratio](signal/signal_processing/basic_knowledge/concept/SWR.md)
+* [Spectral Density](signal/signal_processing/basic_knowledge/concept/Spectral_density.md)
+* [Chirp - 啁啾](signal/signal_processing/basic_knowledge/concept/chirp.md)
+* [Scattering Parameters](signal/signal_processing/basic_knowledge/concept/scattering_parameters.md)
+* [Smith Graph](signal/signal_processing/basic_knowledge/concept/smith_graph.md)
+* [What is dB](signal/signal_processing/basic_knowledge/concept/what_is_dB.md)
+* [Stability of Discrete System](signal/signal_processing/basic_knowledge/stability_of_discrete_system.md)
 
 ## Modern Signal Processing
 
@@ -23,9 +31,12 @@ date: 2024-03-18
 # Devices and Components
 
 * [VNA](signal/hardware/VNA/MOC.md)
-* [Cable](signal/hardware/cable/cable.md)
+* [Cable - MOC](signal/hardware/cable/cable_MOC.md)
 * [oscilloscope](signal/hardware/oscilloscope/MOC.md)
 * [SRD](signal/hardware/SRD/SRD.md)
+* [Jitter](signal/hardware/ADC/jitter.md)
+* [Frequency Mixer](signal/hardware/frequency_mixer/frequency_mixer.md)
+* [Quality Control Certified](signal/hardware/quality_control_certified/qcc.md)
 
 # Signal Algorithm about
 
@@ -36,6 +47,7 @@ date: 2024-03-18
 ## Curve similarity
 
 * [Curve Similarity - MOC](signal/signal_processing/algorithm/curve_similarity/curve_similarity.md)
+* [Manhattan Distance](signal/signal_processing/algorithm/curve_similarity/manhattan_distance.md)
 
 ## Filter
 
@@ -50,6 +62,14 @@ date: 2024-03-18
 * [Autocorrelation in Signal Processing](signal/signal_processing/algorithm/advanced_statistic/autocorrelation/autocorrelation.md)
 * [Period Detection by Autocorrelation](signal/signal_processing/algorithm/advanced_statistic/autocorrelation/period_detection.md)
 
+## UWB
+
+* [UWB signals, Their Descriptions and Parameters](signal/signal_processing/UWB_about/UWB_signal_parameters.md)
+
+## Radio Communication
+
+* [Near Field vs. Far Field](signal/signal_processing/radio_communication/Near_far_field.md)
+
 
 ## Empirical Mode Decomposition
 
@@ -61,5 +81,3 @@ date: 2024-03-18
 ## CST MWS
 
 * [CST MWS Basic](signal/signal_processing/software/simulation/CST/basic.md)
-
-

@@ -20,6 +20,7 @@ Also, here's my notes about learning photography
 ## About Basic Concepts:
 
 * [Saturation](hobbies/photography/basic/Saturation.md)
+* [Modulation transfer function(MTF) Curve](hobbies/photography/basic/MTF_Curve.md)
 
 ## Appreciation of other works - about ***aesthetic***
 
@@ -39,6 +40,7 @@ Also, here's my notes about learning photography
 * [How to measure light using Polaroid?](hobbies/photography/Skills/polaroid_light.md)
 * [How to use Moodboard](hobbies/photography/Skills/moodboard.md)
 * [How to show your Polaroid Picture](hobbies/photography/aesthetic/Polaroid/Polaroid_showcase.md)
+* [How to Show Polaroid?](hobbies/photography/Skills/howToShowPolaroid.md)
 
 ## Photography story
 
@@ -47,6 +49,7 @@ Also, here's my notes about learning photography
 ##  Mood Board
 
 * [🌊Sea - 2023.04.28](hobbies/photography/mood_board/Sea_20230428/Sea_20230428.md)
+* [idea - reference image](hobbies/photography/mood_board/Sea_20230428/idea.md)
 
 ## Meme
 
@@ -77,5 +80,6 @@ Also, here's my notes about learning photography
 
 # Photography Resume
 
+* [Photography Resume](hobbies/photography/resume.md)
 
 

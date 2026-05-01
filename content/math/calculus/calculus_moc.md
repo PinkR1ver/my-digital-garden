@@ -19,4 +19,5 @@ date: 2024-05-24
 
 # Series
 
-* 
+* [Common Series](math/calculus/series/common_series.md)
+* [Series Convergence Tests - 级数收敛判断](math/calculus/series/convergence_tests.md)
