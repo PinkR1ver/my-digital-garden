@@ -46,3 +46,7 @@
   `content/computer_sci/llm/` with child MOCs for architecture, training,
   fine-tuning, and inference; do not split new LLM notes back into
   `deep_learning_and_machine_learning/LLM/`.
+- 2026-05-06: User wants practical CLI/tooling notes to read like personal
+  operation logs, not tutorials. Avoid "my goal", "become an expert", lesson
+  plans, or motivational framing; prefer concrete terminal scenarios, shortcut
+  tables, terse notes, and an explicit low-AI-tone review when requested.
