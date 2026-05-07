@@ -70,9 +70,54 @@ date: 2026-05-07
 | AI 不大会，人类会做 | ZeroBench、ARC-AGI（部分） | 暴露模型在特定认知模式上的短板，是发现能力边界的关键 |
 | AI 不会，人类也不会 | Humanity's Last Exam | 测的是“极限挑战”，用于展示模型绝对上限 |
 
+![](attachments/ai_benchmark_quadrant.svg)
+
 ## 选择 Benchmark 的注意事项
 
 1. **数据污染**：训练数据可能泄露 benchmark 题目，老 benchmark（GSM8K、MMLU）尤其严重。优先看 LiveCodeBench、Chatbot Arena 这类动态更新的指标。
 2. **评测方式**：选择题（MMLU）容易刷分但区分度下降；交互式评测（SWE-bench、Chatbot Arena）更能反映真实能力。
 3. **任务覆盖**：没有单一 benchmark 能代表模型整体水平。通常组合代码 + 推理 + Agent + 多模态四个维度做交叉判断。
 4. **提示敏感度**：同一个模型在 zero-shot、few-shot、CoT 下的表现差异可能很大，技术报告里的数字需要看具体评测方式。
+
+## Reference
+
+### 代码
+
+1. [SWE-bench](https://github.com/SWE-bench/SWE-bench)
+2. [HumanEval](https://github.com/openai/human-eval)
+3. [MBPP](https://arxiv.org/abs/2108.07732)
+4. [LiveCodeBench](https://github.com/LiveCodeBench/LiveCodeBench)
+5. [Terminal-Bench 2.0](https://github.com/laude-institute/terminal-bench)
+
+### 知识与推理
+
+6. [MMLU](https://arxiv.org/abs/2009.03300)
+7. [MMLU-Pro](https://arxiv.org/abs/2406.01574)
+8. [GPQA-Diamond](https://arxiv.org/abs/2311.12022)
+9. [Humanity's Last Exam](https://arxiv.org/abs/2501.14249)
+10. [MATH](https://arxiv.org/abs/2103.03874)
+11. [GSM8K](https://openai.com/research/solving-math-word-problems)
+12. [ARC-AGI](https://arcprize.org/guide)
+
+### 检索与搜索
+
+13. [BrowseComp](https://openai.com/index/browsecomp/)
+14. [DeepSearchQA](https://arxiv.org/abs/2601.20975)
+15. [SimpleQA](https://openai.com/index/introducing-simpleqa/)
+
+### Agent
+
+16. [tau2-bench](https://github.com/sierra-research/tau2-bench)
+17. [GDPval](https://openai.com/index/gdpval/)
+18. [OSWorld](https://arxiv.org/abs/2404.07972)
+
+### 多模态
+
+19. [MMMU-Pro](https://github.com/MMMU-Benchmark/MMMU)
+20. [ZeroBench](https://arxiv.org/abs/2502.09696)
+21. [MathVista](https://mathvista.github.io/)
+
+### 综合与偏好
+
+22. [Chatbot Arena](https://arxiv.org/abs/2403.04132)
+23. [BIG-bench](https://github.com/google/BIG-bench)
