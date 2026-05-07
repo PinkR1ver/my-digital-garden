@@ -1,5 +1,5 @@
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
-import { FullSlug, SimpleSlug, resolveRelative } from "../util/path"
+import { SimpleSlug, resolveRelative } from "../util/path"
 import { QuartzPluginData } from "../plugins/vfile"
 import { byDateAndAlphabetical } from "./PageList"
 import style from "./styles/recentNotes.scss"
@@ -37,9 +37,8 @@ export default ((userOpts?: Partial<Options>) => {
       <div class={classNames(displayClass, "recent-notes")}>
         <h3>{opts.title ?? i18n(cfg.locale).components.recentNotes.title}</h3>
         <ul class="recent-ul">
-          {pages.slice(0, opts.limit).map((page) => {
+          {pages.slice(0, opts.limit).map((page, index) => {
             const title = page.frontmatter?.title ?? i18n(cfg.locale).propertyDefaults.title
-            const tags = page.frontmatter?.tags ?? []
 
             return (
               <li class="recent-li">
@@ -53,21 +52,27 @@ export default ((userOpts?: Partial<Options>) => {
                   </div>
                   {page.dates && (
                     <p class="meta">
-                      <Date date={getDate(cfg, page)!} locale={cfg.locale} />
+                      {index === 0 ? (
+                        <span class="recent-new-badge" aria-label="newest note">
+                          <span class="recent-new-badge-label">New</span>
+                          <svg
+                            class="recent-new-badge-outline"
+                            viewBox="0 0 50 28"
+                            aria-hidden="true"
+                          >
+                            <path
+                              d="M 34 7 C 24 2, 10 4, 6 12 C 2 20, 13 25, 28 25 C 42 25, 48 18, 45 11 C 42 5, 28 3, 19 7"
+                              class="recent-new-badge-path"
+                              pathLength="1"
+                              fill="none"
+                            />
+                          </svg>
+                        </span>
+                      ) : (
+                        <Date date={getDate(cfg, page)!} locale={cfg.locale} />
+                      )}
                     </p>
                   )}
-                  <ul class="tags">
-                    {tags.map((tag) => (
-                      <li>
-                        <a
-                          class="internal tag-link"
-                          href={resolveRelative(fileData.slug!, `tags/${tag}` as FullSlug)}
-                        >
-                          #{tag}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
               </li>
             )

@@ -19,6 +19,73 @@
         margin: 0 0 0.5rem 0;
         opacity: 0.6;
       }
+
+      .section > .meta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+
+      .recent-new-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        padding: 0.1rem 0.35rem 0.08rem 0.35rem;
+        color: currentColor;
+        opacity: 1;
+        line-height: 1;
+      }
+
+      .recent-new-badge-label {
+        position: relative;
+        z-index: 1;
+        color: currentColor;
+        font-family: var(--font-script, "Caveat", cursive);
+        font-size: 1.2rem;
+        font-style: italic;
+        letter-spacing: 0.01em;
+        transform: rotate(-2deg);
+        transform-origin: center;
+      }
+
+      .recent-new-badge-outline {
+        position: absolute;
+        inset: -0.28rem -0.58rem -0.24rem -0.58rem;
+        z-index: 0;
+        width: calc(100% + 20px);
+        height: calc(100% + 12px);
+        overflow: visible;
+      }
+
+      .recent-new-badge-path {
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.35;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        vector-effect: non-scaling-stroke;
+        opacity: 0.9;
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .recent-notes > ul.recent-ul > li:first-child .recent-new-badge-path {
+    stroke-dasharray: 1 1;
+    stroke-dashoffset: 1;
+    animation: recent-new-circle 1.7s ease-out 1 both;
+  }
+
+  @keyframes recent-new-circle {
+    from {
+      stroke-dashoffset: 1;
+    }
+
+    to {
+      stroke-dashoffset: 0;
     }
   }
 }

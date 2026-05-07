@@ -50,3 +50,14 @@
   operation logs, not tutorials. Avoid "my goal", "become an expert", lesson
   plans, or motivational framing; prefer concrete terminal scenarios, shortcut
   tables, terse notes, and an explicit low-AI-tone review when requested.
+- 2026-05-07: For the home page's `Recent writing`, the user likes a subtle
+  animated `new` badge on the newest note's date rather than a GIF-heavy
+  treatment. Keep the motion lightweight and local to that latest entry.
+- 2026-05-07: For the home page's `Recent writing`, do not show tags. Keep the
+  sidebar list minimal: title, date, and the newest-note `new` badge only.
+- 2026-05-07: For the home page's newest-note badge, make `New` noticeably
+  larger and keep the outline circle visually obvious. The motion should read
+  as a drawn ring, not a fade-in.
+- 2026-05-07: For the home page's newest-note badge, use a one-shot draw
+  animation for the outline circle, not an infinite loop. Keep the `New` text
+  color aligned with the date metadata styling.
