@@ -70,7 +70,7 @@ date: 2026-05-07
 | AI 不大会，人类会做 | ZeroBench、ARC-AGI（部分） | 暴露模型在特定认知模式上的短板，是发现能力边界的关键 |
 | AI 不会，人类也不会 | Humanity's Last Exam | 测的是“极限挑战”，用于展示模型绝对上限 |
 
-![](attachments/ai_benchmark_quadrant.svg)
+![](attachments/ai_benchmark_quadrant.png)
 
 ## 选择 Benchmark 的注意事项
 
