@@ -48,4 +48,6 @@ date: 2024-01-17
 ## Agent and Appendix
 
 - [agent SKILL mechanism](computer_sci/llm/agent/agent_SKILL_mechanism.md)
+- [AI Code Agent Hooks](computer_sci/llm/agent/ai_code_agent_hooks.md)
+- [Model Context Protocol MCP](computer_sci/llm/agent/model_context_protocol_mcp.md)
 - [Embed vs. Transform](computer_sci/llm/appendix/embed_vs_transform.md)
