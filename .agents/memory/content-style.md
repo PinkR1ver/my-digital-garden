@@ -64,3 +64,5 @@
 - 2026-05-19: For the home page signoff, user liked the first historical
   calligraphy preview: 王羲之 `欢` paired with 米芾 `迎`. Use a transparent PNG
   asset rather than a font file for this two-character treatment.
+- 2026-05-19: Keep the calligraphy `欢迎` signoff close to the old text size;
+  the colorized PNG treatment is acceptable, but it should stay understated.
