@@ -27,7 +27,9 @@ date: 2023-09-19
   </p>
 
   <p class="home-signoff">
-    <span class="home-signoff-welcome">欢迎</span>
+    <span class="home-signoff-welcome">
+      <img src="./assets/home/welcome-calligraphy.png" alt="欢迎" />
+    </span>
     <span class="home-signoff-name">Jude</span>
   </p>
 </section>

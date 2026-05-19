@@ -61,3 +61,6 @@
 - 2026-05-07: For the home page's newest-note badge, use a one-shot draw
   animation for the outline circle, not an infinite loop. Keep the `New` text
   color aligned with the date metadata styling.
+- 2026-05-19: For the home page signoff, user liked the first historical
+  calligraphy preview: 王羲之 `欢` paired with 米芾 `迎`. Use a transparent PNG
+  asset rather than a font file for this two-character treatment.

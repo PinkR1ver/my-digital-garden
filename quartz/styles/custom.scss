@@ -108,9 +108,14 @@ body[data-slug="index"] .home-signoff {
 
 body[data-slug="index"] .home-signoff-welcome {
   align-self: flex-start;
-  font-family: "Ma Shan Zheng", "Xingkai SC", "STXingkai", "Hannotate SC", cursive;
-  font-size: 1.32rem;
-  font-weight: 400;
+  display: block;
+  width: min(8.25rem, 40vw);
+}
+
+body[data-slug="index"] .home-signoff-welcome img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 body[data-slug="index"] .home-signoff-name {
