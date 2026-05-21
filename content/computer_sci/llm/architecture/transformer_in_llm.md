@@ -340,7 +340,7 @@ Softmax函数公式是$\frac{e^x}{\sum e^x}$，对输入的数值大小非常敏
 
 Softmax 的分布变得像“**独热编码 (One-hot)**”一样极端。其中一个不仅拿走了所有权重，而且在数学上，Softmax 函数在趋近于 0 或 1 的位置，**导数（梯度）趋近于 0**。
 
-以至于为什么要除以$\sqrt{d_k}$，假设 $Q$ 和 $K$ 中的每个元素都是均值为 0，方差为 1 的随机变量。它们的点积 $Q \cdot K = \sum_{i=1}^{d_k} q_i k_i$。[根据统计学规律，如果你把 $d_k$ 个方差为 1 的数加起来，结果的方差会变成 $d_k$]((math/statistic/basic_concepot/var_addition.md)。这意味着点积结果的标准差变成了 $\sqrt{d_k}$，因此需要把结果除以标准差，让数值保持在 Softmax 喜欢的“舒适区”。
+以至于为什么要除以$\sqrt{d_k}$，假设 $Q$ 和 $K$ 中的每个元素都是均值为 0，方差为 1 的随机变量。它们的点积 $Q \cdot K = \sum_{i=1}^{d_k} q_i k_i$。[根据统计学规律，如果你把 $d_k$ 个方差为 1 的数加起来，结果的方差会变成 $d_k$](math/statistic/basic_concepot/var_addition.md)。这意味着点积结果的标准差变成了 $\sqrt{d_k}$，因此需要把结果除以标准差，让数值保持在 Softmax 喜欢的“舒适区”。
 
 ### 为什么要使用softmax归一化weight matrix？
 
@@ -534,6 +534,14 @@ flowchart TD
 | **推理一致性** | 训练/推理统计量不同，需用移动平均  | 训练/推理行为完全一致                |
 
 **结论**：BatchNorm和LayerNorm的“分工”是深度学习中的一个经典范例。它告诉我们，没有“最好”的技术，只有“最合适”的技术。CNN因其处理**具有空间不变性的网格数据**的特性而与BatchNorm联姻；Transformer因其处理**长度可变、关系复杂的序列数据**的使命而与LayerNorm结盟。这种选择是数据特性、计算需求和架构设计三者完美契合的结果。
+
+## Tiny Transformer Lab
+
+前面公式和图看多了之后，最容易卡住的点其实是：这些矩阵到底是怎么一层一层流过去的。
+
+所以这里放一个很小的 toy forward pass。权重都是手写死的，不训练，只是把 tokens, embedding, Q/K/V, causal attention, residual, layernorm, MLP, logits 这些中间结果摊开看一遍。
+
+<iframe src="/computer_sci/llm/architecture/attachments/tiny-transformer-lab.html" width="100%" height="820" frameborder="0"></iframe>
 
 ## Reference
 

@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tiny Transformer Lab</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #eff1f5;
+        --panel: #e6e9ef;
+        --text: #4c4f69;
+        --muted: #6c6f85;
+        --line: #ccd0da;
+        --accent: #1e66f5;
+        --accent-soft: rgba(30, 102, 245, 0.12);
+        --warn: #d20f39;
+        --shape-fill: #ffffff;
+        font-family:
+          "Bricolage Grotesque", "Source Sans Pro", system-ui, -apple-system, BlinkMacSystemFont,
+          sans-serif;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #303446;
+          --panel: #292c3c;
+          --text: #c6d0f5;
+          --muted: #a5adce;
+          --line: #414559;
+          --accent: #8caaee;
+          --accent-soft: rgba(140, 170, 238, 0.16);
+          --warn: #e78284;
+          --shape-fill: #232634;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      .lab-shell {
+        display: grid;
+        grid-template-columns: minmax(210px, 0.34fr) minmax(0, 1fr);
+        min-height: 720px;
+        border: 1px solid var(--line);
+      }
+
+      .lab-panel {
+        border-right: 1px solid var(--line);
+        background: var(--panel);
+        padding: 16px;
+      }
+
+      .lab-label,
+      .lab-kicker {
+        display: block;
+        margin: 0 0 6px;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+      }
+
+      .lab-input {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--bg);
+        color: var(--text);
+        font: inherit;
+        padding: 10px 12px;
+      }
+
+      .lab-vocab {
+        margin: 10px 0 16px;
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.35;
+      }
+
+      .lab-steps {
+        display: grid;
+        gap: 6px;
+      }
+
+      .lab-steps button {
+        width: 100%;
+        border: 1px solid transparent;
+        border-radius: 6px;
+        background: transparent;
+        color: var(--text);
+        cursor: pointer;
+        font: inherit;
+        padding: 9px 10px;
+        text-align: left;
+      }
+
+      .lab-steps button:hover,
+      .lab-steps button.active {
+        border-color: var(--accent);
+        background: var(--accent-soft);
+      }
+
+      .lab-output {
+        min-width: 0;
+        padding: 20px;
+      }
+
+      .lab-output-header {
+        max-width: 760px;
+      }
+
+      h2 {
+        margin: 0 0 8px;
+        font-size: 1.45rem;
+      }
+
+      h3 {
+        margin: 20px 0 8px;
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
+
+      p {
+        line-height: 1.5;
+      }
+
+      .lab-warning {
+        color: var(--warn);
+      }
+
+      .lab-card {
+        overflow: auto;
+        margin-top: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: color-mix(in srgb, var(--bg) 84%, white);
+        padding: 14px;
+      }
+
+      .lab-diagram {
+        overflow: auto;
+        margin-top: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        padding: 12px;
+      }
+
+      .lab-diagram svg {
+        display: block;
+        max-width: 100%;
+        margin: 0 auto;
+      }
+
+      .lab-svg {
+        min-width: 520px;
+      }
+
+      .shape-block rect,
+      .matrix-term rect,
+      .qkv-branch rect {
+        fill: var(--shape-fill);
+        stroke: var(--accent);
+        stroke-width: 1.6;
+      }
+
+      .shape-op line,
+      .shape-op path,
+      .qkv-branch path {
+        fill: none;
+        stroke: var(--muted);
+        stroke-linecap: round;
+        stroke-width: 1.7;
+      }
+
+      .shape-title,
+      .matrix-label {
+        fill: var(--text);
+        font-size: 14px;
+        font-weight: 700;
+        text-anchor: middle;
+      }
+
+      .shape-shape,
+      .matrix-shape {
+        fill: var(--accent);
+        font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 12px;
+        font-weight: 700;
+        text-anchor: middle;
+      }
+
+      .shape-subtitle {
+        fill: var(--muted);
+        font-size: 9px;
+        text-anchor: middle;
+      }
+
+      .shape-op text,
+      .matrix-op,
+      .matrix-note {
+        fill: var(--muted);
+        font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 12px;
+        text-anchor: middle;
+      }
+
+      .matrix-op {
+        font-weight: 700;
+      }
+
+      .mask-visible rect {
+        fill: var(--accent-soft);
+        stroke: var(--accent);
+      }
+
+      .mask-future rect {
+        fill: color-mix(in srgb, var(--warn) 14%, var(--shape-fill));
+        stroke: var(--warn);
+      }
+
+      .mask-visible text,
+      .mask-future text {
+        fill: var(--text);
+        font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 12px;
+        text-anchor: middle;
+      }
+
+      .mermaid-fallback {
+        color: var(--muted);
+      }
+
+      table {
+        border-collapse: collapse;
+        margin-bottom: 8px;
+        min-width: 360px;
+      }
+
+      td {
+        border: 1px solid var(--line);
+        font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.88rem;
+        padding: 8px 10px;
+        text-align: right;
+        white-space: nowrap;
+      }
+
+      pre {
+        overflow: auto;
+        margin: 0;
+        font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      .lab-caption {
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      @media (max-width: 760px) {
+        .lab-shell {
+          display: block;
+        }
+
+        .lab-panel {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .lab-steps {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div data-tiny-transformer-lab></div>
+    <script type="module" src="./tiny-transformer-lab.js?v=2026-05-21-shapes"></script>
+  </body>
+</html>

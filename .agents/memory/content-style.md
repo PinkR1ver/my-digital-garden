@@ -66,3 +66,8 @@
   asset rather than a font file for this two-character treatment.
 - 2026-05-19: Keep the calligraphy `欢迎` signoff close to the old text size;
   the colorized PNG treatment is acceptable, but it should stay understated.
+- 2026-05-21: When embedding local HTML experiments in notes with `<iframe>`,
+  prefer a root-absolute source path such as
+  `/computer_sci/llm/architecture/attachments/example.html`. Quartz rewrites
+  iframe `src` values through clean-link handling; nested relative paths can be
+  rewritten to the wrong folder.
