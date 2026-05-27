@@ -23,6 +23,9 @@ const defaultOptions = (cfg: GlobalConfiguration): Options => ({
   sort: byDateAndAlphabetical(cfg),
 })
 
+const isMocNote = (file: QuartzPluginData): boolean =>
+  file.frontmatter?.tags?.some((tag) => tag.toLowerCase() === "moc") ?? false
+
 export default ((userOpts?: Partial<Options>) => {
   const RecentNotes: QuartzComponent = ({
     allFiles,
@@ -31,7 +34,7 @@ export default ((userOpts?: Partial<Options>) => {
     cfg,
   }: QuartzComponentProps) => {
     const opts = { ...defaultOptions(cfg), ...userOpts }
-    const pages = allFiles.filter(opts.filter).sort(opts.sort)
+    const pages = allFiles.filter((page) => opts.filter(page) && !isMocNote(page)).sort(opts.sort)
     const remaining = Math.max(0, pages.length - opts.limit)
     return (
       <div class={classNames(displayClass, "recent-notes")}>

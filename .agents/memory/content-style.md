@@ -59,6 +59,9 @@
   treatment. Keep the motion lightweight and local to that latest entry.
 - 2026-05-07: For the home page's `Recent writing`, do not show tags. Keep the
   sidebar list minimal: title, date, and the newest-note `new` badge only.
+- 2026-05-27: `Recent writing` should exclude MOC notes. The current
+  implementation filters pages whose frontmatter `tags` include `MOC` in
+  `quartz/components/RecentNotes.tsx`.
 - 2026-05-07: For the home page's newest-note badge, make `New` noticeably
   larger and keep the outline circle visually obvious. The motion should read
   as a drawn ring, not a fade-in.
