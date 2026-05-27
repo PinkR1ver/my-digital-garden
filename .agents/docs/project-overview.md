@@ -50,6 +50,24 @@ published as a static website.
 - `content/plan/`, `content/log/`, `content/news.md`, `content/resume.md`:
   personal pages and updates.
 
+## Dual Git Repo
+
+`content/` is a **nested git repository** (not a submodule) that tracks notes independently:
+
+| Repo | Remote | Branch |
+| :--- | :--- | :--- |
+| Root (Quartz site) | `github.com/PinkR1ver/my-digital-garden` | `v4` |
+| `content/` (notes only) | `github.com/PinkR1ver/Jude.W-s-Knowledge-Brain` | `master` |
+
+When committing and pushing, **always check both repos**:
+
+1. Run `git status` in `content/` first — stage and commit any note changes, push to `master`
+2. Run `git status` in the root — stage and commit any note + infrastructure changes, push to `v4`
+
+### Why?
+
+The content repo is synced separately so notes can be used outside of the Quartz build system (e.g., in Obsidian or other tools) without pulling in the entire site infrastructure.
+
 ## Public Entry Path
 
 ```text

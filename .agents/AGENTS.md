@@ -43,6 +43,10 @@ in `.agents/`.
 - After finishing note work, provide the user a preview URL for the changed
   page before any commit or push. Do not commit or push until the user explicitly
   says to commit/push.
+- When committing note changes, always check both repos: `content/` (notes
+  only, branch `master`, remote `PinkR1ver/Jude.W-s-Knowledge-Brain`) and the
+  root (full Quartz site, branch `v4`, remote `PinkR1ver/my-digital-garden`).
+  Commit content/ first, then root. See `.agents/docs/project-overview.md`.
 - For TypeScript, config, layout, or component changes, run `npm run check` when
   feasible.
 

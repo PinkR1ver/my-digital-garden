@@ -17,6 +17,7 @@ date: 2026-05-01
 
 ## Alignment
 
+- [从 GPT 到 ChatGPT：让模型学会「听话」的对齐之路](computer_sci/llm/training/alignment.md)
 - [Detailed explanation of RLHF technology](computer_sci/llm/training/RLHF.md)
 
 ## Parent MOC

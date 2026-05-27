@@ -217,3 +217,8 @@ body[data-slug="index"] .home-signoff-name {
       stroke 420ms ease;
   }
 }
+
+// Make code blocks use body text color instead of inline-code accent (#d0104c)
+pre > code {
+  color: var(--darkgray);
+}
