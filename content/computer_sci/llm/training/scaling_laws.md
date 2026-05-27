@@ -147,6 +147,49 @@ Chinchilla 的公式里没有"数据质量"这个变量。但实践反复证明�
 
 Brown et al. (2024)[4] 发现，推理时的计算量（inference-time compute）也遵循 scaling laws——通过 chain-of-thought、self-consistency 等技术，你可以在不改变模型参数的情况下，用更多的推理计算换取更好的答案。这意味着 scaling 的故事不只在训练阶段成立。
 
+## 实战：一块 GTX 1080 Ti 的最佳博弈
+
+把理论拉到现实——实验室那块 GTX 1080 Ti（11GB VRAM，11.3 TFLOPS FP32），能训练多大的模型？
+
+### 两个硬约束
+
+**约束一：显存**
+
+训练时的显存占用不只是模型参数本身。以混合精度训练 + AdamW 优化器为例：
+
+| 组件 | 每参数占用 |
+| :--- | :--- |
+| 模型权重 (FP16) | 2 bytes |
+| 梯度 (FP16) | 2 bytes |
+| AdamW 动量 + 方差 (FP32) | 8 bytes |
+| **基础合计** | **~12 bytes** |
+| 激活值 + 框架开销（gradient checkpointing） | ~4-8 bytes |
+| **实际总计** | **~16-20 bytes/param** |
+
+11GB 除以 18 bytes/param ≈ **理论上限 ~600M 参数**。但要留余量给 batch size 和序列长度，**实用上限大约在 300-400M**。
+
+**约束二：时间**
+
+Chinchilla 说最优数据量是 20× 参数量。结合训练计算量 $C \approx 6ND$ FLOPs 和 1080 Ti 实际训练吞吐（混合精度，没有专用 tensor core，大约 2 TFLOPS 有效算力）：
+
+| 模型大小 | Chinchilla 数据量 | 总计算量 | 预估训练时间 |
+| :--- | :--- | :--- | :--- |
+| 50M | 1B tokens | $3 \times 10^{17}$ FLOPs | ~1.7 天 |
+| 100M | 2B tokens | $1.2 \times 10^{18}$ FLOPs | ~7 天 |
+| 200M | 4B tokens | $4.8 \times 10^{18}$ FLOPs | ~28 天 |
+| 350M | 7B tokens | $1.5 \times 10^{19}$ FLOPs | ~85 天 |
+
+> [!tip] 甜蜜点
+> **100M-150M 参数 + 2-3B tokens** 是最务实的选择。显存绰绰有余，一周左右出结果，刚好能在耐心耗尽前看到模型说话。
+
+### 这不是一个"最优解"问题
+
+Chinchilla 公式告诉你的是：*给定 FLOPs 预算，怎么分配 N 和 D 能让 loss 最低*。但你的约束不是 FLOPs 预算，而是**显存上限 + 你愿意等多久**。
+
+在 1080 Ti 这个具体场景下，200M 以下你是在做"计算最优"训练；超过 350M 你根本塞不进显存；在两者之间，决定因素是**你有多想快点看到结果**。
+
+> 一个反直觉的事实：100M 参数的模型已经可以学到相当有意义的语言规律了。Andrej Karpathy 的 [nanoGPT](https://github.com/karpathy/nanoGPT) 用 ~10M 参数在 Shakespeare 上就能生成像样的文本。100M 参数 + 高质量中文语料，完全能训练出一个有趣的实验模型。
+
 ## 小结
 
 Scaling Laws 是 LLM 训练决策的计算器：
