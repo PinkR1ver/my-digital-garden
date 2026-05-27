@@ -11,6 +11,10 @@
 - Keep `content/atlas.md` as the high-level map, not a dump of every note.
 - User preference: after running a Quartz build or local preview for note work,
   always provide the exact local link address for the changed note/page.
+- 2026-05-27: After writing or editing notes, provide a preview URL for the
+  changed page before committing or pushing. Wait until the user explicitly says
+  to commit/push; never commit or push note changes just because validation
+  passed.
 - User preference: when adding references to notes, use inline citation links in
   the body that jump to a lightweight bibliography entry. Prefer numeric
   citations such as `[1]`, `[2]`, `[3]` in the body.

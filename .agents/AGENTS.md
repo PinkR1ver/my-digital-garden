@@ -40,6 +40,9 @@ in `.agents/`.
   MOCs.
 - For substantial content, link, asset, config, or layout changes, verify with
   `npx quartz build`.
+- After finishing note work, provide the user a preview URL for the changed
+  page before any commit or push. Do not commit or push until the user explicitly
+  says to commit/push.
 - For TypeScript, config, layout, or component changes, run `npm run check` when
   feasible.
 
@@ -62,4 +65,6 @@ in `.agents/`.
 - Do not edit generated `public/`.
 - Do not casually change the production domain, deploy branch, or GitHub Pages
   workflow.
+- Do not commit or push note changes before the user has reviewed the preview
+  URL and explicitly asked for commit/push.
 - Do not run destructive git commands.

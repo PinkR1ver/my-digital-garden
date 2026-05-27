@@ -10,6 +10,10 @@ date: 2026-04-30
 
 - [Git MOC](toolkit/git/git_MOC.md)
 
+## Code Quality
+
+- [Code Quality MOC](toolkit/code_quality/MOC.md)
+
 ## Shell and Terminal
 
 - [How to deal with the error 35 by using proxy in curl](toolkit/curl/curl_set_proxy_error35.md)
