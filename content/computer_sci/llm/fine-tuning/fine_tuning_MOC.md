@@ -9,7 +9,7 @@ date: 2026-05-01
 
 ## Methods and Practice
 
-- [LoRA - Low Rand Adaptation](computer_sci/llm/fine-tuning/LoRA.md)
+- [LoRA：大模型微调的数学魔法](computer_sci/llm/fine-tuning/LoRA.md)
 - [How to use fine-tune tech to create your chatbot](computer_sci/llm/fine-tuning/how_to_fine_tune.md)
 - [Learn finetune by Stanford Alpaca](computer_sci/llm/fine-tuning/learn_finetune_byStanfordAlpaca.md)
 

@@ -365,8 +365,6 @@ $$
 3. **RLHF/DPO 调整策略**：在裁判的指导下优化模型，同时用 KL 惩罚防止"作弊"
 4. **DPO 简化一切**：把 reward model 和 RL 两个步骤合并成一步，用偏好数据直接优化
 
-[RLHF 技术细节补充](computer_sci/llm/training/RLHF.md)
-
 ## Reference
 
 [1] Ouyang, L., Wu, J., Jiang, X., et al. (2022). [Training language models to follow instructions with human feedback](https://arxiv.org/abs/2203.02155). NeurIPS 2022. (The InstructGPT paper)
