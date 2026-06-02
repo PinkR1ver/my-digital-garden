@@ -68,6 +68,7 @@ date: 2024-03-18
 
 ## Radio Communication
 
+* [SDR and Radio Codec Basic](electrical_electronics/RF/SDR/sdr_radio_codec_basic.md)
 * [Near Field vs. Far Field](signal/signal_processing/radio_communication/Near_far_field.md)
 
 

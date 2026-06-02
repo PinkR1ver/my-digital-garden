@@ -25,6 +25,8 @@ date: 2024-05-21
 
 ## Basic
 
+* [SDR and Radio Codec Basic](electrical_electronics/RF/SDR/sdr_radio_codec_basic.md)
+
 ### Antenna
 
 * [Antenna](electrical_electronics/RF/antenna/antenna.md)
