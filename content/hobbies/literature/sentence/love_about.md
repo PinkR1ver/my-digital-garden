@@ -5,9 +5,33 @@ tags:
 - 摘抄
 - love
 - poem
-date: 2024-02-28
+date: 2026-06-02
 ---
 
+
+> [!quote]
+> From [爱情心理学 这才是真正的爱情](https://www.bilibili.com/video/BV1nEoYBBEUr/?spm_id_from=333.1387.favlist.content.click&vd_source=c47136abc78922800b17d6ce79d6e19f)
+> <br>
+> If someone loves your appearance, it's obsession.<br>
+> If someone loves your kindness, it's admiration.<br>
+> If someone loves your money, it's for profit.<br>
+> If someone loves your talent, it's for attraction.<br>
+> If someone loves you because you love him, it's for identification.<br>
+> If you deeply love someone, even when you are apart, you still love him.<br>
+> This is emotion.<br>
+> If you love someone by putting their happiness above your own,<br>
+> it's selfless.<br>
+> If you love someone because he can make you laugh,<br>
+> it's humor and wisdom.<br>
+> If you love someone because he can share experiences and knowledge with you.<br>
+> It's a substitute for fatherly love.<br>
+> If you love someone because he can tolerate and understand you,<br>
+> it's the continuation of motherly love.<br>
+> If you love someone, it's for the time you are together with them.<br>
+> Your presence. This is true love.
+
+
+---
 
 
 > [!quote] 
@@ -132,5 +156,3 @@ date: 2024-02-28
 > From [小猫说，在胃痛面前，心动一文不值](https://www.bilibili.com/video/BV1hh4y157Nk/?spm_id_from=333.999.0.0&vd_source=c47136abc78922800b17d6ce79d6e19f) 
 > 
 > 既新鲜又长久的爱情是，反复爱上同一个人
-
-
