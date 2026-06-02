@@ -77,6 +77,17 @@ MOC means "Map of Content". It is the main navigation mechanism for this vault.
 - Update parent MOCs when adding a new child MOC.
 - Keep `content/atlas.md` high signal.
 
+## Excerpt Notes
+
+These rules apply only to quote/excerpt collection notes, such as notes under
+`content/hobbies/literature/sentence/`.
+
+- Add newer excerpts before older excerpts instead of appending them at the
+  bottom.
+- By default, only add the excerpt itself. Do not add agent-written summaries,
+  explanations, interpretations, or commentary unless the user explicitly asks
+  for them.
+
 ## Assets and Attachments
 
 - Public reusable assets belong under `content/assets/`.

@@ -18,8 +18,6 @@
 - User preference: when adding references to notes, use inline citation links in
   the body that jump to a lightweight bibliography entry. Prefer numeric
   citations such as `[1]`, `[2]`, `[3]` in the body.
-- 2026-06-02: For excerpt/quote collection notes, add newer excerpts before
-  older ones instead of appending at the bottom.
 - 2026-04-30: Use Catppuccin Latte for light mode and Catppuccin Frappe for dark
   mode. Fonts match Jacky Zhao's stack: DM Serif Display headings, Bricolage
   Grotesque body, JetBrains Mono code.
