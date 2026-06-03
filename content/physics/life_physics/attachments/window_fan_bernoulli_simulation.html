@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bernoulli Ventilation Principle</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f7f3ea;
+      --panel: #fffaf0;
+      --ink: #2f332e;
+      --muted: #6c7168;
+      --line: #d7cfc0;
+      --accent: #2f7d73;
+      --inlet: #c96e3f;
+      --cool: #5c83b9;
+      --fresh: #75a85e;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--ink);
+      font: 14px/1.45 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 16px;
+      height: 100vh;
+      min-height: 760px;
+      padding: 16px;
+    }
+
+    .stage,
+    .controls {
+      background: color-mix(in srgb, var(--panel) 92%, white);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .stage {
+      position: relative;
+      overflow: hidden;
+      min-height: 728px;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .readout {
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(110px, 1fr));
+      gap: 8px;
+      width: min(560px, calc(100% - 28px));
+      pointer-events: none;
+    }
+
+    .metric {
+      background: color-mix(in srgb, var(--panel) 84%, transparent);
+      border: 1px solid color-mix(in srgb, var(--line) 78%, transparent);
+      border-radius: 8px;
+      padding: 8px 10px;
+      backdrop-filter: blur(6px);
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 2px;
+      font-size: 17px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .controls {
+      padding: 14px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 16px;
+      letter-spacing: 0;
+    }
+
+    label {
+      display: block;
+      margin: 11px 0 5px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 14px 0 6px;
+      color: var(--ink);
+      font-size: 13px;
+    }
+
+    .toggle input {
+      accent-color: var(--accent);
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin: 10px 0 12px;
+    }
+
+    .tab-button {
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: color-mix(in srgb, var(--panel) 80%, white);
+      color: var(--muted);
+      cursor: pointer;
+      font: inherit;
+      padding: 7px 8px;
+    }
+
+    .tab-button.active {
+      background: var(--accent);
+      border-color: #244e49;
+      color: white;
+    }
+
+    .control-panel {
+      display: none;
+    }
+
+    .control-panel.active {
+      display: block;
+    }
+
+    select,
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+    }
+
+    select {
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: color-mix(in srgb, var(--panel) 85%, white);
+      color: var(--ink);
+      font: inherit;
+      padding: 7px 8px;
+    }
+
+    .wall-card {
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+
+    .value {
+      float: right;
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .legend {
+      display: grid;
+      gap: 8px;
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .legend-item {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .swatch {
+      width: 22px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .swatch.inlet {
+      background: var(--inlet);
+    }
+
+    .swatch.low {
+      background: var(--cool);
+    }
+
+    .swatch.wall {
+      background: #777569;
+    }
+
+    .note {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 760px) {
+      html,
+      body {
+        overflow: auto;
+      }
+
+      .wrap {
+        grid-template-columns: 1fr;
+        height: auto;
+        min-height: 0;
+      }
+
+      .stage {
+        min-height: 560px;
+      }
+
+      .readout {
+        grid-template-columns: 1fr;
+        width: 170px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="stage" aria-label="Simple Bernoulli ventilation principle">
+      <canvas id="sim"></canvas>
+      <div class="readout" aria-hidden="true">
+        <div class="metric"><span>Pressure drop</span><strong id="pressure">0 Pa</strong></div>
+        <div class="metric"><span>Flow trend</span><strong id="flow">0%</strong></div>
+        <div class="metric"><span>Effective area</span><strong id="area">0%</strong></div>
+      </div>
+    </section>
+
+    <aside class="controls">
+      <h2>Simple room model</h2>
+
+      <div class="tabs" role="tablist" aria-label="Simulation controls">
+        <button class="tab-button active" type="button" data-tab="room">Room</button>
+        <button class="tab-button" type="button" data-tab="fans">Fans</button>
+      </div>
+
+      <div class="control-panel active" id="roomPanel">
+        <label for="roomWidth">Room width <span class="value" id="roomWidthValue"></span></label>
+        <input id="roomWidth" type="range" min="2" max="12" value="5" step="0.1">
+
+        <label for="roomLength">Room length <span class="value" id="roomLengthValue"></span></label>
+        <input id="roomLength" type="range" min="3" max="16" value="8" step="0.1">
+
+        <label for="exhaustArea">Exhaust opening area <span class="value" id="exhaustAreaValue"></span></label>
+        <input id="exhaustArea" type="range" min="0.02" max="2" value="0.45" step="0.02">
+
+        <label for="exhaustY">Exhaust vertical position <span class="value" id="exhaustYValue"></span></label>
+        <input id="exhaustY" type="range" min="0.08" max="0.92" value="0.24" step="0.01">
+
+        <label for="inletArea">Inlet opening area <span class="value" id="inletAreaValue"></span></label>
+        <input id="inletArea" type="range" min="0" max="2" value="0.35" step="0.02">
+
+        <label for="inletY">Inlet vertical position <span class="value" id="inletYValue"></span></label>
+        <input id="inletY" type="range" min="0.08" max="0.92" value="0.76" step="0.01">
+
+        <div class="wall-card">
+          <label class="toggle"><input id="wall1Enabled" type="checkbox" checked> add wall 1</label>
+          <label for="wall1Direction">Wall 1 direction</label>
+          <select id="wall1Direction">
+            <option value="horizontal">horizontal</option>
+            <option value="vertical">vertical</option>
+          </select>
+          <label for="wall1X">Wall 1 center X <span class="value" id="wall1XValue"></span></label>
+          <input id="wall1X" type="range" min="0.08" max="0.92" value="0.18" step="0.01">
+          <label for="wall1Y">Wall 1 center Y <span class="value" id="wall1YValue"></span></label>
+          <input id="wall1Y" type="range" min="0.08" max="0.92" value="0.62" step="0.01">
+          <label for="wall1Length">Wall 1 length <span class="value" id="wall1LengthValue"></span></label>
+          <input id="wall1Length" type="range" min="0.08" max="0.9" value="0.36" step="0.01">
+        </div>
+
+        <div class="wall-card">
+          <label class="toggle"><input id="wall2Enabled" type="checkbox" checked> add wall 2</label>
+          <label for="wall2Direction">Wall 2 direction</label>
+          <select id="wall2Direction">
+            <option value="vertical">vertical</option>
+            <option value="horizontal">horizontal</option>
+          </select>
+          <label for="wall2X">Wall 2 center X <span class="value" id="wall2XValue"></span></label>
+          <input id="wall2X" type="range" min="0.08" max="0.92" value="0.34" step="0.01">
+          <label for="wall2Y">Wall 2 center Y <span class="value" id="wall2YValue"></span></label>
+          <input id="wall2Y" type="range" min="0.08" max="0.92" value="0.31" step="0.01">
+          <label for="wall2Length">Wall 2 length <span class="value" id="wall2LengthValue"></span></label>
+          <input id="wall2Length" type="range" min="0.08" max="0.9" value="0.62" step="0.01">
+        </div>
+
+        <div class="wall-card">
+          <label class="toggle"><input id="wall3Enabled" type="checkbox"> add wall 3</label>
+          <label for="wall3Direction">Wall 3 direction</label>
+          <select id="wall3Direction">
+            <option value="vertical">vertical</option>
+            <option value="horizontal">horizontal</option>
+          </select>
+          <label for="wall3X">Wall 3 center X <span class="value" id="wall3XValue"></span></label>
+          <input id="wall3X" type="range" min="0.08" max="0.92" value="0.35" step="0.01">
+          <label for="wall3Y">Wall 3 center Y <span class="value" id="wall3YValue"></span></label>
+          <input id="wall3Y" type="range" min="0.08" max="0.92" value="0.32" step="0.01">
+          <label for="wall3Length">Wall 3 length <span class="value" id="wall3LengthValue"></span></label>
+          <input id="wall3Length" type="range" min="0.08" max="0.9" value="0.28" step="0.01">
+        </div>
+
+        <div class="wall-card">
+          <label class="toggle"><input id="middlePath" type="checkbox" checked> add vent pocket</label>
+          <label for="pocketX">Vent pocket center X <span class="value" id="pocketXValue"></span></label>
+          <input id="pocketX" type="range" min="0.12" max="0.88" value="0.50" step="0.01">
+          <label for="pocketY">Vent pocket center Y <span class="value" id="pocketYValue"></span></label>
+          <input id="pocketY" type="range" min="0.12" max="0.88" value="0.50" step="0.01">
+          <label for="pocketSize">Vent pocket size <span class="value" id="pocketSizeValue"></span></label>
+          <input id="pocketSize" type="range" min="0.06" max="0.32" value="0.16" step="0.01">
+        </div>
+      </div>
+
+      <div class="control-panel" id="fansPanel">
+        <label for="fanSpeed">Exhaust fan jet speed <span class="value" id="fanSpeedValue"></span></label>
+        <input id="fanSpeed" type="range" min="0" max="7" value="4" step="0.1">
+
+        <label for="fanX">Fan center X <span class="value" id="fanXValue"></span></label>
+        <input id="fanX" type="range" min="0.08" max="0.96" value="0.82" step="0.01">
+
+        <label for="fanY">Fan center Y <span class="value" id="fanYValue"></span></label>
+        <input id="fanY" type="range" min="0.08" max="0.92" value="0.24" step="0.01">
+
+        <label class="toggle"><input id="extraFan" type="checkbox"> add extra fan</label>
+        <label for="extraFanSpeed">Extra fan speed <span class="value" id="extraFanSpeedValue"></span></label>
+        <input id="extraFanSpeed" type="range" min="0" max="7" value="2.5" step="0.1">
+      </div>
+
+      <div class="legend">
+        <div class="legend-item"><span class="swatch inlet"></span> inlet: replacement air source</div>
+        <div class="legend-item"><span class="swatch"></span> green cells: effective exchange zone</div>
+        <div class="legend-item"><span class="swatch low"></span> blue near window: lower static pressure zone</div>
+        <div class="legend-item"><span class="swatch wall"></span> default L entry wall and center vent pocket can be adjusted</div>
+      </div>
+
+      <p class="note">
+        This is not a house predictor. It only shows the simplest idea:
+        a fan creates a fast exhaust jet; Bernoulli pressure drop and mass continuity pull replacement air through the room.
+      </p>
+    </aside>
+  </main>
+
+  <script>
+    const canvas = document.getElementById("sim");
+    const ctx = canvas.getContext("2d");
+    const inputs = {
+      roomWidth: document.getElementById("roomWidth"),
+      roomLength: document.getElementById("roomLength"),
+      exhaustArea: document.getElementById("exhaustArea"),
+      exhaustY: document.getElementById("exhaustY"),
+      inletArea: document.getElementById("inletArea"),
+      inletY: document.getElementById("inletY"),
+      wall1Enabled: document.getElementById("wall1Enabled"),
+      wall1Direction: document.getElementById("wall1Direction"),
+      wall1X: document.getElementById("wall1X"),
+      wall1Y: document.getElementById("wall1Y"),
+      wall1Length: document.getElementById("wall1Length"),
+      wall2Enabled: document.getElementById("wall2Enabled"),
+      wall2Direction: document.getElementById("wall2Direction"),
+      wall2X: document.getElementById("wall2X"),
+      wall2Y: document.getElementById("wall2Y"),
+      wall2Length: document.getElementById("wall2Length"),
+      wall3Enabled: document.getElementById("wall3Enabled"),
+      wall3Direction: document.getElementById("wall3Direction"),
+      wall3X: document.getElementById("wall3X"),
+      wall3Y: document.getElementById("wall3Y"),
+      wall3Length: document.getElementById("wall3Length"),
+      middlePath: document.getElementById("middlePath"),
+      pocketX: document.getElementById("pocketX"),
+      pocketY: document.getElementById("pocketY"),
+      pocketSize: document.getElementById("pocketSize"),
+      extraFan: document.getElementById("extraFan"),
+      fanSpeed: document.getElementById("fanSpeed"),
+      fanX: document.getElementById("fanX"),
+      fanY: document.getElementById("fanY"),
+      extraFanSpeed: document.getElementById("extraFanSpeed"),
+    };
+    const labels = {
+      roomWidth: document.getElementById("roomWidthValue"),
+      roomLength: document.getElementById("roomLengthValue"),
+      exhaustArea: document.getElementById("exhaustAreaValue"),
+      exhaustY: document.getElementById("exhaustYValue"),
+      inletArea: document.getElementById("inletAreaValue"),
+      inletY: document.getElementById("inletYValue"),
+      wall1X: document.getElementById("wall1XValue"),
+      wall1Y: document.getElementById("wall1YValue"),
+      wall1Length: document.getElementById("wall1LengthValue"),
+      wall2X: document.getElementById("wall2XValue"),
+      wall2Y: document.getElementById("wall2YValue"),
+      wall2Length: document.getElementById("wall2LengthValue"),
+      wall3X: document.getElementById("wall3XValue"),
+      wall3Y: document.getElementById("wall3YValue"),
+      wall3Length: document.getElementById("wall3LengthValue"),
+      pocketX: document.getElementById("pocketXValue"),
+      pocketY: document.getElementById("pocketYValue"),
+      pocketSize: document.getElementById("pocketSizeValue"),
+      fanSpeed: document.getElementById("fanSpeedValue"),
+      fanX: document.getElementById("fanXValue"),
+      fanY: document.getElementById("fanYValue"),
+      extraFanSpeed: document.getElementById("extraFanSpeedValue"),
+      pressure: document.getElementById("pressure"),
+      flow: document.getElementById("flow"),
+      area: document.getElementById("area"),
+    };
+    const tabButtons = Array.from(document.querySelectorAll(".tab-button"));
+    const panels = {
+      room: document.getElementById("roomPanel"),
+      fans: document.getElementById("fansPanel"),
+    };
+
+    const rho = 1.2;
+    const particles = Array.from({ length: 420 }, () => resetParticle({}));
+
+    function model() {
+      const fanSpeed = Number(inputs.fanSpeed.value);
+      const roomWidth = Number(inputs.roomWidth.value);
+      const roomLength = Number(inputs.roomLength.value);
+      const exhaustArea = Number(inputs.exhaustArea.value);
+      const exhaustY = Number(inputs.exhaustY.value);
+      const inletArea = Number(inputs.inletArea.value);
+      const inletY = Number(inputs.inletY.value);
+      const fanX = Number(inputs.fanX.value);
+      const fanY = Number(inputs.fanY.value);
+      const extraFan = inputs.extraFan.checked;
+      const extraFanSpeed = Number(inputs.extraFanSpeed.value);
+      const walls = [1, 2, 3].map((index) => ({
+        enabled: inputs[`wall${index}Enabled`].checked,
+        direction: inputs[`wall${index}Direction`].value,
+        x: Number(inputs[`wall${index}X`].value),
+        y: Number(inputs[`wall${index}Y`].value),
+        length: Number(inputs[`wall${index}Length`].value),
+        index,
+      })).filter((wall) => wall.enabled);
+      const middlePath = inputs.middlePath.checked;
+      const pocketX = Number(inputs.pocketX.value);
+      const pocketY = Number(inputs.pocketY.value);
+      const pocketSize = Number(inputs.pocketSize.value);
+      const fanWindowDistance = Math.max(0.04, 1 - fanX);
+      const verticalAlignment = Math.exp(-Math.pow((fanY - exhaustY) / 0.22, 2));
+      const distanceCoupling = Math.exp(-Math.pow((fanWindowDistance - 0.18) / 0.26, 2)) * (0.35 + 0.65 * verticalAlignment);
+      const maxOpening = Math.max(0.02, Math.min(inletArea, exhaustArea) / 1.2);
+      const inletRatio = Math.max(0.02, Math.min(1, inletArea / 1.2));
+      const exhaustRatio = Math.max(0.02, Math.min(1, exhaustArea / 1.2));
+      const wallPenalty = Math.max(0.2, 1 - walls.reduce((sum, wall) => sum + wall.length * 0.18, 0));
+      const pathBoost = middlePath ? 1.12 : 1;
+      const extraFanBoost = extraFan ? 1 + extraFanSpeed * 0.035 : 1;
+      const pathQuality = Math.max(0.03, Math.min(1, (0.2 + 0.8 * inletRatio) * (0.25 + 0.75 * exhaustRatio) * (0.45 + 0.55 * distanceCoupling) * wallPenalty * pathBoost));
+      const dynamicPressure = 0.5 * rho * fanSpeed * fanSpeed;
+      const extraDynamicPressure = extraFan ? 0.5 * rho * extraFanSpeed * extraFanSpeed * 0.28 : 0;
+      const pressureDrop = (dynamicPressure + extraDynamicPressure) * pathQuality * (0.45 + 0.55 * maxOpening);
+      const flowTrend = Math.min(1, Math.sqrt(Math.max(0, pressureDrop)) / 5.6 * extraFanBoost);
+      return { roomWidth, roomLength, exhaustArea, exhaustY, inletArea, inletY, inletRatio, exhaustRatio, fanSpeed, fanX, fanY, extraFan, extraFanSpeed, walls, middlePath, pocketX, pocketY, pocketSize, distanceCoupling, pathQuality, pressureDrop, flowTrend };
+    }
+
+    function resetParticle(p) {
+      p.x = 0.08 + Math.random() * 0.06;
+      const inletY = inputs?.inletY ? Number(inputs.inletY.value) : 0.76;
+      p.y = Math.max(0.08, Math.min(0.92, inletY + (Math.random() - 0.5) * 0.16));
+      p.age = Math.random() * 180;
+      p.speed = 0.65 + Math.random() * 0.55;
+      return p;
+    }
+
+    function resize() {
+      const rect = canvas.getBoundingClientRect();
+      const ratio = Math.max(1, window.devicePixelRatio || 1);
+      canvas.width = Math.floor(rect.width * ratio);
+      canvas.height = Math.floor(rect.height * ratio);
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    }
+
+    function room(width, height) {
+      const maxW = width - 96;
+      const maxH = height - 150;
+      const m = model();
+      const roomAspect = m.roomLength / m.roomWidth;
+      let w = maxW;
+      let h = w / roomAspect;
+      if (h > maxH) {
+        h = maxH;
+        w = h * roomAspect;
+      }
+      return { x: 48 + (maxW - w) / 2, y: 92 + (maxH - h) / 2, w, h };
+    }
+
+    function fieldAt(x, y, m) {
+      const fan = { x: m.fanX, y: m.fanY };
+      const helperFan = { x: 0.28, y: 0.72 };
+      const sink = { x: 1.02, y: m.exhaustY };
+      const inlet = { x: 0.02, y: m.inletY };
+      let vx = 0.008 + m.flowTrend * 0.035;
+      let vy = 0;
+
+      const addPoint = (point, strength, sign) => {
+        const dx = x - point.x;
+        const dy = y - point.y;
+        const r2 = dx * dx + dy * dy + 0.018;
+        vx += sign * strength * dx / r2;
+        vy += sign * strength * dy / r2;
+      };
+
+      addPoint(inlet, 0.02 + m.inletRatio * 0.08, 1);
+      addPoint(sink, 0.03 + m.exhaustRatio * m.flowTrend * 0.18, -1);
+
+      const along = x - fan.x;
+      const cross = Math.abs(y - fan.y);
+      const jet = Math.max(0, along) / 1.25 * Math.exp(-cross * cross * 80);
+      vx += m.fanSpeed * m.distanceCoupling * jet * 0.04;
+      vy += (m.fanY - y) * jet * 0.02;
+
+      if (m.extraFan) {
+        const helperAlong = x - helperFan.x;
+        const helperCross = Math.abs(y - helperFan.y);
+        const helperJet = Math.max(0, helperAlong) / 1.1 * Math.exp(-helperCross * helperCross * 45);
+        vx += m.extraFanSpeed * helperJet * 0.025;
+        vy += (m.exhaustY - y) * helperJet * 0.018;
+      }
+
+      if (wallBlocks(x, y, x + vx * 0.12, y + vy * 0.12, m)) {
+        vx *= 0.28;
+        vy *= 0.55;
+      }
+
+      return { vx, vy, jet };
+    }
+
+    function wallBlocks(x1, y1, x2, y2, m) {
+      return Boolean(wallHit(x1, y1, x2, y2, m));
+    }
+
+    function wallHit(x1, y1, x2, y2, m) {
+      return m.walls.find((wall) => wallSegmentBlocks(x1, y1, x2, y2, wall));
+    }
+
+    function wallSegmentBlocks(x1, y1, x2, y2, wall) {
+      const half = wall.length * 0.5;
+      const eps = 0.0001;
+
+      if (wall.direction === "vertical") {
+        const dx = x2 - x1;
+        if (Math.abs(dx) < eps) return false;
+        const t = (wall.x - x1) / dx;
+        if (t <= eps || t >= 1 - eps) return false;
+        const yAtWall = y1 + (y2 - y1) * t;
+        return yAtWall >= wall.y - half && yAtWall <= wall.y + half;
+      }
+
+      const dy = y2 - y1;
+      if (Math.abs(dy) < eps) return false;
+      const t = (wall.y - y1) / dy;
+      if (t <= eps || t >= 1 - eps) return false;
+      const xAtWall = x1 + (x2 - x1) * t;
+      return xAtWall >= wall.x - half && xAtWall <= wall.x + half;
+    }
+
+    function drawPressure(roomRect, m) {
+      const cols = 40;
+      const rows = 22;
+      const cellW = roomRect.w / cols;
+      const cellH = roomRect.h / rows;
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          const x = (col + 0.5) / cols;
+          const y = (row + 0.5) / rows;
+          const dx = x - 0.97;
+          const dy = y - m.exhaustY;
+          const low = Math.exp(-(dx * dx * 38 + dy * dy * 16)) * m.flowTrend;
+          ctx.fillStyle = `rgba(92, 131, 185, ${0.035 + low * 0.24})`;
+          ctx.fillRect(roomRect.x + col * cellW, roomRect.y + row * cellH, cellW + 1, cellH + 1);
+        }
+      }
+    }
+
+    function exchangeAt(x, y, m) {
+      const f = fieldAt(x, y, m);
+      const speed = Math.hypot(f.vx, f.vy);
+      const pathY = m.inletY + (m.exhaustY - m.inletY) * Math.max(0, Math.min(1, (x - 0.04) / 0.94));
+      const centerPath = Math.exp(-Math.pow((y - pathY) / 0.28, 2));
+      const pocketDx = (x - m.pocketX) / Math.max(0.04, m.pocketSize);
+      const pocketDy = (y - m.pocketY) / Math.max(0.04, m.pocketSize);
+      const pocketBoost = m.middlePath ? 0.26 * Math.exp(-(pocketDx * pocketDx + pocketDy * pocketDy)) : 0;
+      const progress = Math.max(0, Math.min(1, (x - 0.08) / 0.86));
+      const path = (0.35 + 0.65 * centerPath + pocketBoost) * (0.25 + 0.75 * progress);
+      const blockedFromInlet = wallBlocks(0.04, m.inletY, x, y, m);
+      const blockedToExhaust = wallBlocks(x, y, 0.98, m.exhaustY, m);
+      const wallVisibility = blockedFromInlet || blockedToExhaust ? (m.middlePath ? 0.28 : 0.08) : 1;
+      return Math.max(0, Math.min(1, (speed / 0.09) * path * m.pathQuality * wallVisibility));
+    }
+
+    function coverage(m) {
+      const cols = 32;
+      const rows = 18;
+      let total = 0;
+      const cells = [];
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          const x = (col + 0.5) / cols;
+          const y = (row + 0.5) / rows;
+          const exchange = exchangeAt(x, y, m);
+          total += exchange;
+          cells.push({ col, row, exchange });
+        }
+      }
+      return { cols, rows, cells, effectivePct: total / (cols * rows) * 100 };
+    }
+
+    function drawCoverage(roomRect, m) {
+      const cov = coverage(m);
+      const cellW = roomRect.w / cov.cols;
+      const cellH = roomRect.h / cov.rows;
+      for (const cell of cov.cells) {
+        if (cell.exchange < 0.08) continue;
+        const alpha = 0.04 + cell.exchange * 0.46;
+        ctx.fillStyle = `rgba(117, 168, 94, ${alpha})`;
+        ctx.fillRect(roomRect.x + cell.col * cellW, roomRect.y + cell.row * cellH, cellW + 1, cellH + 1);
+      }
+    }
+
+    function drawRoom(roomRect, m) {
+      ctx.strokeStyle = "#777569";
+      ctx.lineWidth = 3;
+      ctx.strokeRect(roomRect.x, roomRect.y, roomRect.w, roomRect.h);
+
+      const inletH = roomRect.h * (0.12 + m.inletRatio * 0.46);
+      const inletY = roomRect.y + roomRect.h * m.inletY - inletH / 2;
+      ctx.clearRect(roomRect.x - 5, inletY, 10, inletH);
+      ctx.fillStyle = "#c96e3f";
+      ctx.fillRect(roomRect.x - 8, inletY, 10, inletH);
+      ctx.fillStyle = "#6c7168";
+      ctx.fillText("inlet", roomRect.x + 8, inletY - 8);
+
+      const windowH = roomRect.h * (0.12 + m.exhaustRatio * 0.48);
+      const windowY = roomRect.y + roomRect.h * m.exhaustY - windowH / 2;
+      ctx.clearRect(roomRect.x + roomRect.w - 5, windowY, 10, windowH);
+      ctx.fillStyle = "#5c83b9";
+      ctx.fillRect(roomRect.x + roomRect.w - 2, windowY, 10, windowH);
+      ctx.fillStyle = "#6c7168";
+      ctx.fillText("exhaust window", roomRect.x + roomRect.w - 112, windowY - 8);
+
+      const fanX = roomRect.x + roomRect.w * m.fanX;
+      const fanY = roomRect.y + roomRect.h * m.fanY;
+      ctx.fillStyle = "#2f7d73";
+      ctx.strokeStyle = "#244e49";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(fanX, fanY, 22, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+      ctx.fillStyle = "#244e49";
+      ctx.beginPath();
+      ctx.moveTo(fanX + 30, fanY - 8);
+      ctx.lineTo(fanX + 50, fanY);
+      ctx.lineTo(fanX + 30, fanY + 8);
+      ctx.closePath();
+      ctx.fill();
+      ctx.fillStyle = "#6c7168";
+      ctx.fillText("fan", fanX - 12, fanY + 42);
+
+      if (m.extraFan) {
+        const helperX = roomRect.x + roomRect.w * 0.28;
+        const helperY = roomRect.y + roomRect.h * 0.72;
+        ctx.fillStyle = "#2f7d73";
+        ctx.strokeStyle = "#244e49";
+        ctx.beginPath();
+        ctx.arc(helperX, helperY, 17, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = "#244e49";
+        ctx.beginPath();
+        ctx.moveTo(helperX + 24, helperY - 7);
+        ctx.lineTo(helperX + 40, helperY);
+        ctx.lineTo(helperX + 24, helperY + 7);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = "#6c7168";
+        ctx.fillText("extra fan", helperX - 24, helperY + 34);
+      }
+    }
+
+    function drawOptionalModules(roomRect, m) {
+      if (m.middlePath) {
+        const size = Math.min(roomRect.w, roomRect.h) * m.pocketSize;
+        const x = roomRect.x + roomRect.w * m.pocketX - size / 2;
+        const y = roomRect.y + roomRect.h * m.pocketY - size / 2;
+        ctx.fillStyle = "rgba(47, 125, 115, 0.14)";
+        ctx.strokeStyle = "rgba(47, 125, 115, 0.48)";
+        ctx.lineWidth = 2;
+        ctx.setLineDash([]);
+        ctx.fillRect(x, y, size, size);
+        ctx.strokeRect(x, y, size, size);
+        ctx.fillStyle = "#6c7168";
+        ctx.fillText("vent pocket", x + size + 8, y + 14);
+      }
+
+      for (const wall of m.walls) {
+        const x = roomRect.x + roomRect.w * wall.x;
+        const y = roomRect.y + roomRect.h * wall.y;
+        const half = wall.length * 0.5;
+        ctx.strokeStyle = "rgba(71, 69, 61, 0.78)";
+        ctx.lineWidth = 8;
+        ctx.beginPath();
+        if (wall.direction === "vertical") {
+          ctx.moveTo(x, roomRect.y + roomRect.h * Math.max(0, wall.y - half));
+          ctx.lineTo(x, roomRect.y + roomRect.h * Math.min(1, wall.y + half));
+        } else {
+          ctx.moveTo(roomRect.x + roomRect.w * Math.max(0, wall.x - half), y);
+          ctx.lineTo(roomRect.x + roomRect.w * Math.min(1, wall.x + half), y);
+        }
+        ctx.stroke();
+        ctx.fillStyle = "#6c7168";
+        ctx.fillText(`wall ${wall.index}`, x + 8, y - 10);
+      }
+    }
+
+    function drawParticles(roomRect, m) {
+      ctx.lineWidth = 1.4;
+      for (const p of particles) {
+        const f = fieldAt(p.x, p.y, m);
+        const prevX = p.x;
+        const prevY = p.y;
+        const dx = f.vx * p.speed * 0.022;
+        const dy = f.vy * p.speed * 0.022;
+        const nextX = p.x + dx;
+        const nextY = p.y + dy;
+        const hit = wallHit(p.x, p.y, nextX, nextY, m);
+        if (hit) {
+          if (hit.direction === "vertical") {
+            p.x += dx > 0 ? -0.001 : 0.001;
+            p.y += dy * 0.45;
+          } else {
+            p.x += dx * 0.45;
+            p.y += dy > 0 ? -0.001 : 0.001;
+          }
+          p.age += 4;
+        } else {
+          p.x = nextX;
+          p.y = nextY;
+        }
+        p.age += 1;
+
+        if (p.x > 1.04 || p.x < -0.04 || p.y < -0.05 || p.y > 1.05 || p.age > 480) {
+          resetParticle(p);
+          continue;
+        }
+
+        ctx.strokeStyle = `rgba(47, 125, 115, ${Math.max(0.16, 1 - p.age / 480)})`;
+        ctx.beginPath();
+        ctx.moveTo(roomRect.x + prevX * roomRect.w, roomRect.y + prevY * roomRect.h);
+        ctx.lineTo(roomRect.x + p.x * roomRect.w, roomRect.y + p.y * roomRect.h);
+        ctx.stroke();
+      }
+    }
+
+    function drawExplanation(width, height, m) {
+      const y = height - 62;
+      ctx.fillStyle = "#2f332e";
+      ctx.font = "15px ui-sans-serif, system-ui, sans-serif";
+      ctx.fillText("fast jet near exhaust -> lower static pressure -> surrounding air is entrained -> replacement air enters from inlet", 48, y);
+      ctx.fillStyle = "#6c7168";
+      ctx.font = "13px ui-sans-serif, system-ui, sans-serif";
+      ctx.fillText("This shows the principle only. Real homes need geometry, wind, temperature, leakage, and wall resistance.", 48, y + 24);
+    }
+
+    function updateLabels(m) {
+      labels.fanSpeed.textContent = `${m.fanSpeed.toFixed(1)} m/s`;
+      labels.roomWidth.textContent = `${m.roomWidth.toFixed(1)} m`;
+      labels.roomLength.textContent = `${m.roomLength.toFixed(1)} m`;
+      labels.exhaustArea.textContent = `${m.exhaustArea.toFixed(2)} m2`;
+      labels.exhaustY.textContent = `${Math.round(m.exhaustY * 100)}%`;
+      labels.inletArea.textContent = `${m.inletArea.toFixed(2)} m2`;
+      labels.inletY.textContent = `${Math.round(m.inletY * 100)}%`;
+      for (const index of [1, 2, 3]) {
+        labels[`wall${index}X`].textContent = `${Math.round(Number(inputs[`wall${index}X`].value) * 100)}%`;
+        labels[`wall${index}Y`].textContent = `${Math.round(Number(inputs[`wall${index}Y`].value) * 100)}%`;
+        labels[`wall${index}Length`].textContent = `${Math.round(Number(inputs[`wall${index}Length`].value) * 100)}%`;
+      }
+      labels.pocketX.textContent = `${Math.round(m.pocketX * 100)}%`;
+      labels.pocketY.textContent = `${Math.round(m.pocketY * 100)}%`;
+      labels.pocketSize.textContent = `${Math.round(m.pocketSize * 100)}%`;
+      labels.fanX.textContent = `${Math.round(m.fanX * 100)}%`;
+      labels.fanY.textContent = `${Math.round(m.fanY * 100)}%`;
+      labels.extraFanSpeed.textContent = `${m.extraFanSpeed.toFixed(1)} m/s`;
+      labels.pressure.textContent = `${m.pressureDrop.toFixed(1)} Pa`;
+      labels.flow.textContent = `${Math.round(m.flowTrend * 100)}%`;
+      labels.area.textContent = `${Math.round(coverage(m).effectivePct)}%`;
+    }
+
+    function tick() {
+      const width = canvas.clientWidth;
+      const height = canvas.clientHeight;
+      const m = model();
+      const r = room(width, height);
+      updateLabels(m);
+
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = "#f7f3ea";
+      ctx.fillRect(0, 0, width, height);
+      drawPressure(r, m);
+      drawCoverage(r, m);
+      drawOptionalModules(r, m);
+      drawParticles(r, m);
+      drawRoom(r, m);
+      drawExplanation(width, height, m);
+      requestAnimationFrame(tick);
+    }
+
+    for (const input of Object.values(inputs)) {
+      input.addEventListener("input", () => updateLabels(model()));
+      input.addEventListener("change", () => updateLabels(model()));
+    }
+
+    for (const button of tabButtons) {
+      button.addEventListener("click", () => {
+        for (const item of tabButtons) item.classList.toggle("active", item === button);
+        for (const [name, panel] of Object.entries(panels)) {
+          panel.classList.toggle("active", name === button.dataset.tab);
+        }
+      });
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+    tick();
+  </script>
+</body>
+</html>
