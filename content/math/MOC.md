@@ -39,6 +39,7 @@ date: 2023-12-03
 ## Stochastic Process
 
 * [Markov Chain](math/statistic/stochastic_process/markov_chain.md)
+* [Random Walk Recurrence](math/statistic/stochastic_process/random_walk_recurrence.md)
 
 ## Paradox
 
