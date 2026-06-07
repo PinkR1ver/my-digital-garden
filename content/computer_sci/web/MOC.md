@@ -19,4 +19,5 @@ Here's the MOC of Web knowledge
 
 # Practice
 
+* [GitHub Pages 域名、Project Pages 和旧路径跳转](computer_sci/web/practice/github_pages_domain_redirect_case.md)
 * [OpenClaw Discord Bot 1006 断连修复复盘（Clash + DNS + TUN）](computer_sci/web/practice/openclaw_discord_gateway_1006_postmortem.md)
