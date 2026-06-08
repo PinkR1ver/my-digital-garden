@@ -22,6 +22,10 @@ date: 2023-09-19
   </p>
 
   <p>
+    Or take a look at my <a href="./recent-writing">recent writing</a>.
+  </p>
+
+  <p>
     For a more direct sketch of who I am, there is also a short
     <a href="./resume">about me</a>.
   </p>

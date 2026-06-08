@@ -12,6 +12,7 @@ interface Options {
   title?: string
   limit: number
   linkToMore: SimpleSlug | false
+  hideOnSlugs: string[]
   filter: (f: QuartzPluginData) => boolean
   sort: (f1: QuartzPluginData, f2: QuartzPluginData) => number
 }
@@ -19,12 +20,15 @@ interface Options {
 const defaultOptions = (cfg: GlobalConfiguration): Options => ({
   limit: 3,
   linkToMore: false,
+  hideOnSlugs: [],
   filter: () => true,
   sort: byDateAndAlphabetical(cfg),
 })
 
 const isMocNote = (file: QuartzPluginData): boolean =>
   file.frontmatter?.tags?.some((tag) => tag.toLowerCase() === "moc") ?? false
+
+const isRecentWritingPage = (file: QuartzPluginData): boolean => file.slug === "recent-writing"
 
 export default ((userOpts?: Partial<Options>) => {
   const RecentNotes: QuartzComponent = ({
@@ -34,7 +38,13 @@ export default ((userOpts?: Partial<Options>) => {
     cfg,
   }: QuartzComponentProps) => {
     const opts = { ...defaultOptions(cfg), ...userOpts }
-    const pages = allFiles.filter((page) => opts.filter(page) && !isMocNote(page)).sort(opts.sort)
+    if (opts.hideOnSlugs.includes(String(fileData.slug))) {
+      return null
+    }
+
+    const pages = allFiles
+      .filter((page) => opts.filter(page) && !isMocNote(page) && !isRecentWritingPage(page))
+      .sort(opts.sort)
     const remaining = Math.max(0, pages.length - opts.limit)
     return (
       <div class={classNames(displayClass, "recent-notes")}>
