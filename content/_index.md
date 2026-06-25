@@ -27,7 +27,7 @@ date: 2023-09-19
 
   <p>
     For a more direct sketch of who I am, there is also a short
-    <a href="./resume">about me</a>.
+    <a href="https://pinkr1ver.github.io/resume/">about me</a>.
   </p>
 
   <p class="home-signoff">

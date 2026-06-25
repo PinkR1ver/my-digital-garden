@@ -34,7 +34,8 @@
   use Chinese only as a light handwritten signoff touch before Jude's name. Keep
   the normal Quartz sidebars and layout on the home page; use CSS for home-only
   presentation tweaks instead of conditional layout components. Include plain
-  inline paths to both `atlas` for notes and `resume` for About me. Keep the
+  inline paths to `atlas` for notes and the external portfolio URL
+  `https://pinkr1ver.github.io/resume/` for About me. Keep the
   final signoff split into two lines: small readable handwritten/xingshu-style
   `欢迎` on the left, then `Jude` right-aligned below it. Avoid overly cursive
   Chinese fonts that make the characters hard to read.

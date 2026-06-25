@@ -165,8 +165,6 @@ Build job:
 - Uses Node.js `22`
 - Runs `npm ci`
 - Runs `npx quartz build`
-- Copies `static-root/.` into `public/` when `static-root/` exists. This is used
-  for root-mounted static routes that should bypass Quartz content rendering.
 - Uploads `public/` with `actions/upload-pages-artifact@v3`
 
 Deploy job:
@@ -178,9 +176,9 @@ Deploy job:
 Operational notes:
 
 - Generated output lives in `public/` and is ignored locally. Do not commit it.
-- Root-mounted static route sources live in `static-root/`. The portfolio
-  mounted at `/resume/` is sourced from `static-root/resume/` and is copied
-  into `public/resume/` during deployment.
+- The research portfolio/resume is not hosted inside Quartz. Link to
+  `https://pinkr1ver.github.io/resume/` instead of mounting static portfolio
+  output under `pinktalk.online`.
 - The current branch is expected to be `v4` for deployment.
 - A successful push to `v4` should rebuild the site and publish via GitHub Pages.
 - Because GitHub Pages deployment is push-triggered, do not use production

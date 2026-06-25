@@ -64,6 +64,6 @@ date: 2024-02-28
 
 * [Recent note](recent.md)
 
-* [Resume](resume.md)
+* [Resume](https://pinkr1ver.github.io/resume/)
 
 * [Log](log/log_MOC.md)

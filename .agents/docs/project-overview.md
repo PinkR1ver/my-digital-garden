@@ -47,8 +47,9 @@ published as a static website.
 - `content/report/`: reports and longer writeups.
 - `content/hobbies/`: photography, literature, food, games, IELTS, music.
 - `content/toolkit/`: practical tool notes.
-- `content/plan/`, `content/log/`, `content/news.md`, `content/resume.md`:
-  personal pages and updates.
+- `content/plan/`, `content/log/`, `content/news.md`: personal pages and
+  updates. The old resume page is archived under `content/arch/`; the current
+  portfolio is external at `https://pinkr1ver.github.io/resume/`.
 
 ## Dual Git Repo
 

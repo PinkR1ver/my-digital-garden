@@ -28,11 +28,6 @@ jobs:
         run: npm ci
       - name: Build Quartz
         run: npx quartz build
-      - name: Mount root static routes
-        run: |
-          if [ -d static-root ]; then
-            cp -R static-root/. public/
-          fi
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
