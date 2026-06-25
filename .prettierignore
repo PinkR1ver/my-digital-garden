@@ -2,3 +2,5 @@ public
 node_modules
 .quartz-cache
 content
+.agents
+static-root/resume

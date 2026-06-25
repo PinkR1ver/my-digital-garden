@@ -5,10 +5,14 @@
 - Agent-facing evolving memory lives in `.agents/memory/`.
 - Public notes live in `content/`.
 - The main public entry points are `content/_index.md` and `content/atlas.md`.
-- The production base URL in `quartz.config.ts` is `https://pinktalk.online/`.
+- The production base URL in `quartz.config.ts` is `www.pinktalk.online`.
 - Deployment runs from GitHub Actions on pushes to branch `v4`.
 - GitHub Pages builds with Node.js 22 and publishes the generated `public/`
   directory.
+- 2026-06-25: `/resume/` is mounted as a root static route from
+  `static-root/resume/`, populated by the Jekyll portfolio repo. The old Quartz
+  resume note was moved to `content/arch/resume.md`, and `arch` is ignored by
+  Quartz.
 - 2026-04-29: Current `v4` branch is a fork of Quartz around `v4.2.3`
   (`package.json` version `4.2.3`; merge base with `upstream/v4` is
   `b9dee0775`, described as `v4.2.3-9-gb9dee0775`). Upstream has active

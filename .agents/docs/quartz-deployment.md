@@ -11,8 +11,8 @@ Key settings in `quartz.config.ts`:
 - `enablePopovers`: `true`
 - `analytics.provider`: `plausible`
 - `locale`: `en-US`
-- `baseUrl`: `https://pinktalk.online/`
-- `ignorePatterns`: `["private", "templates", ".obsidian"]`
+- `baseUrl`: `www.pinktalk.online`
+- `ignorePatterns`: `["private", "templates", ".obsidian", "arch"]`
 - `defaultDateType`: `created`
 - Theme fonts:
   - Header: `Schibsted Grotesk`
@@ -165,6 +165,8 @@ Build job:
 - Uses Node.js `22`
 - Runs `npm ci`
 - Runs `npx quartz build`
+- Copies `static-root/.` into `public/` when `static-root/` exists. This is used
+  for root-mounted static routes that should bypass Quartz content rendering.
 - Uploads `public/` with `actions/upload-pages-artifact@v3`
 
 Deploy job:
@@ -176,6 +178,9 @@ Deploy job:
 Operational notes:
 
 - Generated output lives in `public/` and is ignored locally. Do not commit it.
+- Root-mounted static route sources live in `static-root/`. The portfolio
+  mounted at `/resume/` is sourced from `static-root/resume/` and is copied
+  into `public/resume/` during deployment.
 - The current branch is expected to be `v4` for deployment.
 - A successful push to `v4` should rebuild the site and publish via GitHub Pages.
 - Because GitHub Pages deployment is push-triggered, do not use production
