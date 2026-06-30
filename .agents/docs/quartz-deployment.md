@@ -90,6 +90,35 @@ npm run check
 npm test
 ```
 
+### User-Run Preview Command
+
+When the user wants commands to build and preview the garden themselves, give
+preview commands rather than deploy/commit/push instructions.
+
+Use this short command first. It builds once, serves `public/`, binds to
+`0.0.0.0`, supports Quartz clean URLs, and avoids Quartz serve mode's file
+watcher, which can hit the repo's
+`node_modules/@jackyzha0/quartz -> ../..` symlink loop:
+
+```bash
+cd /home/jude/Documents/proj/my-digital-garden
+npx quartz preview --host 0.0.0.0 --port 8082
+```
+
+Then provide the Tailscale URL shape:
+
+```bash
+tailscale ip -4
+```
+
+```text
+http://<TAILSCALE_IP>:8082/path/to/note
+```
+
+If the custom `preview` command is unavailable in another checkout, fall back to
+`npx quartz build` plus the clean-URL static server in the recommended preview
+section below.
+
 Build defaults:
 
 - Source directory: `content`

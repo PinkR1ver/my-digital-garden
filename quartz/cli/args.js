@@ -106,3 +106,37 @@ export const BuildArgv = {
     describe: "how many threads to use to parse notes",
   },
 }
+
+export const PreviewArgv = {
+  ...CommonArgv,
+  output: {
+    string: true,
+    alias: ["o"],
+    default: "public",
+    describe: "output folder for files",
+  },
+  host: {
+    string: true,
+    default: "0.0.0.0",
+    describe: "host to bind the preview server to",
+  },
+  port: {
+    number: true,
+    default: 8082,
+    describe: "port to serve Quartz preview on",
+  },
+  baseDir: {
+    string: true,
+    default: "",
+    describe: "base path to serve your local server on",
+  },
+  bundleInfo: {
+    boolean: true,
+    default: false,
+    describe: "show detailed bundle information",
+  },
+  concurrency: {
+    number: true,
+    describe: "how many threads to use to parse notes",
+  },
+}

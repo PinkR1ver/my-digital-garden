@@ -11,6 +11,9 @@
 - Keep `content/atlas.md` as the high-level map, not a dump of every note.
 - User preference: after running a Quartz build or local preview for note work,
   always provide the exact local link address for the changed note/page.
+- 2026-06-30: When the user asks for review/preview commands, provide
+  `npx quartz preview --host 0.0.0.0 --port 8082`; do not give
+  deploy/commit/push instructions unless explicitly requested.
 - 2026-05-27: After writing or editing notes, provide a preview URL for the
   changed page before committing or pushing. Wait until the user explicitly says
   to commit/push; never commit or push note changes just because validation

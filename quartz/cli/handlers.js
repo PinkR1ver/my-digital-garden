@@ -432,6 +432,105 @@ export async function handleBuild(argv) {
 }
 
 /**
+ * Handles `npx quartz preview`
+ * Builds once, then serves the output directory without the live-reload watcher.
+ * This avoids symlink loops from local file dependencies under node_modules.
+ * @param {*} argv arguments for `preview`
+ */
+export async function handlePreview(argv) {
+  await handleBuild({
+    ...argv,
+    serve: false,
+    fastRebuild: false,
+    wsPort: 3001,
+    remoteDevHost: "",
+  })
+
+  if (argv.baseDir !== "" && !argv.baseDir.startsWith("/")) {
+    argv.baseDir = "/" + argv.baseDir
+  }
+
+  const server = http.createServer(async (req, res) => {
+    if (argv.baseDir && !req.url?.startsWith(argv.baseDir)) {
+      console.log(chalk.red(`[404] ${req.url} (warning: link outside of configured baseDir)`))
+      res.writeHead(404)
+      res.end()
+      return
+    }
+
+    req.url = req.url?.slice(argv.baseDir.length)
+
+    const serve = async () => {
+      await serveHandler(req, res, {
+        public: argv.output,
+        directoryListing: false,
+        headers: [
+          {
+            source: "**/*.*",
+            headers: [{ key: "Content-Disposition", value: "inline" }],
+          },
+        ],
+      })
+      const status = res.statusCode
+      const statusString =
+        status >= 200 && status < 300 ? chalk.green(`[${status}]`) : chalk.red(`[${status}]`)
+      console.log(statusString + chalk.grey(` ${argv.baseDir}${req.url}`))
+    }
+
+    const redirect = (newFp) => {
+      newFp = argv.baseDir + newFp
+      res.writeHead(302, {
+        Location: newFp,
+      })
+      console.log(chalk.yellow("[302]") + chalk.grey(` ${argv.baseDir}${req.url} -> ${newFp}`))
+      res.end()
+    }
+
+    let fp = req.url?.split("?")[0] ?? "/"
+
+    if (fp.endsWith("/")) {
+      const indexFp = path.posix.join(fp, "index.html")
+      if (fs.existsSync(path.posix.join(argv.output, indexFp))) {
+        req.url = fp
+        return serve()
+      }
+
+      let base = fp.slice(0, -1)
+      if (path.extname(base) === "") {
+        base += ".html"
+      }
+      if (fs.existsSync(path.posix.join(argv.output, base))) {
+        return redirect(fp.slice(0, -1))
+      }
+    } else {
+      let base = fp
+      if (path.extname(base) === "") {
+        base += ".html"
+      }
+      if (fs.existsSync(path.posix.join(argv.output, base))) {
+        req.url = fp
+        return serve()
+      }
+
+      let indexFp = path.posix.join(fp, "index.html")
+      if (fs.existsSync(path.posix.join(argv.output, indexFp))) {
+        return redirect(fp + "/")
+      }
+    }
+
+    return serve()
+  })
+
+  server.listen(argv.port, argv.host)
+  console.log(
+    chalk.cyan(
+      `Started a Quartz preview server listening at http://${argv.host}:${argv.port}${argv.baseDir}`,
+    ),
+  )
+  console.log("hint: exit with ctrl+c")
+}
+
+/**
  * Handles `npx quartz update`
  * @param {*} argv arguments for `update`
  */

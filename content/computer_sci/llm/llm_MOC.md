@@ -47,6 +47,8 @@ date: 2024-01-17
 
 ## Agent and Appendix
 
+- [Agent Architecture Overview](computer_sci/llm/agent/agent_architecture_overview.md)
+- [Agent Frameworks Overview](computer_sci/llm/agent/agent_frameworks_overview.md)
 - [Chat-to-Agent Connector](computer_sci/llm/agent/chat_to_agent_connector.md)
 - [agent SKILL mechanism](computer_sci/llm/agent/agent_SKILL_mechanism.md)
 - [AI Code Agent Hooks](computer_sci/llm/agent/ai_code_agent_hooks.md)
