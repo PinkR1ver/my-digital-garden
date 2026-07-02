@@ -19,6 +19,11 @@
   migrates configuration/layout to YAML plus community plugins.
 - Do not commit `public/`, `.quartz-cache/`, `node_modules/`, or
   `content/.trash/`.
+- 2026-07-02: Mermaid diagrams are enhanced by
+  `quartz/components/scripts/mermaid.inline.ts`, wired from
+  `quartz/plugins/transformers/ofm.ts`, with modal styles in
+  `quartz/styles/base.scss`. Keep `.inline.ts` files as raw browser scripts;
+  do not use `export default` inside them.
 - 2026-05-01: User requested deletion of all Copilot-related content. Do not
   recreate `content/copilot/` or a Copilot MOC unless explicitly asked.
 - Treat `content/` as an Obsidian-style vault: preserve wikilinks, MOCs,
