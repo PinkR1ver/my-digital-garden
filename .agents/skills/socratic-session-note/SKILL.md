@@ -1,89 +1,120 @@
 ---
 name: socratic-session-note
-description: Summarize a completed /quiz or Socratic learning session and append the results to a Markdown note in this Quartz digital garden. Use when the user asks to save, summarize, archive, expand, polish, compare, update, or attach quiz-session learning outcomes to a note, especially for sessions created with the quiz skill or PinkR1ver/socratic-learning. Handles repeated quiz sessions for the same note by preserving each collapsed QA transcript and maintaining an updated cumulative learning summary. Produces a visible learning summary plus default-collapsed QA transcript blocks with provenance linking to https://github.com/PinkR1ver/socratic-learning.
+description: Summarize one or more completed /quiz or Socratic learning sessions and produce a single unified Markdown note in this Quartz digital garden. When multiple quiz sessions cover the same topic, the skill merges all Q&A into one coherent note — the AI decides the logical ordering of Q&A (by concept progression, topic grouping, difficulty, or dependency) rather than preserving chronological session boundaries. Use when the user asks to save, summarize, archive, expand, polish, compare, update, or attach quiz-session learning outcomes to a note, especially for sessions created with the quiz skill or PinkR1ver/socratic-learning. Each Q&A pair retains provenance linking to https://github.com/PinkR1ver/socratic-learning.
 ---
 
 # Socratic Session Note
 
-Use this skill after a `/quiz` Socratic session when the user wants the session
-captured in a garden note.
+Use this skill after one or more `/quiz` Socratic sessions when the user wants the
+sessions captured in a single, logically-organized garden note.
+
+## Core principle
+
+**One topic → one note.** Multiple quiz sessions on the same topic are merged into
+a single unified note. The AI takes ownership of Q&A ordering — organize by what
+makes pedagogical sense, not by when each question was asked.
 
 ## Workflow
 
 1. Identify the target Markdown note. If the user did not specify one and it
    cannot be inferred from the quiz source material, ask for the note path.
-2. Read the target note and preserve its language, tone, frontmatter, links, and
-   existing structure.
-3. Check whether the note already contains prior Socratic learning sessions:
-   - Look for headings like `Socratic Learning Session - YYYY-MM-DD` and
-     `<details class="socratic-learning-session">`.
-   - Preserve prior collapsed QA blocks. Do not merge, delete, or rewrite them
-     unless the user explicitly asks.
-   - Use prior visible summaries to identify learning progress, repeated gaps,
-     resolved confusion, and new questions.
-4. Extract only what happened in the current Socratic session:
-   - topic and source material
-   - questions asked
-   - user's answers
-   - misconceptions, uncertainty, or gaps the user explicitly revealed
-   - ideas that became more solid during the session
-5. Write or update a concise cumulative summary before the session history when
-   the note has multiple sessions. Name it `## Socratic Learning Summary` unless
-   the note already has a local equivalent. Include:
-   - sessions covered
-   - concepts that improved over time
-   - recurring weak spots
-   - current open questions
-   - suggested next quiz focus
-   Keep this summary current, not append-only.
-6. Write a concise visible summary for the current session in the note's dominant
-   language. Prefer
-   Chinese if the note is mostly Chinese, English if it is mostly English, and
-   mixed language if that matches the note.
-7. Expand the user's answers when useful for learning value:
+2. Read the target note. Preserve its language, tone, frontmatter, links, and
+   any non-Socratic content (the note's original body).
+3. Collect ALL Q&A that should go into this note:
+   - The current session's Q&A (just completed).
+   - Any prior Socratic Q&A already stored in the target note (look for
+     `<details class="socratic-learning-session">` blocks and extract their
+     Q&A pairs).
+   - Any other Q&A the user explicitly references.
+4. **AI reorganizes all Q&A into a logical order.** This is the key step.
+   Decide the sequence based on one or more of:
+   - **Concept progression** — foundational ideas first, then build on them.
+   - **Topic grouping** — cluster related questions under concept sub-headings.
+   - **Difficulty** — start simple, progress to harder or more nuanced questions.
+   - **Dependency chain** — if Q3's answer depends on understanding Q1, put Q1 first.
+   - **Narrative flow** — tell a coherent learning story from "what is X" through
+     "how does X work" to "why does X matter" and "what are the edge cases."
+
+   Do NOT preserve chronological or per-session ordering unless it happens to
+   match the best logical order. The user should read the note top-to-bottom
+   and follow a coherent learning arc.
+
+5. Write a single unified summary section (`## Socratic Learning - <topic>`)
+   that covers ALL sessions being merged:
+   - Topic and source material
+   - Sessions covered (list dates)
+   - Key takeaways (the most important things learned)
+   - Concepts that improved across sessions
+   - Recurring weak spots or unresolved confusion
+   - Current open questions
+   - Suggested next quiz focus
+   Write this summary in the note's dominant language (Chinese if the note is
+   mostly Chinese, English if mostly English, mixed if that matches).
+
+6. For each Q&A pair, expand the user's answers when useful for learning value:
    - Preserve the user's original answer.
-   - Add a clearly labeled AI-expanded answer that improves correctness,
+   - Add a clearly labeled **AI-expanded answer** that improves correctness,
      completeness, missing assumptions, examples, edge cases, and terminology.
    - Ground expansions in the source material, the target note, or reliable
-     domain knowledge. If uncertain, mark the expansion as uncertain instead of
-     presenting it as fact.
+     domain knowledge. If uncertain, mark the expansion as uncertain.
    - Do not convert a wrong or partial user answer into an implied correct
      original answer; show the distinction between what the user said and what
      the AI added.
-8. Append the complete QA session at the very end of the note inside a
-   default-collapsed HTML `<details>` block. Do not add the `open` attribute.
+   - Mark missing user answers as "Not answered" or `未回答`, then optionally
+     add a clearly labeled AI-expanded answer if the source material supports one.
+
+7. Write the unified note:
+   - Keep the note's original frontmatter and non-Socratic body content intact.
+   - Replace ALL prior Socratic content (old summary + old session blocks) with
+     the new unified block.
+   - If this is the first time (no old Socratic content to strip), the unified
+     block is simply appended after the note's original body.
+
+8. Place all reorganized Q&A inside a single default-collapsed HTML `<details>`
+   block. Do not add the `open` attribute. Group Q&A under concept sub-headings
+   inside the collapsed block when that improves readability.
+
 9. Include this provenance line inside the collapsed block:
    `Generated by [PinkR1ver/socratic-learning](https://github.com/PinkR1ver/socratic-learning)`.
-10. Do not invent scores or mastery claims. Mark missing user answers as
-   "Not answered" or `未回答`, then optionally add a clearly labeled
-   AI-expanded answer if the source material supports one.
+
+10. Do not invent scores or mastery claims.
 
 ## Output Shape
 
-Append a section like this to the end of the target note:
+The unified note looks like this (one block per topic, regardless of how many
+quiz sessions contributed):
 
 ```markdown
-## Socratic Learning Summary
-
-- Sessions: 2026-07-03, 2026-07-10
-- Improved: ...
-- Recurring weak spots: ...
-- Open questions: ...
-- Next quiz focus: ...
-
-## Socratic Learning Session - YYYY-MM-DD
+## Socratic Learning - <topic>
 
 - Source: ...
-- Main takeaways: ...
-- Still hazy: ...
-- Next review: ...
+- Sessions covered: 2026-07-01, 2026-07-03
+- Key takeaways: ...
+- Concepts that improved: ...
+- Recurring weak spots: ...
+- Open questions: ...
+- Suggested next focus: ...
 
 <details class="socratic-learning-session">
 <summary>QA session generated by PinkR1ver/socratic-learning</summary>
 
 Generated by [PinkR1ver/socratic-learning](https://github.com/PinkR1ver/socratic-learning).
 
-### Q1
+### Concept: Foundational idea
+
+**Q:** ...
+
+**User answer:** ...
+
+**AI-expanded answer:** ...
+
+**Q:** ...
+
+**User answer:** ...
+
+**AI-expanded answer:** ...
+
+### Concept: Building on the foundation
 
 **Q:** ...
 
@@ -94,15 +125,17 @@ Generated by [PinkR1ver/socratic-learning](https://github.com/PinkR1ver/socratic
 </details>
 ```
 
-For a first session, the cumulative summary is optional. For the second and later
-sessions on the same note, add or update the cumulative summary and then append
-the new session block. Keep visible summaries short. Put detailed turns only in
-collapsed blocks.
+Key differences from the old per-session format:
+- **One heading** per topic (not per session date).
+- **Q&A is logically ordered** by the AI, not grouped by which session it came from.
+- **Concept sub-headings** inside the collapsed block organize related questions.
+- **No cumulative summary** tracked separately — the unified summary IS the note.
+- **No duplication** — if the same question was revisited across sessions, merge
+  the answers into one richer Q&A pair showing progression.
 
 ## Script
 
-Use `scripts/append_socratic_session.py` when possible to append a prepared
-summary and QA block consistently:
+Use `scripts/append_socratic_session.py` to write the unified note:
 
 ```bash
 python3 .agents/skills/socratic-session-note/scripts/append_socratic_session.py \
@@ -111,7 +144,11 @@ python3 .agents/skills/socratic-session-note/scripts/append_socratic_session.py 
   --qa-file /tmp/socratic-qa.md
 ```
 
+The script always strips any prior Socratic content (`## Socratic Learning Summary`
+and `## Socratic Learning Session` sections) before writing the new unified block.
+First-time use is safe — there's simply nothing to strip.
+
 The summary file should contain only the visible bullets or paragraphs under the
-session heading. The QA file should contain the full QA transcript in Markdown,
-starting with `### Q1` when appropriate. In the QA file, prefer `User answer`
-and `AI-expanded answer` labels over a single ambiguous `A` label.
+unified `## Socratic Learning - <topic>` heading. The QA file should contain the
+full reorganized QA transcript in Markdown, with `### Concept:` sub-headings
+and `User answer` / `AI-expanded answer` labels.
