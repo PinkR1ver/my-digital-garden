@@ -49,6 +49,8 @@ date: 2024-02-28
 
 * [Toolkit](toolkit/toolkit_MOC.md)
 
+* [🔍 Discoveries](hobbies/discoveries/discoveries_MOC.md)
+
 
 ⭐ Here to find my recent study:
 
