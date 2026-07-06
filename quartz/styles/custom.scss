@@ -228,7 +228,7 @@ details.socratic-learning-session {
   margin-top: 2.5rem;
   padding: 0.85rem 1.1rem 0.7rem;
   border: 1.5px dashed var(--lightgray);
-  border-radius: 4px 12px 6px 10px;        // slightly uneven — like a paper note
+  border-radius: 4px 12px 6px 10px; // slightly uneven — like a paper note
   background: var(--lightgray);
   font-size: 0.925rem;
   color: var(--secondary);
@@ -244,7 +244,7 @@ details.socratic-learning-session {
     border-style: solid;
     border-color: var(--lightgray);
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
-    animation: none;                         // still when reading
+    animation: none; // still when reading
   }
 
   & > summary {
@@ -313,7 +313,8 @@ details.socratic-learning-session {
   .socratic-qa {
     margin-top: 0.85rem;
 
-    h3, h4 {
+    h3,
+    h4 {
       font-size: 0.95rem;
       color: var(--darkgray);
       margin: 0.8rem 0 0.35rem;
@@ -339,11 +340,23 @@ details.socratic-learning-session {
 
 // Keyframes — slow, quiet, barely-there motion
 @keyframes socratic-breathe {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50%      { opacity: 0.85; transform: scale(1.08); }
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.08);
+  }
 }
 
 @keyframes socratic-float {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-2.5px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2.5px);
+  }
 }
