@@ -117,9 +117,6 @@ print: true
 因此，Home Nystagmus Monitor 更适合被定位为低成本视频眼动筛查工作流。它从专业 VNG/vHIT 中提取最适合下沉的眼动观察能力，用手机或外接摄像头采集眼部视频，转换为眼动曲线和眼震指标，并生成可解释证据，用于孤立性眩晕患者的脑卒中风险筛查和转诊辅助。
 
 
-
-## 参考
-
 [^visualeyes]: Interacoustics, [VisualEyes - Videonystagmography system](https://www.interacoustics.com/balance-testing-equipment/visualeyes).
 [^eyeseecam]: Interacoustics, [EyeSeeCam vHIT](https://www.interacoustics.com/balance-testing-equipment/eyeseecam-vhit).
 [^vng_intro]: Interacoustics, [Videonystagmography (VNG): An Introduction](https://www.interacoustics.com/academy/balance-testing-training/videonystagmography/videonystagmography-introduction).
