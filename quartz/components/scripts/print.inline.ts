@@ -36,14 +36,8 @@ document.addEventListener("nav", () => {
     --muted: #666;
     --border: #e0e0e0;
     --code-bg: #f5f5f5;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --text: #ddd;
-      --muted: #999;
-      --border: #444;
-      --code-bg: #2a2a2a;
-    }
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+    color-scheme: light;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -53,6 +47,7 @@ document.addEventListener("nav", () => {
     font-size: 12pt;
     line-height: 1.8;
     color: var(--text);
+    background: #fff;
     max-width: 680px;
     margin: 0 auto;
     padding: 48px 40px;
@@ -74,13 +69,13 @@ document.addEventListener("nav", () => {
     margin-bottom: 8px;
   }
   .print-header .meta {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: var(--sans);
     font-size: 9pt;
     color: var(--muted);
     letter-spacing: 0.02em;
   }
   .print-header .url {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: var(--sans);
     font-size: 8pt;
     color: var(--muted);
     margin-top: 4px;
@@ -89,11 +84,12 @@ document.addEventListener("nav", () => {
 
   /* ---- content ---- */
   h2, h3, h4, h5, h6 {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: var(--sans);
     font-weight: 600;
     margin: 1.6em 0 0.5em;
     line-height: 1.3;
     letter-spacing: -0.01em;
+    color: var(--text);
   }
   h2 { font-size: 15pt; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
   h3 { font-size: 13pt; }
@@ -164,7 +160,7 @@ document.addEventListener("nav", () => {
   th {
     background: var(--code-bg);
     font-weight: 600;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: var(--sans);
   }
 
   /* callouts */
@@ -174,7 +170,7 @@ document.addEventListener("nav", () => {
     padding: 0.6em 1em;
     border-radius: 0 4px 4px 0;
   }
-  .callout-title { font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  .callout-title { font-weight: 600; font-family: var(--sans); }
   .callout-content p { margin: 0.3em 0; }
 
   /* images */
@@ -195,6 +191,8 @@ document.addEventListener("nav", () => {
       padding: 0;
       font-size: 11pt;
       line-height: 1.75;
+      color: #1a1a1a;
+      background: #fff;
     }
     .print-header {
       border-bottom-width: 1.5pt;
