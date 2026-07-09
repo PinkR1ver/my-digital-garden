@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Never See Me Again inspired piano loop</title>
+    <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.0/dist/abcjs-basic-min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 12px;
+        background: #f8f5ee;
+        color: #2b2825;
+        font-family: system-ui, sans-serif;
+      }
+
+      #paper {
+        overflow-x: auto;
+        border: 1px solid #d8d0c4;
+        background: rgba(255, 255, 255, 0.66);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="paper"></div>
+    <script>
+      const abc = `X:1
+T:Never See Me Again inspired piano loop
+M:4/4
+L:1/8
+Q:1/4=75
+K:C
+V:RH clef=treble
+E z G B z G E G | E z G c z G E G | D z F A z F D F | D z F B z F D F |]
+V:LH clef=bass
+C,, z [C,E,G,B,] z C,, z [C,E,G,B,] z | A,, z [A,,C,E,G,] z A,, z [A,,C,E,G,] z | D,, z [D,F,A,C] z D,, z [D,F,A,C] z | G,, z [G,,B,,D,F,] z G,, z [G,,B,,D,F,] z |]`;
+
+      ABCJS.renderAbc("paper", abc, {
+        responsive: "resize",
+        staffwidth: 860,
+        paddingtop: 8,
+        paddingbottom: 8,
+      });
+    </script>
+  </body>
+</html>

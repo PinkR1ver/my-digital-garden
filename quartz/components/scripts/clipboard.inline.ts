@@ -15,7 +15,27 @@ document.addEventListener("nav", () => {
       button.innerHTML = svgCopy
       button.ariaLabel = "Copy source"
       function onClick() {
-        navigator.clipboard.writeText(source).then(
+        const write =
+          navigator.clipboard && window.isSecureContext
+            ? navigator.clipboard.writeText(source)
+            : new Promise<void>((resolve, reject) => {
+                const textarea = document.createElement("textarea")
+                textarea.value = source
+                textarea.style.position = "fixed"
+                textarea.style.opacity = "0"
+                document.body.appendChild(textarea)
+                textarea.focus()
+                textarea.select()
+                try {
+                  document.execCommand("copy") ? resolve() : reject(new Error("Copy failed"))
+                } catch (error) {
+                  reject(error)
+                } finally {
+                  textarea.remove()
+                }
+              })
+
+        write.then(
           () => {
             button.blur()
             button.innerHTML = svgCheck

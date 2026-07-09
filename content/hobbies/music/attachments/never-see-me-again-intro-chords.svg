@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="330" viewBox="0 0 1180 330" role="img" aria-labelledby="title desc">
+  <title id="title">Never See Me Again intro chord reduction</title>
+  <desc id="desc">A two-staff piano chord reduction in F sharp major: F sharp, F sharp seven, B, B minor, A sharp minor seven, D sharp minor seven, G sharp minor seven, C sharp seven.</desc>
+  <rect width="1180" height="330" fill="#fffdf8"/>
+  <g stroke="#27241f" stroke-width="1.2" fill="none">
+    <path d="M72 96H1122M72 108H1122M72 120H1122M72 132H1122M72 144H1122"/>
+    <path d="M72 190H1122M72 202H1122M72 214H1122M72 226H1122M72 238H1122"/>
+    <path d="M178 96V238M1122 96V238" stroke-width="2"/>
+    <path d="M296 96V238M414 96V238M532 96V238M650 96V238M768 96V238M886 96V238M1004 96V238"/>
+  </g>
+  <g font-family="Georgia, serif" fill="#27241f">
+    <text x="72" y="43" font-size="27" font-weight="bold">Never See Me Again</text>
+    <text x="72" y="69" font-size="16">Intro chord reduction · 4/4 · 89 BPM · key of F♯</text>
+    <text x="87" y="130" font-size="42">𝄞</text>
+    <text x="87" y="222" font-size="42">𝄢</text>
+    <text x="130" y="116" font-size="15">♯♯♯♯♯♯</text>
+    <text x="130" y="210" font-size="15">♯♯♯♯♯♯</text>
+    <text x="220" y="88" font-size="17" font-weight="bold">F♯</text>
+    <text x="337" y="88" font-size="17" font-weight="bold">F♯7</text>
+    <text x="466" y="88" font-size="17" font-weight="bold">B</text>
+    <text x="580" y="88" font-size="17" font-weight="bold">Bm</text>
+    <text x="688" y="88" font-size="17" font-weight="bold">A♯m7</text>
+    <text x="806" y="88" font-size="17" font-weight="bold">D♯m7</text>
+    <text x="924" y="88" font-size="17" font-weight="bold">G♯m7</text>
+    <text x="1047" y="88" font-size="17" font-weight="bold">C♯7</text>
+  </g>
+  <g fill="#27241f">
+    <ellipse cx="237" cy="138" rx="7" ry="5"/><ellipse cx="237" cy="126" rx="7" ry="5"/><ellipse cx="237" cy="114" rx="7" ry="5"/>
+    <ellipse cx="355" cy="138" rx="7" ry="5"/><ellipse cx="355" cy="126" rx="7" ry="5"/><ellipse cx="355" cy="114" rx="7" ry="5"/><ellipse cx="355" cy="102" rx="7" ry="5"/>
+    <ellipse cx="473" cy="132" rx="7" ry="5"/><ellipse cx="473" cy="120" rx="7" ry="5"/><ellipse cx="473" cy="108" rx="7" ry="5"/>
+    <ellipse cx="591" cy="132" rx="7" ry="5"/><ellipse cx="591" cy="120" rx="7" ry="5"/><ellipse cx="591" cy="108" rx="7" ry="5"/>
+    <ellipse cx="709" cy="138" rx="7" ry="5"/><ellipse cx="709" cy="126" rx="7" ry="5"/><ellipse cx="709" cy="114" rx="7" ry="5"/><ellipse cx="709" cy="102" rx="7" ry="5"/>
+    <ellipse cx="827" cy="138" rx="7" ry="5"/><ellipse cx="827" cy="126" rx="7" ry="5"/><ellipse cx="827" cy="114" rx="7" ry="5"/><ellipse cx="827" cy="102" rx="7" ry="5"/>
+    <ellipse cx="945" cy="138" rx="7" ry="5"/><ellipse cx="945" cy="126" rx="7" ry="5"/><ellipse cx="945" cy="114" rx="7" ry="5"/><ellipse cx="945" cy="102" rx="7" ry="5"/>
+    <ellipse cx="1063" cy="138" rx="7" ry="5"/><ellipse cx="1063" cy="126" rx="7" ry="5"/><ellipse cx="1063" cy="114" rx="7" ry="5"/><ellipse cx="1063" cy="102" rx="7" ry="5"/>
+    <ellipse cx="237" cy="232" rx="7" ry="5"/><ellipse cx="355" cy="232" rx="7" ry="5"/>
+    <ellipse cx="473" cy="226" rx="7" ry="5"/><ellipse cx="591" cy="226" rx="7" ry="5"/>
+    <ellipse cx="709" cy="238" rx="7" ry="5"/><ellipse cx="827" cy="220" rx="7" ry="5"/>
+    <ellipse cx="945" cy="232" rx="7" ry="5"/><ellipse cx="1063" cy="226" rx="7" ry="5"/>
+  </g>
+  <g font-family="Georgia, serif" fill="#27241f" font-size="15">
+    <text x="228" y="270">F♯</text><text x="346" y="270">F♯</text><text x="467" y="270">B</text><text x="585" y="270">B</text>
+    <text x="697" y="270">A♯</text><text x="815" y="270">D♯</text><text x="933" y="270">G♯</text><text x="1052" y="270">C♯</text>
+    <text x="72" y="310" font-size="14">Chord reduction from the supplied intro progression; no guessed vocal melody.</text>
+  </g>
+</svg>
