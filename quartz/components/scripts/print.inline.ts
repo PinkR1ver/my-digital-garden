@@ -1,22 +1,51 @@
-const svgPrinter = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 12H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>`
-
 document.addEventListener("nav", () => {
   const btn = document.getElementById("print-button")
   if (!btn) return
 
-  const onClick = () => {
+  let printInProgress = false
+
+  const onClick = async () => {
+    if (printInProgress) return
+    printInProgress = true
+    btn.setAttribute("aria-disabled", "true")
+
     // Gather note content
     const article = document.querySelector("article.popover-hint")
     const titleEl = document.querySelector(".article-title")
     const metaEl = document.querySelector(".content-meta")
     const title = titleEl?.textContent?.trim() ?? document.title
     const meta = metaEl?.textContent?.trim() ?? ""
-    const bodyHTML = article?.innerHTML ?? ""
+    const articleCopy = article?.cloneNode(true) as HTMLElement | undefined
+
+    // Mermaid is rendered as one SVG. Mark its print copy so it can be scaled to
+    // the printable page and kept together instead of being clipped like code.
+    for (const diagram of articleCopy?.querySelectorAll<HTMLElement>("code.mermaid") ?? []) {
+      const container = diagram.closest("pre")
+      container?.classList.add("print-mermaid")
+
+      if (articleCopy && container && isOpeningDiagram(articleCopy, container)) {
+        container.classList.add("print-mermaid-opening")
+      }
+
+      diagram.removeAttribute("tabindex")
+      diagram.removeAttribute("role")
+      diagram.removeAttribute("aria-label")
+
+      const svg = diagram.querySelector("svg")
+      svg?.removeAttribute("width")
+      svg?.removeAttribute("height")
+      svg?.style.removeProperty("max-width")
+      svg?.setAttribute("preserveAspectRatio", "xMidYMid meet")
+    }
+
+    const bodyHTML = articleCopy?.innerHTML ?? ""
 
     // Build a professional print document
     const printWindow = window.open("", "_blank", "width=800,height=600")
     if (!printWindow) {
       // If popup blocked, fall back to direct window.print()
+      printInProgress = false
+      btn.removeAttribute("aria-disabled")
       window.print()
       return
     }
@@ -145,6 +174,43 @@ document.addEventListener("nav", () => {
     font-size: 9pt;
   }
 
+  /* Mermaid is an SVG, not a code listing. Keep each diagram intact and scale
+     both wide and tall charts inside the printable A4 content box. */
+  pre.print-mermaid {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+  pre.print-mermaid code.mermaid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    overflow: visible;
+    background: transparent;
+    line-height: 0;
+  }
+  pre.print-mermaid code.mermaid::after { display: none; }
+  pre.print-mermaid svg {
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 225mm !important;
+    margin: 0 auto;
+    overflow: visible;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
   /* tables */
   table {
     width: 100%;
@@ -209,6 +275,23 @@ document.addEventListener("nav", () => {
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
     }
+    pre.print-mermaid {
+      /* 225mm diagram + 8mm margins stays safely within the 257mm A4
+         content height left by the 20mm page margins. */
+      margin: 4mm 0;
+      border: 0;
+      background: transparent !important;
+      break-inside: avoid-page;
+      page-break-inside: avoid;
+    }
+    pre.print-mermaid svg {
+      max-height: 225mm !important;
+    }
+    pre.print-mermaid-opening svg {
+      /* Opening diagrams share page one with the document header and section
+         heading, so they need a smaller budget than later full-page diagrams. */
+      max-height: 180mm !important;
+    }
     th { background: #f0f0f0 !important; }
     a { color: inherit; }
   }
@@ -227,25 +310,62 @@ document.addEventListener("nav", () => {
 
     printDoc.close()
 
-    // Wait for images/fonts to load, then trigger print
-    printWindow.addEventListener("load", () => {
-      // Small delay so fonts can start loading
-      setTimeout(() => {
-        printWindow.print()
-      }, 400)
-    })
+    // Follow one guarded path to the print dialog. The previous load listener
+    // plus readyState fallback could both fire and open the dialog twice.
+    await waitForDocumentReady(printWindow)
+    await waitForPrintAssets(printWindow)
+    await nextPaint(printWindow)
 
-    // Also trigger immediately if load already fired
-    if (printDoc.readyState === "complete") {
-      setTimeout(() => {
-        printWindow.print()
-      }, 400)
+    const releasePrintLock = () => {
+      printInProgress = false
+      btn.removeAttribute("aria-disabled")
     }
+    printWindow.addEventListener("afterprint", releasePrintLock, { once: true })
+    printWindow.addEventListener("pagehide", releasePrintLock, { once: true })
+    printWindow.focus()
+    printWindow.print()
+    window.setTimeout(releasePrintLock, 1000)
   }
 
   btn.addEventListener("click", onClick)
   window.addCleanup(() => btn.removeEventListener("click", onClick))
 })
+
+function isOpeningDiagram(article: HTMLElement, container: HTMLElement): boolean {
+  const containerIndex = Array.from(article.children).indexOf(container)
+  if (containerIndex < 0) return false
+
+  return Array.from(article.children)
+    .slice(0, containerIndex)
+    .every((element) => /^H[1-6]$/.test(element.tagName) || element.textContent?.trim() === "")
+}
+
+function waitForDocumentReady(target: Window): Promise<void> {
+  if (target.document.readyState === "complete") return Promise.resolve()
+
+  return new Promise((resolve) => {
+    target.addEventListener("load", () => resolve(), { once: true })
+  })
+}
+
+async function waitForPrintAssets(target: Window): Promise<void> {
+  const fonts = target.document.fonts?.ready ?? Promise.resolve()
+  const images = Array.from(target.document.images).map((image) => {
+    if (image.complete) return Promise.resolve()
+    return new Promise<void>((resolve) => {
+      image.addEventListener("load", () => resolve(), { once: true })
+      image.addEventListener("error", () => resolve(), { once: true })
+    })
+  })
+
+  await Promise.all([fonts, ...images])
+}
+
+function nextPaint(target: Window): Promise<void> {
+  return new Promise((resolve) => {
+    target.requestAnimationFrame(() => target.requestAnimationFrame(() => resolve()))
+  })
+}
 
 function escapeHTML(str: string): string {
   const div = document.createElement("div")

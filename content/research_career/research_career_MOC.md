@@ -28,6 +28,10 @@ date: 2026-04-30
 
 - [Research Reports - MOC](report/report_MOC.md)
 
+## Funding and Incubation
+
+- [HKSTP Incu-Bio 申请流程与材料准备](research_career/HKSTP-IncuBio-application-process.md)
+
 ## Plans and Defense
 
 - [Dec. 2023 Work Plan](research_career/plan/Next_work_plan/2023_12.md)
