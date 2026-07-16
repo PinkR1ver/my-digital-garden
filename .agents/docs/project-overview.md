@@ -77,3 +77,20 @@ content/_index.md -> content/atlas.md -> topic MOCs -> leaf notes
 
 Use this path when deciding whether a page is discoverable enough for the public
 site.
+
+## Opt-in Note Exports
+
+- `print: true` in note frontmatter shows the existing print action.
+- `slides: true` shows a Slides action that converts the rendered note HTML into
+  a 16:9 presentation. The title becomes a cover slide; Markdown horizontal
+  rules and H1/H2 headings start content sections. Sections that exceed one
+  slide are automatically paginated using their rendered height; continuation
+  slides repeat the section heading, and lists, tables, and code are split only
+  between semantic items, rows, or lines. The generated deck supports keyboard
+  navigation, fullscreen presentation, and browser printing/saving as PDF with
+  one slide per page. Mermaid source is retained before normal page rendering so
+  Slides can rerender diagrams for its light background; pagination and scaling
+  use the padding-adjusted content box to keep diagrams above the footer.
+- The implementation lives in `quartz/components/Slides.tsx` and
+  `quartz/components/scripts/slides.inline.ts`, and is registered in
+  `quartz.layout.ts`.

@@ -24,6 +24,14 @@
   `quartz/plugins/transformers/ofm.ts`, with modal styles in
   `quartz/styles/base.scss`. Keep `.inline.ts` files as raw browser scripts;
   do not use `export default` inside them.
+- 2026-07-15: Notes can opt into a browser-rendered 16:9 presentation with
+  `slides: true`. The Slides action uses the already-rendered article HTML,
+  creates sections from horizontal rules and H1/H2 headings, then automatically
+  paginates overlong sections by rendered height. It splits lists between items,
+  tables between rows, and highlighted code between lines, and supports
+  fullscreen, keyboard navigation, and print/save-to-PDF. Mermaid definitions
+  are retained and rerendered with a light theme for Slides; fit calculations
+  subtract content padding so diagrams do not overlap the footer.
 - 2026-05-01: User requested deletion of all Copilot-related content. Do not
   recreate `content/copilot/` or a Copilot MOC unless explicitly asked.
 - Treat `content/` as an Obsidian-style vault: preserve wikilinks, MOCs,

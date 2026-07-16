@@ -92,6 +92,16 @@ document.addEventListener("nav", async () => {
     mermaidImport ||= await import(mermaidUrl)
     const mermaid = mermaidImport.default
     const darkMode = document.documentElement.getAttribute("saved-theme") === "dark"
+
+    // Mermaid replaces the code block source with an SVG. Keep the original
+    // definition so light-background exports such as Slides can render their
+    // own theme instead of cloning a dark-mode SVG.
+    document.querySelectorAll<HTMLElement>("code.mermaid").forEach((diagram) => {
+      if (!diagram.querySelector("svg") && diagram.dataset.mermaidSource === undefined) {
+        diagram.dataset.mermaidSource = diagram.textContent ?? ""
+      }
+    })
+
     mermaid.initialize({
       startOnLoad: false,
       securityLevel: "loose",

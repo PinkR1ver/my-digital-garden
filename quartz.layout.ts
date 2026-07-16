@@ -22,6 +22,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.ContentMeta(),
     Component.TagList(),
     Component.Print({ label: "Print" }),
+    Component.Slides({ label: "Slides" }),
   ],
   left: [
     Component.PageTitle(),

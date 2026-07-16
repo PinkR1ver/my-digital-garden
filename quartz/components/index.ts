@@ -20,6 +20,7 @@ import MobileOnly from "./MobileOnly"
 import RecentNotes from "./RecentNotes"
 import Breadcrumbs from "./Breadcrumbs"
 import Print from "./Print"
+import Slides from "./Slides"
 
 export {
   ArticleTitle,
@@ -44,4 +45,5 @@ export {
   NotFound,
   Breadcrumbs,
   Print,
+  Slides,
 }
