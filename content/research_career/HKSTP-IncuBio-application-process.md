@@ -16,6 +16,7 @@ print: true
 ## 一、申请总流程
 
 ```mermaid
+%%{init: {"themeVariables": {"fontSize": "20px"}, "flowchart": {"nodeSpacing": 24, "rankSpacing": 24}}}%%
 flowchart TD
     A[申请人｜1. 申请前咨询] --> B[申请人｜2. 资格自检]
     B --> C{符合基本资格?}

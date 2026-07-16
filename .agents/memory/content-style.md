@@ -11,6 +11,10 @@
 - Keep `content/atlas.md` as the high-level map, not a dump of every note.
 - User preference: after running a Quartz build or local preview for note work,
   always provide the exact local link address for the changed note/page.
+- 2026-07-13: The user reviews and may directly revise each working version of a
+  note. Before making follow-up edits, always reread the current file and inspect
+  its diff; treat the user's latest wording and structure as authoritative, and
+  do not restore earlier agent-authored content over those changes.
 - 2026-06-30: When the user asks for review/preview commands, provide
   `npx quartz preview --host 0.0.0.0 --port 8082`; do not give
   deploy/commit/push instructions unless explicitly requested.

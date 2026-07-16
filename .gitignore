@@ -13,3 +13,4 @@ replit.nix
 /content/.trash
 /content/copilot
 /.claude
+/.tmp

@@ -23,10 +23,6 @@ document.addEventListener("nav", () => {
       const container = diagram.closest("pre")
       container?.classList.add("print-mermaid")
 
-      if (articleCopy && container && isOpeningDiagram(articleCopy, container)) {
-        container.classList.add("print-mermaid-opening")
-      }
-
       diagram.removeAttribute("tabindex")
       diagram.removeAttribute("role")
       diagram.removeAttribute("aria-label")
@@ -196,9 +192,15 @@ document.addEventListener("nav", () => {
     padding: 0;
     overflow: visible;
     background: transparent;
-    line-height: 0;
+    line-height: normal;
   }
   pre.print-mermaid code.mermaid::after { display: none; }
+  pre.print-mermaid .nodeLabel,
+  pre.print-mermaid .edgeLabel,
+  pre.print-mermaid .label,
+  pre.print-mermaid foreignObject div {
+    line-height: 1.2 !important;
+  }
   pre.print-mermaid svg {
     display: block;
     width: 100% !important;
@@ -250,7 +252,7 @@ document.addEventListener("nav", () => {
   @media print {
     @page {
       size: A4;
-      margin: 20mm;
+      margin: 12mm;
     }
     body {
       max-width: none;
@@ -262,10 +264,10 @@ document.addEventListener("nav", () => {
     }
     .print-header {
       border-bottom-width: 1.5pt;
-      padding-bottom: 16pt;
-      margin-bottom: 28pt;
+      padding-bottom: 8pt;
+      margin-bottom: 12pt;
     }
-    .print-header h1 { font-size: 20pt; }
+    .print-header h1 { font-size: 18pt; }
     h2 { font-size: 14pt; }
     h3 { font-size: 12pt; }
     pre, code { font-size: 8.5pt; }
@@ -276,21 +278,16 @@ document.addEventListener("nav", () => {
       print-color-adjust: exact;
     }
     pre.print-mermaid {
-      /* 225mm diagram + 8mm margins stays safely within the 257mm A4
-         content height left by the 20mm page margins. */
-      margin: 4mm 0;
+      /* Give diagrams most of the A4 sheet instead of shrinking the opening
+         flowchart to share an artificially small first-page budget. */
+      margin: 2mm 0;
       border: 0;
       background: transparent !important;
       break-inside: avoid-page;
       page-break-inside: avoid;
     }
     pre.print-mermaid svg {
-      max-height: 225mm !important;
-    }
-    pre.print-mermaid-opening svg {
-      /* Opening diagrams share page one with the document header and section
-         heading, so they need a smaller budget than later full-page diagrams. */
-      max-height: 180mm !important;
+      max-height: 220mm !important;
     }
     th { background: #f0f0f0 !important; }
     a { color: inherit; }
@@ -330,15 +327,6 @@ document.addEventListener("nav", () => {
   btn.addEventListener("click", onClick)
   window.addCleanup(() => btn.removeEventListener("click", onClick))
 })
-
-function isOpeningDiagram(article: HTMLElement, container: HTMLElement): boolean {
-  const containerIndex = Array.from(article.children).indexOf(container)
-  if (containerIndex < 0) return false
-
-  return Array.from(article.children)
-    .slice(0, containerIndex)
-    .every((element) => /^H[1-6]$/.test(element.tagName) || element.textContent?.trim() === "")
-}
 
 function waitForDocumentReady(target: Window): Promise<void> {
   if (target.document.readyState === "complete") return Promise.resolve()
