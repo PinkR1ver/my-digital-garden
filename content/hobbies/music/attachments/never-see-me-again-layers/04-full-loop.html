@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Never See Me Again — combined loop</title>
+    <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.0/dist/abcjs-basic-min.js"></script>
+    <style>
+      body { margin: 0; padding: 12px; background: #f8f5ee; color: #2b2825; font-family: system-ui, sans-serif; }
+      #paper { overflow-x: auto; border: 1px solid #d8d0c4; background: rgba(255,255,255,.66); }
+    </style>
+  </head>
+  <body>
+    <div id="paper"></div>
+    <script>
+      ABCJS.renderAbc("paper", `X:1
+T:4. Decorated arrangement — melody, harmony and arpeggio
+M:4/4
+L:1/16
+Q:1/4=89
+K:C
+V:MELODY clef=treble name="Melody"
+"F#" ^C4 ^A ^G ^F2 "F#7" ^C4 ^A ^G ^F2 | "B" ^C4 ^A ^G ^F2 "Bm" ^C4 ^A ^G ^F2 |
+"A#m7" ^C4 ^c B ^A ^G ^G z "D#m7" ^A2 ^G2 ^F ^F | "G#m7" ^G ^G ^G2 ^G2 ^F ^C3 "C#7" ^A2 ^A ^G ^F2 |
+"F#" ^C4 ^A ^G ^F2 "F#7" ^C4 ^A ^G ^F2 | "B" ^D2 ^D ^A2 ^G ^F2 "Bm" =D4 ^c2 ^c ^c |
+"A#m7" ^c ^A3 ^c ^c ^c ^c "D#m7" ^G2 ^A2 ^G ^F ^F ^F | "G#m7" ^G ^G ^G2 ^G2 ^F ^C3 "C#7" z2 ^F2 ^F ^F |]
+V:ARP clef=treble name="Arpeggio"
+^F,2 ^C2 ^A,2 ^C2 ^F,2 ^C2 ^A,2 =E2 | B,2 ^F2 ^D2 ^F2 B,2 ^F2 =D2 ^F2 |
+^A,2 =F2 ^C2 ^G2 ^D2 ^A2 ^F2 ^c2 | ^G,2 ^D2 B,2 ^F2 ^C2 ^G2 =F2 B2 |
+^F2 ^c2 ^A2 ^c2 ^F2 e2 ^c2 ^A2 | B2 ^f2 ^d2 ^f2 B2 ^f2 =d2 ^f2 |
+^A2 =f2 ^c2 ^g2 ^d2 ^a2 ^f2 ^c'2 | ^G2 ^d2 B2 ^f2 ^c2 ^g2 =f2 b2 |]
+V:HARMONY clef=bass name="Harmony"
+[^F,,^A,,^C,^F,]8 [^F,,^A,,^C,=E,]8 | [B,,^D,^F,B,]8 [B,,=D,^F,B,]8 |
+[^A,,^C,=F,^G,]8 [^D,^F,^A,^C]8 | [^G,,B,,^D,^F,]8 [^C,=F,^G,B,]8 |
+[^F,,^A,,^C,^F,]8 [^F,,^A,,^C,=E,]8 | [B,,^D,^F,B,]8 [B,,=D,^F,B,]8 |
+[^A,,^C,=F,^G,]8 [^D,^F,^A,^C]8 | [^G,,B,,^D,^F,]8 [^C,=F,^G,B,]8 |]`, {
+        responsive: "resize", staffwidth: 860, paddingtop: 8, paddingbottom: 8,
+      });
+    </script>
+  </body>
+</html>

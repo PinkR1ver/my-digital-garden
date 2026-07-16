@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Never See Me Again — original multi-instrument final work</title>
+    <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.0/dist/abcjs-basic-min.js"></script>
+    <style>
+      body { margin: 0; padding: 12px; background: #f8f5ee; color: #2b2825; font-family: system-ui, sans-serif; }
+      h2 { margin: 18px 4px 6px; font-size: 16px; font-weight: 650; }
+      h2:first-of-type { margin-top: 2px; }
+      .paper { overflow-x: auto; border: 1px solid #d8d0c4; background: rgba(255,255,255,.66); }
+    </style>
+  </head>
+  <body>
+    <h2>Chapter I — piano prelude (new line)</h2>
+    <div id="prelude" class="paper"></div>
+    <h2>Chapter II — nylon guitar (new arpeggio)</h2>
+    <div id="guitar" class="paper"></div>
+    <h2>Chapter III — trumpet solo</h2>
+    <div id="trumpet" class="paper"></div>
+    <h2>Chapter IV — tenor saxophone (new response)</h2>
+    <div id="sax" class="paper"></div>
+    <h2>Coda — piano and winds</h2>
+    <div id="coda" class="paper"></div>
+    <h2>Piano epilogue — final harmony</h2>
+    <div id="epilogue" class="paper"></div>
+    <script>
+      const options = {
+        responsive: "resize", staffwidth: 900, paddingtop: 8, paddingbottom: 8,
+      };
+
+      ABCJS.renderAbc("prelude", `X:1
+T:Sparse piano line — 8 bars
+M:4/4
+L:1/16
+Q:1/4=89
+K:C
+V:Piano clef=treble name="Piano"
+[V:Piano] "^F# / F#7" ^F8 ^C8 | "^B / Bm" ^c10 E3 ^c3 |
+"^A#m7 / D#m7" ^A8 ^A4 B2 ^c2 | "^G#m7 / C#7" ^F8 ^G4 B4 |
+"^F# / F#7" ^F4 ^F4 ^F4 ^c4 | "^B / Bm" ^F8 ^G4 ^A4 |
+"^A#m7 / D#m7" B,6 ^C4 ^D3 ^C3 | "^G#m7 / C#7" ^C16 |]`, options);
+
+      ABCJS.renderAbc("guitar", `X:2
+T:Nylon-string arpeggio — 8 bars
+M:4/4
+L:1/8
+Q:1/4=89
+K:C
+V:Guitar clef=treble name="Guitar"
+[V:Guitar] "^F# / F#7" ^F, ^C ^A, ^C ^F, ^C ^A, E |
+"^B / Bm" B, ^F ^D ^F B, ^F D ^F |
+"^A#m7 / D#m7" ^A, F ^C ^G ^D ^A ^F ^c |
+"^G#m7 / C#7" ^G, ^D B, ^F ^C ^G F B |
+"^F# / F#7" ^F ^c ^A ^c ^F e ^c ^A |
+"^B / Bm" B ^f ^d ^f B ^f d ^f |
+"^A#m7 / D#m7" ^A f ^c ^g ^d ^a ^f ^c' |
+"^G#m7 / C#7" ^G ^d B ^f ^c ^g f b |]`, options);
+
+      ABCJS.renderAbc("trumpet", `X:3
+T:Trumpet solo — 8 bars
+M:4/4
+L:1/16
+Q:1/4=89
+K:C
+V:Trumpet clef=treble name="Trumpet"
+[V:Trumpet] z4 ^c3 ^d ^f4 ^g4 | ^a6 ^g2 ^f4 ^d2 ^c2 |
+z2 ^c2 ^d2 ^f2 ^g4 ^f2 ^d2 | f6 ^d2 ^c4 z4 |
+^A3 ^c ^d4 ^f4 ^a4 | ^g6 ^f2 ^d4 ^c4 |
+B2 ^c2 ^d4 ^f3 ^g ^a4 | f4 ^d3 ^c B4 ^A2 ^G2 |]`, options);
+
+      ABCJS.renderAbc("sax", `X:4
+T:Tenor saxophone response — written at sounding pitch
+M:4/4
+L:1/16
+Q:1/4=89
+K:C
+V:Sax clef=treble name="Tenor sax"
+[V:Sax] z16 | ^C4 ^F4 ^G4 ^A4 |
+B6 ^A2 ^G4 ^F4 | ^C8 z8 |
+^F4 ^G4 ^A4 ^c4 | B6 ^A2 ^G4 ^F4 |
+^D4 ^F4 ^G4 B4 | ^A4 ^G4 ^F8 |]`, options);
+
+      ABCJS.renderAbc("coda", `X:5
+T:Coda — Bmaj7 to F#maj9
+M:4/4
+L:1/16
+Q:1/4=89
+K:C
+%%score { ( H ) ( T S ) }
+V:H clef=bass name="Piano"
+V:T clef=treble name="Trumpet"
+V:S clef=treble name="Tenor sax"
+[V:H] "^Bmaj7" [B,,^D,^F,^A,]16 | "^Bm6" [B,,D,^F,^G,]16 | "^C#7sus4" [^C,^F,^G,B,]8 "^C#7" [^C,F,^G,B,]8 | "^F#maj9" [^F,,^A,,^C,^F,^G,]16 |]
+[V:T] ^d8 ^c8 | B8 ^A8 | ^G8 F8 | ^F16 |]
+[V:S] B,16 | D8 ^F8 | ^C8 B,8 | ^C16 |]`, options);
+
+      ABCJS.renderAbc("epilogue", `X:6
+T:Piano epilogue — the final four bars
+M:4/4
+L:1/16
+Q:1/4=89
+K:C
+%%score { ( RH LH ) }
+V:RH clef=treble name="Piano"
+V:LH clef=bass
+[V:RH] [^A,F^G]16 | [^A,^C]16 | [^G,^C]16 | [^A,^D^G]16 |]
+[V:LH] "^F#maj9" [^F,,^C,]16 | "^Bmaj9/F#" [^F,,B,,^D,]16 | "^Bm6(add9)/F#" [^F,,B,,D,]16 | "^F#maj9(add6)" [^F,,^C,F,]16 |]`, options);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Never See Me Again — melody</title>
+    <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.0/dist/abcjs-basic-min.js"></script>
+    <style>
+      body { margin: 0; padding: 12px; background: #f8f5ee; color: #2b2825; font-family: system-ui, sans-serif; }
+      #paper { overflow-x: auto; border: 1px solid #d8d0c4; background: rgba(255,255,255,.66); }
+    </style>
+  </head>
+  <body>
+    <div id="paper"></div>
+    <script>
+      ABCJS.renderAbc("paper", `X:1
+T:3. Hooktheory melody — complete 32 beats
+M:4/4
+L:1/16
+Q:1/4=89
+K:C
+V:RH clef=treble
+^C4 ^A ^G ^F2 ^C4 ^A ^G ^F2 | ^C4 ^A ^G ^F2 ^C4 ^A ^G ^F2 |
+^C4 ^c B ^A ^G ^G z ^A2 ^G2 ^F ^F | ^G ^G ^G2 ^G2 ^F ^C3 ^A2 ^A ^G ^F2 |
+^C4 ^A ^G ^F2 ^C4 ^A ^G ^F2 | ^D2 ^D ^A2 ^G ^F2 =D4 ^c2 ^c ^c |
+^c ^A3 ^c ^c ^c ^c ^G2 ^A2 ^G ^F ^F ^F | ^G ^G ^G2 ^G2 ^F ^C3 z2 ^F2 ^F ^F |]`, {
+        responsive: "resize", staffwidth: 860, paddingtop: 8, paddingbottom: 8,
+      });
+    </script>
+  </body>
+</html>

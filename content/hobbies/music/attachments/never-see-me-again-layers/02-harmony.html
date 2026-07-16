@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Never See Me Again — harmony</title>
+    <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.0/dist/abcjs-basic-min.js"></script>
+    <style>
+      body { margin: 0; padding: 12px; background: #f8f5ee; color: #2b2825; font-family: system-ui, sans-serif; }
+      #paper { overflow-x: auto; border: 1px solid #d8d0c4; background: rgba(255,255,255,.66); }
+    </style>
+  </head>
+  <body>
+    <div id="paper"></div>
+    <script>
+      ABCJS.renderAbc("paper", `X:1
+T:2. Harmony — bass-register voicings, two beats per chord
+M:4/4
+L:1/4
+Q:1/4=89
+K:C
+V:H clef=bass
+"F#" [^F,,^A,,^C,^F,]2 "F#7" [^F,,^A,,^C,=E,]2 | "B" [B,,^D,^F,B,]2 "Bm" [B,,=D,^F,B,]2 |
+"A#m7" [^A,,^C,=F,^G,]2 "D#m7" [^D,^F,^A,^C]2 | "G#m7" [^G,,B,,^D,^F,]2 "C#7" [^C,=F,^G,B,]2 |
+"F#" [^F,,^A,,^C,^F,]2 "F#7" [^F,,^A,,^C,=E,]2 | "B" [B,,^D,^F,B,]2 "Bm" [B,,=D,^F,B,]2 |
+"A#m7" [^A,,^C,=F,^G,]2 "D#m7" [^D,^F,^A,^C]2 | "G#m7" [^G,,B,,^D,^F,]2 "C#7" [^C,=F,^G,B,]2 |]`, {
+        responsive: "resize", staffwidth: 860, paddingtop: 8, paddingbottom: 8,
+      });
+    </script>
+  </body>
+</html>
