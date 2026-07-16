@@ -218,20 +218,31 @@ body[data-slug="index"] .home-signoff-name {
   }
 }
 
-// Make code blocks use body text color instead of inline-code accent (#d0104c)
+// Inline code — a quiet Catppuccin-blue chip instead of the old deep-red accent.
+:not(pre) > code {
+  color: var(--secondary);
+  background: color-mix(in srgb, var(--secondary) 9%, var(--light));
+  border: 1px solid color-mix(in srgb, var(--secondary) 24%, var(--lightgray));
+  border-radius: 0.32rem;
+  padding: 0.08em 0.32em;
+  font-weight: 520;
+}
+
+// Keep fenced code blocks neutral; syntax highlighting supplies their colors.
 pre > code {
   color: var(--darkgray);
 }
 
 // Socratic Learning session — handwritten-note appendix at end of note
 details.socratic-learning-session {
+  --socratic-concept: #8839ef; // Catppuccin Latte mauve
   margin-top: 2.5rem;
   padding: 0.85rem 1.1rem 0.7rem;
   border: 1.5px dashed var(--lightgray);
   border-radius: 4px 12px 6px 10px; // slightly uneven — like a paper note
   background: var(--lightgray);
   font-size: 0.925rem;
-  color: var(--secondary);
+  color: var(--darkgray);
   transition:
     background 0.35s ease,
     border-color 0.35s ease,
@@ -297,7 +308,7 @@ details.socratic-learning-session {
     padding: 0.65rem 0.95rem;
     border-left: 3px dotted var(--tertiary); // dotted = pen/ink feel
     font-size: 0.88rem;
-    color: var(--secondary);
+    color: var(--darkgray);
     line-height: 1.6;
 
     ul {
@@ -311,13 +322,98 @@ details.socratic-learning-session {
   }
 
   .socratic-qa {
+    --exchange-border: color-mix(in srgb, var(--gray) 34%, var(--lightgray));
     margin-top: 0.85rem;
 
     h3,
     h4 {
-      font-size: 0.95rem;
+      position: relative;
+      margin: 1.35rem 0 0;
+      padding: 0.55rem 0.75rem 0.55rem 0.9rem;
+      border-top: 1px solid var(--exchange-border);
+      border-right: 1px solid var(--exchange-border);
+      border-bottom: 0;
+      border-left: 4px solid var(--socratic-concept);
+      border-radius: 0.65rem 0.65rem 0 0;
+      background: color-mix(in srgb, var(--socratic-concept) 9%, var(--light));
+      font-size: 0.98rem;
+      line-height: 1.45;
+      color: var(--socratic-concept);
+      font-weight: 650;
+    }
+
+    // A Concept heading and all of its Question → User → AI paragraphs share
+    // one continuous outer card. Role colors remain visible as left-edge lanes.
+    p:has(> strong:first-child) {
+      margin: 0;
+      padding: 0.62rem 0.78rem;
+      border-right: 1px solid var(--exchange-border);
       color: var(--darkgray);
-      margin: 0.8rem 0 0.35rem;
+      line-height: 1.68;
+
+      & > strong:first-child {
+        display: inline-block;
+        margin: 0 0.38rem 0.1rem 0;
+        padding: 0.08rem 0.38rem;
+        border-radius: 999px;
+        font-family: var(--codeFont);
+        font-size: 0.72rem;
+        font-weight: 700;
+        line-height: 1.35;
+        letter-spacing: 0.015em;
+      }
+
+      // Question
+      &:nth-of-type(3n + 1) {
+        border-top: 1px solid var(--exchange-border);
+        border-bottom: 0;
+        border-left: 3px solid var(--secondary);
+        border-radius: 0;
+        background: color-mix(in srgb, var(--secondary) 7%, var(--light));
+
+        & > strong:first-child {
+          color: var(--secondary);
+          background: color-mix(in srgb, var(--secondary) 13%, transparent);
+        }
+      }
+
+      // User answer
+      &:nth-of-type(3n + 2) {
+        border-top: 1px dashed var(--exchange-border);
+        border-bottom: 0;
+        border-left: 3px solid var(--gray);
+        border-radius: 0;
+        background: color-mix(in srgb, var(--gray) 7%, var(--light));
+
+        & > strong:first-child {
+          color: var(--darkgray);
+          background: color-mix(in srgb, var(--gray) 16%, transparent);
+        }
+      }
+
+      // AI-expanded answer
+      &:nth-of-type(3n) {
+        border-top: 1px dashed var(--exchange-border);
+        border-bottom: 0;
+        border-left: 3px solid var(--tertiary);
+        border-radius: 0;
+        background: color-mix(in srgb, var(--tertiary) 7%, var(--light));
+
+        & > strong:first-child {
+          color: var(--tertiary);
+          background: color-mix(in srgb, var(--tertiary) 13%, transparent);
+        }
+      }
+
+      // Close the shared Concept card on its final AI answer.
+      &:has(+ h3),
+      &:has(+ h4),
+      &:last-of-type {
+        margin-bottom: 1.05rem;
+        border-bottom: 1px solid var(--exchange-border);
+        border-radius: 0 0 0.65rem 0.65rem;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.035);
+      }
     }
 
     hr {
@@ -336,6 +432,10 @@ details.socratic-learning-session {
     border-top: 1px dotted var(--lightgray);
     font-size: 0.82rem;
   }
+}
+
+:root[saved-theme="dark"] details.socratic-learning-session {
+  --socratic-concept: #ca9ee6; // Catppuccin Frappe mauve
 }
 
 // Keyframes — slow, quiet, barely-there motion

@@ -40,9 +40,10 @@ in `.agents/`.
   MOCs.
 - For substantial content, link, asset, config, or layout changes, verify with
   `npx quartz build`.
-- After finishing note work, provide the user a preview URL for the changed
-  page before any commit or push. Do not commit or push until the user explicitly
-  says to commit/push.
+- Do not start a preview server or provide a preview URL by default after note
+  work. Only preview when the user explicitly asks; then provide the exact URL
+  for the changed page. Do not commit or push until the user explicitly says to
+  commit/push.
 - When committing note changes, always check both repos: `content/` (notes
   only, branch `master`, remote `PinkR1ver/Jude.W-s-Knowledge-Brain`) and the
   root (full Quartz site, branch `v4`, remote `PinkR1ver/my-digital-garden`).

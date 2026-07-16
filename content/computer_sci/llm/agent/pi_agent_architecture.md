@@ -568,3 +568,184 @@ coding agent product
 <a id="ref-11"></a>[11] Pi, [Extensions documentation](https://github.com/earendil-works/pi/blob/0e6909f050eeb15e8f6c05185511f3788357ddb3/packages/coding-agent/docs/extensions.md).
 
 <a id="ref-12"></a>[12] Pi, [Security: project trust and sandbox boundary](https://github.com/earendil-works/pi/blob/0e6909f050eeb15e8f6c05185511f3788357ddb3/packages/coding-agent/docs/security.md).
+
+<details class="socratic-learning-session">
+<summary><span class="socratic-marker"></span>Socratic Learning - Pi Agent 架构 — 2026-07-17</summary>
+
+<div class="socratic-summary">
+
+- Source: [[computer_sci/llm/agent/pi_agent_architecture|Pi Agent：用最小 Harness 看懂真实 Agent 架构]]、本轮 Socratic 对话，以及退出 Socratic 模式后对 Pi 当前官方源码与文档的追问核对。
+- Sessions covered: 2026-07-16—2026-07-17。
+- Key takeaways: Pi 的核心价值不在于“另一个更聪明的 LLM”，而在于把 provider-normalized model I/O、stateful tool loop、context projection、runtime events 与 cancellation 组成最小 runtime；coding-specific tools、sessions、compaction、Extensions 与多种交互端口再由 `pi-coding-agent` 叠加。
+- Concepts that improved: 能区分 model intention 与 harness side effect、并发完成顺序与 transcript source order、storage truth 与 model view、runtime event 与 model message、project trust 与 sandbox，以及 `pi-ai` / `pi-agent-core` / product harness / UI 四层职责。
+- Recurring weak spots: 容易把 event subscriber 误认为 LLM 或 loop 的上游；把 compaction 理解成删除/备份历史；把 project trust 当成 OS-enforced sandbox；把具体 Pi package 名称误当成所有 agent 都必须复制的架构组件。
+- Open questions: 本轮没有必须先解决的悬而未决问题；后续可继续验证 Pi 在 crash recovery、幂等工具、长期 workflow durability 与外部 sandbox 集成方面的实际边界。
+- Suggested next focus: 用一个最小 `pi-agent-core` 示例和一个自定义 business harness 做迁移练习，再沿一次真实 run 追踪 `AgentMessage → LLM Message → provider payload → ToolCall → ToolResult → AgentEvent`。
+
+</div>
+
+<div class="socratic-qa">
+
+### Concept: Pi 不是“会调用工具的 LLM”，而是 model 外面的执行系统
+
+**Q:** Pi 到底是什么，它为什么不只是一个会调用工具的 LLM？同一个 LLM 在聊天框里说“我会修改文件”和在 Pi 中真正修改文件，中间缺少什么？
+
+**User answer:** “这个问题真的很好，我有点回答不上来”；“Pi在runtime修改的时候，会有harness工程参与，会有工程级限制”。
+
+**AI-expanded answer:** LLM 只能生成 text 或结构化 tool-call intention。Pi 的 harness 持有 state，建立 model context，接收 tool call，验证并执行真实副作用，把 observation 写回 transcript，再决定继续或结束。因而 model 是 decision engine，agent 是 model 加上 state owner、tool loop、context projection、events、cancellation 与 environment feedback。
+
+### Concept: Tool pipeline 把模型意图变成受控副作用
+
+**Q:** 从模型生成一次 `edit` 调用到文件真正改变，harness 要经过哪些步骤？
+
+**User answer:** “先找注册表，再校验 schema”；“preflight 与 execution 分开”；tool output 可 streaming；默认并行但可声明 sequential；完成事件按真实顺序、`toolResult` 按 source order；截断调用不执行；post-hook 可改结果或 `terminate`。
+
+**AI-expanded answer:** 这条回答覆盖了完整 pipeline：resolve tool → prepare/validate arguments → preflight hook/gate → execute → stream updates → postprocess → normalized tool result → next turn。关键不只是“能调用工具”，而是 harness 对权限、错误、并发、顺序、截断与恢复语义给出确定性保证。
+
+### Concept: 并行执行、稳定 transcript 与可复现性
+
+**Q:** 两个独立 tool call 按 `A → B` 发出但 `B` 先完成，为什么不按完成顺序把结果写成 `B → A`？固定顺序能否让两次 run 完全相同？
+
+**User answer:** 回答轨迹是：“可能会返回错误的agentState” → “B需要A做完” → “这个我还真不知道” → “token 序列不相同，但会有影响吗” → “agent run这么脆弱吗” → harness 应固定顺序 → “普通的确定性逻辑就好” → “速度与性价比” → “无法将这个输出作为格式化明显的checkpoint点来调试” → 固定后仍不完全一致，“LLM本身的输入输出就不行吧”。
+
+**AI-expanded answer:** 如果 calls 独立且用 `toolCallId` 正确配对，结果本身并未错误；问题是异步调度把无语义的偶然顺序带进 token sequence，降低 diff、测试、调试与故障复现的稳定性。harness 可按原始 call array 确定性地回填。它不能消除模型采样、provider、时间、网络、文件系统或并发进程等全部非确定性，只是在边界上消除可避免的噪声。
+
+**Q:** 怎样用一句话概括固定 tool-result source order 的价值？
+
+**User answer:** “固定 tool-result的顺序，不是为了保证agent run完全相同，而是为了消除异步执行引入的无意义差异，是得transcript更容易互相比较确定、调试确定故障。”
+
+**AI-expanded answer:** 固定结果顺序不是追求全局确定性，而是让相同逻辑过程产生稳定的 observation boundary，使 transcript 更容易复现、diff，并沿 event/tool-call 边界定位故障。
+
+### Concept: 外部状态、crash window 与幂等恢复
+
+**Q:** 即使模型完全确定，工具与环境还会带来哪些变化？如果 tool-call 已造成副作用但 session 未写盘，如何恢复？
+
+**User answer:** “机器运行状态确实也一直在变，时间、各种”；`date`、实时 API、未锁定依赖和并发文件修改“全都是在变化的状态”。对于 crash window：“做了这个事件，但是没有记录，事件开始和结束不闭合”；应先写 JSONL，再执行并记录结果；后来意识到任意副作用“没办法”自动回滚，应该“核对外部真实状态”。
+
+**AI-expanded answer:** Durable log 可以缩小并暴露不确定窗口，却不能自动撤销邮件、支付或远程部署。恢复策略应依工具选择：查询外部真实状态、使用 idempotency key、设计可重试操作、记录 compensation information，或转人工 reconciliation，而不是盲目重放。
+
+**Q:** 同一个 `idempotencyKey` 应怎样用于崩溃后的重试？
+
+**User answer:** 起初认为“可能会导致idempotency key相同，但是发送的内容不同”；随后修正为不同逻辑操作使用不同 key；相同内容与相同 key 重试时，服务先检查是否处理过，并“返回第一次操作的既有结果到transcript”。
+
+**AI-expanded answer:** Key 标识的是一个逻辑操作，而不是任意一次 HTTP 请求。相同 key 加不同 payload 应被拒绝或报告冲突；相同 key 加相同操作则返回既有结果而不重复副作用，从而实现 effectively-once 的调用体验。
+
+### Concept: Application history、model context 与 provider message
+
+**Q:** 为什么不把完整 session history 原样塞给 LLM？`transformContext()` 与 `convertToLlm()` 分别做什么？
+
+**User answer:** “为了更准确的意图识别和上下文压缩”；UI-only 信息属于“无效消息和误导消息”；provider 不认识自定义格式时“要调整到provider格式”。最终区分为：`transformContext()` 避免无效信息占用注意力和误导模型，`convertToLlm()` 调整为 provider 可以理解的格式。
+
+**AI-expanded answer:** `transformContext()` 是应用层的 model-view policy：剪枝、压缩、注入或重排 `AgentMessage[]`；`convertToLlm()` 是 app-message 到统一 LLM message 的类型边界：过滤 UI-only/custom state 或转换自定义消息。之后 `pi-ai` 才把统一 messages 序列化为具体 provider payload。
+
+### Concept: Session、compaction 与 storage truth
+
+**Q:** Compaction 后旧 entries 是否删除？模型下一轮看到什么？
+
+**User answer:** “不应该，应该被总结或者被backup到文档”；在具体的 1—100 条例子中确认 1—70 仍在 JSONL，模型看到“1-70条的摘要 + 近期消息”；后来补充 session 还要追加“前面entry的压缩出来的摘要”。
+
+**AI-expanded answer:** 不需要另搬文档才能保留历史。Append-only JSONL 继续保存原始 entries，并追加包含 summary 与 cut boundary 的 compaction entry。SessionManager 投影 active branch 时，用 summary 代表旧段并保留近期消息。因此 compaction 改的是 context/model view，而不是 durable storage truth。
+
+### Concept: Agent core、事件流与 subscriber
+
+**Q:** 为什么 core 发结构化 events，而不是直接画 TUI、写 session 和日志？什么是 subscriber？
+
+**User answer:** 最初“不知道为什么”，也“不知道为什么A要修改agent core”；经过 `addEventListener` 类比后理解为“运行逻辑是交给不同的监听者内部代码决定的”。在辨认 core 时先答“LLM”，随后定位到 `agentLoop`；最终总结：“为了分离功能，core是上游，subscriber是下游具体执行”。
+
+**AI-expanded answer:** Core 完成 model → tool → observation 的闭环，并发布 runtime facts；subscriber 是注册的普通程序回调。TUI 可把 `tool_execution_start` 画成 spinner，Web UI 可更新进度条，SessionManager 可写 JSONL，logger 可记录 trace。Core 无需包含每种消费者的实现，因此同一 runtime 可服务多种界面与基础设施。
+
+**Q:** 工具完成信号由 UI 还是 core 产生？subscriber 为什么有时必须被 await？
+
+**User answer:** 起初认为“是UI先告诉”，随后借 headless 场景修正为 agent core 最先知道工具返回，UI 是“接受runtime的事实并呈现它们的下游”。对于 persistence barrier，用户指出必须先记录操作意图、完成后再写结果，否则“事件开始和结束不闭合，无法知道有没有写完”。
+
+**AI-expanded answer:** UI 不是执行闭环的上游。Core 调用工具并知道其完成，然后发事件。某些 listeners 只是展示，可以异步；durability-sensitive listeners 则需要 awaited barrier，确保副作用前已保存调用意图、结束后保存 observation。日志能识别 uncertain operation，但不等于能自动回滚。
+
+### Concept: Steering、follow-up 与 abort
+
+**Q:** Stateful tool loop 中的 steering / follow-up 是什么？
+
+**User answer:** 未直接作答；这是退出 Socratic 模式后的强化追问。
+
+**AI-expanded answer:** Steering 是 agent 运行中排队的方向修正：当前 assistant turn 及其已发出的工具完成后，在下一 turn 优先注入，例如“先不要改源码，只分析”。Follow-up 只在 agent 本来要结束时注入，例如“完成后再写摘要”。Abort 是另一条控制路径，用于取消当前 run。Steering 不是 preflight permission gate，也不会倒流撤销已执行副作用。
+
+### Concept: Project trust 不是 sandbox
+
+**Q:** Project trust 阻止加载未信任 extension，是否意味着 `bash/read/edit` 已进入 sandbox？
+
+**User answer:** 先请求解释 sandbox，并正确选择受限容器更能控制损害；之后一度认为 trust “算” sandbox、OS 会拒绝访问项目外私人文件。通过“OS 是否知道 Pi 内部 trusted 状态”修正为不会拒绝，并最终填出：project trust 控制 extension，sandbox 控制文件与指令访问。
+
+**AI-expanded answer:** Project trust 是应用层 code/resource loading policy；sandbox 是 OS、container、VM 或 policy engine 强制的 runtime authority boundary，控制 filesystem、process、network 与 credentials。Pi 默认继承启动用户权限，trust flag 本身不会改变 OS 权限。挂载目录是 sandbox 明确开放的通道，因此项目变化可见，而未挂载的 SSH key 不可见。
+
+### Concept: 通用 runtime 与 coding product
+
+**Q:** Pi 为什么叫 coding agent？能否用于 general/business agent？
+
+**User answer:** 去掉 coding tools、换成业务工具后，“原理上从coding agent被改造为业务agent”。最初只列出 `read/bash/edit/write`；随后识别出还需要 AGENTS/Skills、JSONL sessions、compaction、Extensions 与交互端口。
+
+**AI-expanded answer:** `pi-agent-core` 的 loop 不理解代码，可用于 general agent。`pi-coding-agent` 是一个具体产品 harness：加入 filesystem/shell/edit tools、项目 context discovery、skills、durable sessions、compaction、extension lifecycle 与 TUI/JSON/RPC/SDK ports。业务场景可在 core 之上建立独立的 `customer-service-agent` harness，而不是把业务规则写死进通用 loop。
+
+**Q:** Pi 如何获得项目长期指导，退出后如何恢复会话？
+
+**User answer:** 填出 `AGENTS.md`、`CLAUDE.md`，起初把 lazy resource 误答为 `.pi/SYSTEM.md`，后来确认是 Skill；恢复机制先答“memory”，再具体化为 append-only JSONL session tree 和 `SessionManager`。
+
+**AI-expanded answer:** Context files 的内容进入 system prompt；Skill 通常先暴露 metadata，相关时再读取 `SKILL.md`；`.pi/SYSTEM.md` 属于 system-prompt customization。跨进程恢复依赖 SessionManager 管理的 append-only session tree，而不是一个抽象的“memory 模块”或默认向量库。
+
+### Concept: `pi-ai`、`pi-agent-core`、`pi-coding-agent`、`pi-tui`
+
+**Q:** 四个 package 分别负责什么？自己设计 agent 时是否都必须有？
+
+**User answer:** Provider 差异先后误答为 `pi-agent-core`、`pi-coding-agent`，最终定位到 `pi-ai`；tool loop 是 `pi-agent-core`；coding harness 是 `pi-coding-agent`；terminal rendering 是 `pi-tui`。对于自己的 agent，最终总结：“看情况，具体情况具体分析；但是原则是让每个组件的边界清晰。”
+
+**AI-expanded answer:** `pi-ai` 统一 model/provider I/O；`pi-agent-core` 持有 stateful tool loop 与 events；`pi-coding-agent` 组装 coding-specific product services；`pi-tui` 提供 terminal components/rendering。架构职责需要存在，但未必使用这四个具体包，也未必拆成四个发布单元。
+
+**Q:** 后台客服 agent 应如何映射这些层？业务逻辑是否应写进 core？
+
+**User answer:** 最初提出保留 `pi-ai`、`pi-agent-core`，省略 coding-agent，把 extension 写死进 core，并用 Web UI 替换 TUI；随后认识到这会强耦合，改为单独的 `customer-service-agent`，core 只负责 loop。最终映射为 `pi-ai → pi-agent-core → customer-service-agent → Web GUI`。
+
+**AI-expanded answer:** 这是正确的 responsibility mapping。若永远只有单 provider，可以不用 `pi-ai` 具体包，但仍值得用薄 adapter 隔离 provider types/events。业务 tools、prompt、session policy 与 permissions 属于 product harness，Web/HTTP 属于交互端口。
+
+### Concept: 为什么 tool-call representation 位于 `pi-ai`
+
+**Q:** 为什么 tool call 也放在 `pi-ai`？它是不是 provider 提供的类似 `tool: ...` 的格式？
+
+**User answer:** 未回答；这是退出 Socratic 模式后的主动追问。
+
+**AI-expanded answer:** Tool call 是 model API 的结构化 I/O，不是普通文本。OpenAI、Anthropic、Google 各有自己的 tool/function-call request、streaming 与 response shape；`pi-ai` 把它们统一为 `{ type: "toolCall", id, name, arguments }`。`pi-agent-core` 消费这个统一 intention，负责注册表查找、验证、preflight、execution 与 `ToolResultMessage`。可记为：`pi-ai` 规范化“模型想调用什么”，core 保证“系统怎样执行”。
+
+### Concept: `AGENTS.md` 如何进入模型上下文
+
+**Q:** `pi-coding-agent` 加载 `AGENTS.md`，是写进 system prompt 吗？
+
+**User answer:** 未回答；这是退出 Socratic 模式后的主动追问。
+
+**AI-expanded answer:** 是。`DefaultResourceLoader` 从 global、cwd 与父目录发现 context files，`buildSystemPrompt()` 把完整内容包装在 `<project_context>` / `<project_instructions path="...">` 中。它不同于 Skill 的 metadata-first lazy loading，也不同于 `.pi/SYSTEM.md` 的基础 prompt customization；Extensions 仍可在 `before_agent_start` 修改最终 system prompt。
+
+### Concept: Stateful、message conversion 与 event stream 的记忆锚点
+
+**Q:** 如何快速记住 stateful tool loop、消息转换和事件流？
+
+**User answer:** 未回答；这是退出 Socratic 模式后的强化请求。
+
+**AI-expanded answer:** `State` 回答“执行机现在在哪里”，例如 model、tools、messages、streaming 与 pending calls；`Message` 回答“模型这次看到什么”，经过 context transform、LLM conversion 与 provider serialization；`Event` 回答“runtime 实际发生了什么”，供 UI、persistence、hooks 与 tracing 消费。Live state 不自动等于 durable session。
+
+### Concept: Extensions 与四种产品端口
+
+**Q:** `pi-coding-agent` 的 Extensions、TUI、JSON、RPC、SDK 分别是什么？
+
+**User answer:** 未回答；这是退出 Socratic 模式后的强化请求。
+
+**AI-expanded answer:** Extension 是可执行 TypeScript plugin，可注册 tools、commands、shortcuts、flags、providers、event handlers 与 UI；它不是 Skill，也不是 sandbox。TUI 是人在 terminal 中交互的 frontend。JSON mode 单向把 events 作为 JSONL 输出，适合 pipeline/log。RPC 通过 stdin/stdout JSONL 双向发送 commands、responses 与 events，适合非 Node host 或 IDE 子进程集成。SDK 让 Node/TypeScript 在同进程直接创建 `AgentSession`、subscribe 与 prompt，省去 subprocess 和 serialization。
+
+**Q:** 这四种方式之间最简洁的区别是什么？
+
+**User answer:** 未回答。
+
+**AI-expanded answer:** TUI 是人类终端入口；JSON 是机器可读的单向观察口；RPC 是跨进程双向控制口；SDK 是同进程编程接口。它们共享同一个 AgentSession/runtime，不是四套不同 agent。
+
+</div>
+
+<hr class="socratic-provenance">
+
+Generated by [PinkR1ver/socratic-learning](https://github.com/PinkR1ver/socratic-learning).
+
+</details>

@@ -9,8 +9,9 @@
 - Prefer placing new notes under the closest topic folder and linking them from
   the nearest MOC.
 - Keep `content/atlas.md` as the high-level map, not a dump of every note.
-- User preference: after running a Quartz build or local preview for note work,
-  always provide the exact local link address for the changed note/page.
+- User preference: do not start a preview server or provide a preview URL by
+  default after note work. Only preview when the user explicitly asks; after a
+  preview is started, provide the exact link for the changed note/page.
 - 2026-07-13: The user reviews and may directly revise each working version of a
   note. Before making follow-up edits, always reread the current file and inspect
   its diff; treat the user's latest wording and structure as authoritative, and
@@ -18,10 +19,14 @@
 - 2026-06-30: When the user asks for review/preview commands, provide
   `npx quartz preview --host 0.0.0.0 --port 8082`; do not give
   deploy/commit/push instructions unless explicitly requested.
-- 2026-05-27: After writing or editing notes, provide a preview URL for the
-  changed page before committing or pushing. Wait until the user explicitly says
-  to commit/push; never commit or push note changes just because validation
-  passed.
+- 2026-07-17: A successful build does not imply that a preview should be started.
+  Preview only on explicit request. Wait until the user explicitly says to
+  commit/push; never commit or push note changes just because validation passed.
+- 2026-07-17: Socratic session blocks render each Concept and all of its Q →
+  user answer → AI-expanded answer sequences inside one connected card. Concept
+  headers use Catppuccin mauve, distinct from blue questions, neutral user
+  answers, and teal AI-expanded answers. Inline code uses a theme-aware blue
+  chip rather than the former deep-red accent.
 - User preference: when adding references to notes, use inline citation links in
   the body that jump to a lightweight bibliography entry. Prefer numeric
   citations such as `[1]`, `[2]`, `[3]` in the body.

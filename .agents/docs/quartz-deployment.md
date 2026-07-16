@@ -124,12 +124,12 @@ Build defaults:
 - Source directory: `content`
 - Output directory: `public`
 - Local preview: `http://localhost:8080/` unless another port is provided
-- After every successful local build or preview setup, report the exact local
-  link address the user can open. For note edits, include the specific note URL,
-  not only the site root.
-- For note work, treat preview as a review gate: provide the preview URL first,
-  then wait for the user to explicitly say to commit and push. Do not commit or
-  push merely because the build passed.
+- A successful build alone does not require starting a preview or reporting a
+  preview URL. Only start preview when the user explicitly asks.
+- After a requested preview is running, report the exact local link the user can
+  open. For note edits, include the specific note URL, not only the site root.
+- Do not commit or push merely because the build or requested preview passed;
+  wait for explicit commit/push approval.
 
 Use `npx quartz build --help` for all options. Important flags:
 
@@ -211,9 +211,9 @@ Operational notes:
 - The current branch is expected to be `v4` for deployment.
 - A successful push to `v4` should rebuild the site and publish via GitHub Pages.
 - Because GitHub Pages deployment is push-triggered, do not use production
-  deployment as the first review step. Give the user a local preview URL, or an
-  external deploy-preview URL if one is explicitly available, and wait for
-  commit/push approval.
+  deployment as the first review step. If the user explicitly requests preview,
+  give them a local preview URL or an explicitly available external
+  deploy-preview URL. Always wait for commit/push approval.
 - The repository still contains some upstream Quartz workflows that only run for
   `jackyzha0/quartz`; do not rely on those for this personal site.
 
