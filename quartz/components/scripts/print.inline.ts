@@ -11,6 +11,7 @@ document.addEventListener("nav", () => {
 
     // Gather note content
     const article = document.querySelector("article.popover-hint")
+    const isReport = article?.classList.contains("report-page") ?? false
     const titleEl = document.querySelector(".article-title")
     const metaEl = document.querySelector(".content-meta")
     const title = titleEl?.textContent?.trim() ?? document.title
@@ -80,6 +81,19 @@ document.addEventListener("nav", () => {
     print-color-adjust: exact;
   }
 
+  body.report-print {
+    --report-blue: #2c5f75;
+    --report-blue-muted: #6e7c83;
+    --report-border: #b9cbd2;
+    --report-table-head: #ddecef;
+    --report-table-alt: #f4f8f9;
+    --report-ink: #363f43;
+    max-width: 760px;
+    color: var(--report-ink);
+    font-size: 11pt;
+    line-height: 1.72;
+  }
+
   /* ---- header ---- */
   .print-header {
     border-bottom: 2px solid var(--border);
@@ -107,6 +121,18 @@ document.addEventListener("nav", () => {
     word-break: break-all;
   }
 
+  .report-print .print-header {
+    border-bottom-color: var(--report-border);
+  }
+  .report-print .print-header h1 {
+    color: var(--report-blue);
+    font-weight: 500;
+  }
+  .report-print .print-header .meta,
+  .report-print .print-header .url {
+    color: var(--report-blue-muted);
+  }
+
   /* ---- content ---- */
   h2, h3, h4, h5, h6 {
     font-family: var(--sans);
@@ -119,6 +145,21 @@ document.addEventListener("nav", () => {
   h2 { font-size: 15pt; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
   h3 { font-size: 13pt; }
   h4 { font-size: 11.5pt; }
+
+  .report-print h2,
+  .report-print h3,
+  .report-print h4 {
+    color: var(--report-blue);
+    font-family: Georgia, "Noto Serif SC", "Songti SC", "STSong", serif;
+    font-weight: 500;
+  }
+  .report-print h2 {
+    border-bottom-color: var(--report-border);
+  }
+  .report-print strong {
+    color: var(--report-blue);
+    font-weight: 650;
+  }
 
   p { margin: 0.7em 0; }
   a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
@@ -145,6 +186,12 @@ document.addEventListener("nav", () => {
     padding: 0.4em 1em;
     color: var(--muted);
     font-style: italic;
+  }
+  .report-print blockquote {
+    border-left-color: var(--report-blue);
+    background: #f5f8f9;
+    color: #44545a;
+    font-style: normal;
   }
 
   /* code */
@@ -230,6 +277,27 @@ document.addEventListener("nav", () => {
     font-weight: 600;
     font-family: var(--sans);
   }
+  .report-print table {
+    font-size: 8.5pt;
+    line-height: 1.45;
+  }
+  .report-print thead,
+  .report-print th {
+    background: var(--report-table-head);
+  }
+  .report-print tbody tr:nth-child(even) {
+    background: var(--report-table-alt);
+  }
+  .report-print th,
+  .report-print td {
+    border-color: var(--report-border);
+    padding: 7px 9px;
+    vertical-align: top;
+  }
+  .report-print th {
+    color: var(--report-blue);
+    font-weight: 650;
+  }
 
   /* callouts */
   .callout {
@@ -240,6 +308,11 @@ document.addEventListener("nav", () => {
   }
   .callout-title { font-weight: 600; font-family: var(--sans); }
   .callout-content p { margin: 0.3em 0; }
+  .report-print .callout {
+    border: 1px solid var(--report-border);
+    border-radius: 0;
+    background: #f7fafb;
+  }
 
   /* images */
   img { max-width: 100%; height: auto; border-radius: 4px; }
@@ -252,7 +325,7 @@ document.addEventListener("nav", () => {
   @media print {
     @page {
       size: A4;
-      margin: 12mm;
+      margin: ${isReport ? "16mm 17mm 18mm" : "12mm"};
     }
     body {
       max-width: none;
@@ -290,11 +363,15 @@ document.addEventListener("nav", () => {
       max-height: 220mm !important;
     }
     th { background: #f0f0f0 !important; }
+    .report-print th { background: var(--report-table-head) !important; }
+    .report-print tbody tr:nth-child(even) {
+      background: var(--report-table-alt) !important;
+    }
     a { color: inherit; }
   }
 </style>
 </head>
-<body>
+<body${isReport ? ' class="report-print"' : ""}>
   <div class="print-header">
     <h1>${escapeHTML(title)}</h1>
     ${meta ? `<div class="meta">${escapeHTML(meta)}</div>` : ""}

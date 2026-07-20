@@ -81,6 +81,12 @@ site.
 ## Opt-in Note Exports
 
 - `print: true` in note frontmatter shows the existing print action.
+- `report: true` keeps the normal Quartz reading layout on screen, automatically
+  shows the print action, and applies the A4 report typography, tables, figures,
+  hidden sidebars, and page-break rules only to the generated print document or
+  direct-print fallback. Report pages do not also need `print: true`. The print
+  styles live in `quartz/styles/report.scss` and the print-window rendering is
+  handled by `quartz/components/scripts/print.inline.ts`.
 - `slides: true` shows a Slides action that converts the rendered note HTML into
   a 16:9 presentation. The title becomes a cover slide; Markdown horizontal
   rules and H1/H2 headings start content sections. Sections that exceed one

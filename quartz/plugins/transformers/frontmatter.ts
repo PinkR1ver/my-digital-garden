@@ -92,6 +92,7 @@ declare module "vfile" {
         draft: boolean
         print: boolean
         slides: boolean
+        report: boolean
         enableToc: string
         cssclasses: string[]
       }>

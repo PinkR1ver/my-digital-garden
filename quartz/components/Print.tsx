@@ -34,8 +34,8 @@ export default ((opts?: Partial<PrintOptions>) => {
   const options: PrintOptions = { ...defaultOptions, ...opts }
 
   const Print: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
-    // Only render when the note explicitly opts in with `print: true` in frontmatter
-    if (!fileData.frontmatter?.print) {
+    // Reports are print-ready by definition; normal notes still opt in explicitly.
+    if (!fileData.frontmatter?.print && fileData.frontmatter?.report !== true) {
       return null
     }
 

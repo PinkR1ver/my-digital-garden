@@ -8,7 +8,8 @@ const Content: QuartzComponent = (props: QuartzComponentProps) => {
   const { fileData, tree } = props
   const content = htmlToJsx(fileData.filePath!, tree)
   const classes: string[] = fileData.frontmatter?.cssclasses ?? []
-  const classString = ["popover-hint", ...classes].join(" ")
+  const reportClass = fileData.frontmatter?.report === true ? ["report-page"] : []
+  const classString = ["popover-hint", ...reportClass, ...classes].join(" ")
   const isRecentWritingPage = fileData.slug === "recent-writing"
 
   return (

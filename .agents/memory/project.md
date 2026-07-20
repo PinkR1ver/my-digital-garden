@@ -32,6 +32,42 @@
   fullscreen, keyboard navigation, and print/save-to-PDF. Mermaid definitions
   are retained and rerendered with a light theme for Slides; fit calculations
   subtract content padding so diagrams do not overlap the footer.
+- 2026-07-20: Notes with `report: true` retain the ordinary Quartz reading
+  layout on screen. The flag automatically exposes the Print action; only the
+  generated print document (and direct-print fallback) receives the A4 report
+  typography, tables, figures, hidden sidebars, and page-break rules. Report
+  markers remain on `#quartz-root` and the article for print targeting. The
+  implementation is centered in `quartz/components/renderPage.tsx`,
+  `quartz/components/pages/Content.tsx`, `quartz/components/Print.tsx`,
+  `quartz/components/scripts/print.inline.ts`, and `quartz/styles/report.scss`.
+- 2026-07-20: `content/report/vestibular_home_business_plan.md` names the two
+  programs `Pipeline 1` (CV-based home nystagmus monitoring) and `Pipeline 2`
+  (home vestibular rehabilitation), matching the IncuBio deck terminology.
+  Pipeline 1 may show the existing analysis-result product screenshot and state
+  approximately 4-degree eye-angle measurement precision, conservatively based
+  on the recorded 3.25-degree repeatability dispersion. Keep clear that this is
+  not diagnostic sensitivity, specificity, or clinical accuracy. Do not include
+  or cite the former public reference 18 / pHINTS calibration note in this plan.
+  Do not reintroduce iPhone framing or raw experiment details. The report intentionally
+  omits technical-asset, patent, and IP-planning sections. The expanded market
+  model preserves legacy BP assumptions but labels hospital volumes, pricing
+  anchors, channel interviews, revenue sharing, and national GMV ranges as
+  hypotheses pending real single-center validation. Pipeline 2 section 7.4 is
+  framed as a modular device concept rather than completed progress: a combined
+  camera-and-projector base station supports independent training for mild cases;
+  head/body IMUs and an optional balance board add feedback for moderate cases;
+  safety rails, protection, and supervision support severe or high-fall-risk
+  cases. The configuration should change dynamically as the patient improves or
+  deteriorates. Keep both the Xiaohei modular explanation figure and the original
+  all-in-one rehabilitation-device concept in Pipeline 2; the original concept is
+  the hardware-form source and should not be discarded. Pipeline 1 includes the
+  magnetic clip/shade mounting concept as its acquisition-end form. The previous
+  registration and clinical-validation section was removed at the user's request,
+  with all following chapters renumbered. The market material is now consolidated
+  into only two chapters: section 8 covers market size (demand, institutional
+  capacity, market definitions, single-center model, and revenue scenarios), and
+  section 9 covers the current competitive landscape and market gap (including a
+  clearly labeled heuristic six-dimensional radar comparison and the entry path).
 - 2026-05-01: User requested deletion of all Copilot-related content. Do not
   recreate `content/copilot/` or a Copilot MOC unless explicitly asked.
 - Treat `content/` as an Obsidian-style vault: preserve wikilinks, MOCs,

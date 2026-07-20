@@ -204,11 +204,12 @@ export function renderPage(
   )
 
   const lang = componentData.frontmatter?.lang ?? cfg.locale?.split("-")[0] ?? "en"
+  const isReport = componentData.fileData.frontmatter?.report === true
   const doc = (
     <html lang={lang}>
       <Head {...componentData} />
       <body data-slug={slug}>
-        <div id="quartz-root" class="page">
+        <div id="quartz-root" class={isReport ? "page report-layout" : "page"}>
           <Body {...componentData}>
             {LeftComponent}
             <div class="center">
