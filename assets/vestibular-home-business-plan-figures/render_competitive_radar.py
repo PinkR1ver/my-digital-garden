@@ -19,6 +19,7 @@ from visual_qa import audit_layout, print_report, render_preview  # noqa: E402
 
 
 HERE = Path(__file__).resolve().parent
+TMP_DIR = ROOT / ".tmp/figures/vestibular-home-business-plan"
 CSV_PATH = HERE / "competitive-positioning-six-dimensions.csv"
 OUT_BASE = HERE / "competitive-positioning-six-dimensions"
 
@@ -46,6 +47,7 @@ def load_rows() -> list[dict[str, str]]:
 
 
 def main() -> None:
+    TMP_DIR.mkdir(parents=True, exist_ok=True)
     setup_style(journal="general", lang="zh")
     plt.rcParams.update(
         {
@@ -138,17 +140,21 @@ def main() -> None:
         fontsize=7.3,
         color="#64748B",
     )
-    preview = HERE / "_competitive-positioning-six-dimensions-preview.png"
+    preview = TMP_DIR / "competitive-positioning-six-dimensions-preview.png"
     render_preview(fig, str(preview), dpi=150)
     print_report(audit_layout(fig))
 
     fig.savefig(OUT_BASE.with_suffix(".png"), dpi=320, bbox_inches="tight", facecolor="white")
     fig.savefig(OUT_BASE.with_suffix(".svg"), bbox_inches="tight", facecolor="white")
-    fig.savefig(OUT_BASE.with_suffix(".pdf"), bbox_inches="tight", facecolor="white")
+    fig.savefig(
+        TMP_DIR / "competitive-positioning-six-dimensions.pdf",
+        bbox_inches="tight",
+        facecolor="white",
+    )
     plt.close(fig)
 
     with Image.open(OUT_BASE.with_suffix(".png")) as image:
-        image.convert("L").save(HERE / "competitive-positioning-six-dimensions-grayscale.png")
+        image.convert("L").save(TMP_DIR / "competitive-positioning-six-dimensions-grayscale.png")
 
 
 if __name__ == "__main__":
