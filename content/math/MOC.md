@@ -48,6 +48,7 @@ date: 2023-12-03
 ## Game Theory
 
 * [Counterfactual Regret Minimization](math/statistic/game_theory/counterfactual_regret_minimization.md)
+* [复利下注下的凯利公式：如何推导最优下注尺度](math/statistic/game_theory/kelly_criterion.md)
 
 # Discrete mathematics
 
