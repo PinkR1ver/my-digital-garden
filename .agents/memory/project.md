@@ -25,13 +25,42 @@
   `quartz/styles/base.scss`. Keep `.inline.ts` files as raw browser scripts;
   do not use `export default` inside them.
 - 2026-07-15: Notes can opt into a browser-rendered 16:9 presentation with
-  `slides: true`. The Slides action uses the already-rendered article HTML,
-  creates sections from horizontal rules and H1/H2 headings, then automatically
-  paginates overlong sections by rendered height. It splits lists between items,
-  tables between rows, and highlighted code between lines, and supports
+  `slides: true`. Its page action is labeled Print, while internally using the
+  slides renderer instead of the standard document print renderer. It uses the
+  already-rendered article HTML, creates sections from horizontal rules and
+  H1/H2 headings, then automatically paginates overlong sections by rendered
+  height. It splits lists between items, tables between rows, and highlighted
+  code between lines, and supports
   fullscreen, keyboard navigation, and print/save-to-PDF. Mermaid definitions
   are retained and rerendered with a light theme for Slides; fit calculations
   subtract content padding so diagrams do not overlap the footer.
+- 2026-07-22: The `frontend-slides` skill from
+  `zarazhangrui/frontend-slides` is installed project-locally at
+  `.agents/skills/frontend-slides/`. The Quartz Slides renderer now adopts its
+  fixed-stage contract: slides are authored at 1920×1080 and the whole stage is
+  uniformly transformed to fit each viewport, including phones. Slide switching
+  uses `.active` / `.visible`; touch, wheel, reveal motion, reduced-motion, and
+  one-slide-per-page printing are supported. Keep the existing semantic
+  auto-pagination and Mermaid preparation when applying this skill in future.
+- 2026-07-22: Slides Mermaid labels use SVG `foreignObject` HTML and must not
+  inherit a zero line height from the diagram container. Keep `code.mermaid` at
+  normal line height and explicitly reset `foreignObject` `div`, `span`, and `p`
+  to `line-height: 1.2`; also remove paragraph margins there. A zero inherited
+  line height collapses the label boxes and makes Chinese and multiline node
+  text appear clipped or overlapped.
+- 2026-07-22: The Slides/Print toolbar exposes 48 live styles: 14 Core Presets
+  (the 12 official `frontend-slides` presets plus Editorial and Midnight) and
+  all 34 styles from its Bold Template Pack. The expanded presets vary
+  typography, composition, surface, and signature decoration rather than only
+  recoloring one template. Keep the native selector grouped with `<optgroup>`
+  and derive the allowed-style set from its options to prevent the catalog from
+  drifting. Themes retain the same fixed-stage geometry; switching refits slide
+  content after fonts load and does not repaginate the note. The renderer
+  persists the selection under `quartz-slide-style` in local storage, and
+  Print/PDF uses the active theme.
+  Keep Mermaid on a light inset surface in dark themes, and explicitly isolate
+  slide paragraph/list/table colors from the main-site stylesheet so dark-theme
+  body text remains readable.
 - 2026-07-20: Notes with `report: true` retain the ordinary Quartz reading
   layout on screen. The flag automatically exposes the Print action; only the
   generated print document (and direct-print fallback) receives the A4 report

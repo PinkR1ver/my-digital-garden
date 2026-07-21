@@ -87,8 +87,9 @@ site.
   direct-print fallback. Report pages do not also need `print: true`. The print
   styles live in `quartz/styles/report.scss` and the print-window rendering is
   handled by `quartz/components/scripts/print.inline.ts`.
-- `slides: true` shows a Slides action that converts the rendered note HTML into
-  a 16:9 presentation. The title becomes a cover slide; Markdown horizontal
+- `slides: true` shows a Print action that converts the rendered note HTML into
+  a printable 16:9 presentation rather than the standard document layout. The
+  title becomes a cover slide; Markdown horizontal
   rules and H1/H2 headings start content sections. Sections that exceed one
   slide are automatically paginated using their rendered height; continuation
   slides repeat the section heading, and lists, tables, and code are split only
@@ -96,7 +97,18 @@ site.
   navigation, fullscreen presentation, and browser printing/saving as PDF with
   one slide per page. Mermaid source is retained before normal page rendering so
   Slides can rerender diagrams for its light background; pagination and scaling
-  use the padding-adjusted content box to keep diagrams above the footer.
+  use the padding-adjusted content box to keep diagrams above the footer. The
+  renderer follows the project-local `frontend-slides` skill: every slide is
+  authored on a fixed 1920×1080 stage, the stage scales uniformly to fit desktop
+  and phone viewports without reflowing slide content, and visibility is managed
+  with `.active` / `.visible` rather than `display: none`. Touch swipe, mouse
+  wheel, keyboard navigation, reveal motion, and reduced-motion preferences are
+  supported. The Slides toolbar includes 48 live styles grouped as 14 Core
+  Presets and the complete 34-style `frontend-slides` Bold Template Pack. Each
+  option has its own typography, palette, surface treatment, and signature
+  decoration while retaining the fixed-stage geometry. The selected theme is
+  persisted in browser local storage and is used for presentation and
+  print/PDF output.
 - The implementation lives in `quartz/components/Slides.tsx` and
   `quartz/components/scripts/slides.inline.ts`, and is registered in
   `quartz.layout.ts`.

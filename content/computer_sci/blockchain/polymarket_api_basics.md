@@ -6,6 +6,7 @@ tags:
   - polymarket
   - api
   - prediction-market
+slides: true
 ---
 
 ## Overview
