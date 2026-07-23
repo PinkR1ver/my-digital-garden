@@ -43,6 +43,7 @@ date: 2024-01-17
 ## Evaluation
 
 - [主流 AI Benchmark 概览](computer_sci/llm/evaluation/ai_benchmark_overview.md)
+- [Role-Playing Benchmark：模型是在模仿角色，还是成为角色？](computer_sci/llm/evaluation/role_playing_benchmarks.md)
 - [Tasks to evaluate BERT - Maybe can be deployed in other LM](computer_sci/llm/evaluation/some_task.md)
 
 ## Agent and Appendix
