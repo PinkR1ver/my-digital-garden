@@ -30,6 +30,13 @@
 - User preference: when adding references to notes, use inline citation links in
   the body that jump to a lightweight bibliography entry. Prefer numeric
   citations such as `[1]`, `[2]`, `[3]` in the body.
+- 2026-07-23: Research notes should be written as durable knowledge objects, not
+  as polished chat responses transplanted into Markdown. Avoid response-shaped
+  structures such as "先说结论", exhaustive FAQ-style coverage, "适合/不适合",
+  recommendations, and a closed final verdict unless the topic genuinely calls
+  for them. Organize around the concept, mechanism, evidence, relationships,
+  tensions, and open questions; write for future rereading and extension rather
+  than for completing the current conversational turn.
 - 2026-04-30: Use Catppuccin Latte for light mode and Catppuccin Frappe for dark
   mode. Fonts match Jacky Zhao's stack: DM Serif Display headings, Bricolage
   Grotesque body, JetBrains Mono code.
