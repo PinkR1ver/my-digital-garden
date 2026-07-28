@@ -61,6 +61,12 @@
   Keep Mermaid on a light inset surface in dark themes, and explicitly isolate
   slide paragraph/list/table colors from the main-site stylesheet so dark-theme
   body text remains readable.
+- 2026-07-26: The `lieflat-charts` skill from
+  `larashero3-dotcom/lieflat-charts` is installed project-locally at
+  `.agents/skills/lieflat-charts/`, pinned to audited commit `e5b369d`. It is
+  suitable for personal/noncommercial use. See
+  `.agents/memory/lieflat-charts-audit.md` for CDN, license, and untrusted-label
+  handling constraints.
 - 2026-07-20: Notes with `report: true` retain the ordinary Quartz reading
   layout on screen. The flag automatically exposes the Print action; only the
   generated print document (and direct-print fallback) receives the A4 report
