@@ -31,6 +31,7 @@ date: 2026-04-30
 ## Funding and Incubation
 
 - [HKSTP Incu-Bio 申请流程与材料准备](research_career/HKSTP-IncuBio-application-process.md)
+- [从杭州 OPC 到 HKSTP IncuBio — 可行性评估与实操路径](research_career/从杭州OPC到HKSTP-IncuBio.md)
 
 ## Plans and Defense
 
