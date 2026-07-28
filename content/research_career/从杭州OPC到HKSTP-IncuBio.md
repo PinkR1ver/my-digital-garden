@@ -316,17 +316,96 @@ tags:
 
 ---
 
-## 十、信息来源可靠性说明
+## 十、信源
 
-| 来源类别 | 内容 | 可靠性 |
-|----------|------|:---:|
-| 官方文件 | 杭市监〔2026〕43号 PDF、新《公司法》条文、HKSTP Programme Guide V9、港交所招股书、立法会文件 | **高** |
-| 政府新闻稿 | HK-浙江合作机制、HIIC 成立、IncuBio 2.0 升级、河套政策 | **高** |
-| 一手访谈 | i-RNA 创始人申请经验（Yau & Wong 律所） | **中高** |
-| 实操经验 | 知乎/小红书/论坛的 OPC 注册和银行开户经历 | **中**（个体经验，可能有偏） |
-| Agent 交叉审计 | 四个独立 agent 报告的互相验证 | **中**（逻辑推理，非一手验证） |
+### 政策与法律文件
 
-> **关键免责**：本文引用的所有政策信息截至 **2026 年 7 月 29 日**。杭州 OPC 政策和 HKSTP IncuBio 条款均可能在 2026 年下半年调整。建议在启动任何实质性步骤（公司注册、资金投入）前，向相关机构获取最新书面确认。本文不构成法律、税务或投资建议。
+| 来源 | 链接 |
+|------|------|
+| 杭市监〔2026〕43号 — 支持一人公司OPC创新创业发展若干举措 | [杭州市政府公报 PDF](https://zfgb.hangzhou.gov.cn/upload/default/bigfile/2026/04/15/20260415_ef3cc7422f3a5f0c1043eb59c87d6026.pdf) |
+| 上城区 OPC 专项政策发布会（2026.3.3） | [人民网浙江](http://zj.people.com.cn/BIG5/n2/2026/0303/c186327-41513851.html) / [新华网](http://zj.news.cn/20260624/1bbaaf3bb6be4707b51d6244e07317fa/c.html) |
+| 新《公司法》（2024.7.1 施行）全文 | [司法部](https://www.moj.gov.cn/pub/sfbgw/gwxw/xwyw/202407/t20240701_501534.html) |
+| Morgan Lewis — 新《公司法》外资解读 | [Morgan Lewis PDF](https://www.morganlewis.com/-/media/files/publication/report/understanding-chinas-new-company-law-what-foreign-investors-need-to-know.pdf) |
+| 增值税免税门槛（月≤10万），2026年起 | [财政部](https://www.mof.gov.cn/jrttts/202602/t20260203_3983175.htm) |
+| 小型微利企业所得税优惠（实际 5%） | [国家税务总局](https://www.chinatax.gov.cn/chinatax/n810356/n3010387/c5211219/content.html) |
+| 杭州 HQ 经济政策 2.0 | [杭州市政府](https://www.hangzhou.gov.cn/art/2024/7/3/art_1229063385_1844456.html) |
+| 杭州日报 — 上城区 OPC 专题报道 | [杭州日报](https://mdaily.hangzhou.com.cn/mrsb/2026/03/04/article_detail_3_20260304A043.html) |
+| eZhejiang — OPC 政策英文版 | [eZhejiang](https://www.ezhejiang.gov.cn/2026-03/17/c_1168994.htm) |
+| 杭州日报 — 杭市监43号文落地报道 | [杭州新闻](https://hznews.hangzhou.com.cn/chengshi/content/2026-04/17/content_9207698.htm) |
+| 36Kr — 上城区 OPC 政策解读 | [36Kr](https://36kr.com/p/3775928909251080) |
+| Yangtzeer — 杭州 OPC 创业潮英文报道 | [Yangtzeer](https://yangtzeer.com/news/policy/hangzhou-mayor-pushes-solo-startup-boom/) |
+| China Briefing — 2026 增值税免税门槛更新 | [China Briefing](https://www.china-briefing.com/news/chinas-updated-vat-threshold-2026-27-implications-for-fies/) |
+
+### HKSTP IncuBio 官方资料
+
+| 来源 | 链接 |
+|------|------|
+| IncuBio 项目页（英文） | [HKSTP](https://www.hkstp.org/en/programmes/incubation/incu-bio) |
+| IncuBio 项目页（中文） | [HKSTP 中文](https://www.hkstp.org/zh-cn/programmes/incubation/incu-bio) |
+| IncuBio Programme Guide V9（2021.11，官网仍挂载） | [HKSTP PDF](https://www.hkstp.org/-/media/corpsite/assets/programmes/incubation/incu-bio/hkstp_incubio_programme_guide20211126__v9.pdf) |
+| 培育计划资格条件（V12） | [HKSTP PDF](https://www.hkstp.org/-/media/corpsite/assets/programmes/incubation/eligibility_criteria_ipg_v12.pdf) |
+| 通用培育计划指南 V13（2026.3） | [HKSTP PDF](https://www.hkstp.org/-/media/corpsite/assets/programmes/incubation/incu/incubation-programme-guide_v13_clean_26mar2026_released.pdf) |
+| IncuBio 2.0 升级公告（2025.10.9） | [HKSTP News](https://www.hkstp.org/en/park-life/news-and-events/news/hkstp-launches-upgraded-incubio-2) |
+| 2024 年毕业企业新闻 | [HKSTP News](https://www.hkstp.org/en/park-life/news-and-events/news/hkstp-congratulates-recordbreaking-641-graduates-comprehensive-support-at-every-stage-fuels-startups) |
+| SPH（上海医药）联合孵化 | [HKSTP News](https://www.hkstp.org/en/park-life/news-and-events/news/hkstp-sph-and-biopharma-evolution-colaunch-biomedical-technology-coincubation-programme) |
+| GBA 信息总览 | [HKSTP](https://www.hkstp.org/en/discover/why-gba) |
+| 香港科学园深圳分园 | [HKSTP](https://www.hkstp.org/en/discover/sites/hong-kong-science-park-shenzhen-branch) |
+| SME Link HK — IncuBio 摘要 | [SME Link](https://www.smelink.gov.hk/en/web/sme-portal/w/hkstp-incu-bio-programme.html) |
+| 河套合作区 — 立法会文件（2026.4） | [立法会 PDF](https://www.legco.gov.hk/yr2026/english/panels/ci/papers/ci20260421cb2-480-3-e.pdf) |
+
+### 跨境合作与中港桥梁
+
+| 来源 | 链接 |
+|------|------|
+| HK-浙江合作机制签署（2024.5） | [Hong Kong Business](https://hongkongbusiness.hk/economy/news/hk-zhejiang-strengthen-ties-new-cooperation-mechanism) |
+| 香港公司注册处 | [CR HK](https://www.cr.gov.hk) |
+| 高才通计划（TTPS） | [入境处](https://www.immd.gov.hk/eng/services/visas/TTPS.html) |
+| GBA 跨境数据流动标准合同 | [数字政策办公室](https://www.digitalpolicy.gov.hk/en/our_work/digital_infrastructure/mainland/gbacbdf/cross-boundary_data_flow/) |
+| 创新科技署 ITF | [ITC HK](https://innovation.gov.hk) |
+| 阿里巴巴创业者基金 GBA | [AEF](https://www.ent-fund.org/en/investment/hk) |
+| OASES — 引进重点企业办公室 | [HK Engage](https://www.hkengage.gov.hk) |
+| 税务局 — 中港税收协定 | [IRD HK](https://www.ird.gov.hk) |
+| 知识产权署 | [IPD HK](https://www.ipd.gov.hk) |
+| 2026 财政预算案 | [Budget HK](https://www.budget.gov.hk/2026) |
+| InvestHK | [investhk.gov.hk](https://www.investhk.gov.hk) |
+| 浙江省电子税务局 | [etax.zhejiang.chinatax.gov.cn](https://etax.zhejiang.chinatax.gov.cn/) |
+| 国家企业信用信息公示系统 | [gsxt.gov.cn](http://www.gsxt.gov.cn) |
+
+### IncuBio 申请一手经验与案例
+
+| 来源 | 说明 |
+|------|------|
+| **i-RNA 创始人 Ruby Jing Zhao & Dr. Ting Ling 访谈**（2025-2026） | Yau & Wong 律师事务所深度访谈：从 2025.7 提交 → 2025.11 有条件录取 → 2026.3 最终批准 → 2026.6 入驻。四年里程碑计划是"最具挑战性的部分"；面试是"深思熟虑的对话"而非考试；主动与 IncuBio 团队沟通至关重要。 |
+| **高光制药 (HighTide, 2511.HK)** | 深圳创立（2011），2023.6 入驻科学园，2023.12 港交所 18A 上市。港交所招股书 + HKSTP 新闻稿。 |
+| **晶泰科技 (XtalPi)** | 深圳/河套起步的 AI 制药独角兽，2024.6 港交所上市。河套官方资料 + 港交所上市文件。 |
+| **英矽智能 (Insilico Medicine, 3696.HK)** | 河套深圳园区设 AI 自动化实验室，2025.12 港交所上市（HK$22.77 亿，2025 年生物医药 IPO 最大规模）。 |
+| **丹娜生物 (DanausGT)** | 母公司无锡，创始人王海峰博士（哈工大本→延世博士→哈佛博后→诺华→药明康德→创业），IncuBio 入驻企业。The Standard + HKSTP IncuBio 升级发布会。 |
+| **博安生物 (BrainAurora)** | 内地背景，认知障碍数字疗法，2025.1 港交所上市。HKSTP 新闻稿。 |
+| **Agilis Robotics** | 完成世界首例机器人辅助膀胱肿瘤整块切除；明确计划 2-3 年内利用 18A 章上市。China Daily HK（2025.7）。 |
+| **杭州创新孵化中心 (HIIC)** | 2024 年杭实集团在香港科学园设立，连接 200+ 项目、帮助 14 家浙江企业签署 MoU。InvestHK + HKSTP 联合新闻稿。 |
+| **杭州生物科技港交所 IPO** | Ted Medicine（2025.6，HK$4.11 亿）+ Diagens Biotechnology（2026.3，US$1.01 亿）。 |
+
+### 税务与公司注册实操
+
+| 来源 | 说明 |
+|------|------|
+| 浙江政务服务网 — "企业开办一件事" | 杭州 OPC 在线注册入口：[gswsdj.zjzwfw.gov.cn](https://gswsdj.zjzwfw.gov.cn/entrance.html) |
+| 浙里办 APP | 移动端注册 + 电子签名 + 电子营业执照 |
+| 知乎/小红书 — OPC 注册经验帖 | 多源交叉验证，已标注 `[经验]`。具体帖子因时效和算法推荐可能已变化，建议搜索"杭州一人公司注册""杭州 OPC 代理记账"获取最新一手经验。 |
+| 代理记账市场报价 | 杭州本地代理 2025-2026 年小规模纳税人月报价 ¥200-500，年度审计 ¥2,000-5,000。来源：多个财税服务比价平台交叉验证。 |
+
+### 可靠性与时效说明
+
+| 层级 | 内容 | 可靠性 |
+|------|------|:---:|
+| 官方一手文件 | 杭市监〔2026〕43号 PDF、新《公司法》条文、HKSTP Programme Guide、港交所招股书、立法会文件 | **高** |
+| 政府新闻稿与机构官网 | HK-浙江合作机制、HIIC 成立、IncuBio 2.0 升级、河套政策、税务局/入境处官网 | **高** |
+| 一手访谈与专业分析 | i-RNA 创始人 Yau & Wong 访谈、Morgan Lewis 公司法分析、China Briefing 税务解读 | **中高** |
+| 二手整合与行业媒体 | 36Kr、Yangtzeer、China Daily HK、Hong Kong Business | **中** |
+| 实操经验 | 知乎/小红书/论坛的 OPC 注册和银行开户经历 | **中低**（个体经验，有偏） |
+| 多 Agent 交叉审计 | 四个独立 agent 报告互相验证 | **中**（逻辑推理，非一手） |
+
+> **关键免责**：本文所引用的所有政策信息截至 **2026 年 7 月 29 日**。杭州 OPC 政策和 HKSTP IncuBio 条款均可能在 2026 年下半年调整。建议在启动任何实质性步骤（公司注册、资金投入）前，向相关机构获取最新书面确认。本文不构成法律、税务或投资建议。
 
 ---
 
