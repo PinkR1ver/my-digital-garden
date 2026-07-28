@@ -373,26 +373,26 @@ tags:
 
 ### IncuBio 申请一手经验与案例
 
-| 来源 | 说明 |
-|------|------|
-| **i-RNA 创始人 Ruby Jing Zhao & Dr. Ting Ling 访谈**（2025-2026） | Yau & Wong 律师事务所深度访谈：从 2025.7 提交 → 2025.11 有条件录取 → 2026.3 最终批准 → 2026.6 入驻。四年里程碑计划是"最具挑战性的部分"；面试是"深思熟虑的对话"而非考试；主动与 IncuBio 团队沟通至关重要。 |
-| **高光制药 (HighTide, 2511.HK)** | 深圳创立（2011），2023.6 入驻科学园，2023.12 港交所 18A 上市。港交所招股书 + HKSTP 新闻稿。 |
-| **晶泰科技 (XtalPi)** | 深圳/河套起步的 AI 制药独角兽，2024.6 港交所上市。河套官方资料 + 港交所上市文件。 |
-| **英矽智能 (Insilico Medicine, 3696.HK)** | 河套深圳园区设 AI 自动化实验室，2025.12 港交所上市（HK$22.77 亿，2025 年生物医药 IPO 最大规模）。 |
-| **丹娜生物 (DanausGT)** | 母公司无锡，创始人王海峰博士（哈工大本→延世博士→哈佛博后→诺华→药明康德→创业），IncuBio 入驻企业。The Standard + HKSTP IncuBio 升级发布会。 |
-| **博安生物 (BrainAurora)** | 内地背景，认知障碍数字疗法，2025.1 港交所上市。HKSTP 新闻稿。 |
-| **Agilis Robotics** | 完成世界首例机器人辅助膀胱肿瘤整块切除；明确计划 2-3 年内利用 18A 章上市。China Daily HK（2025.7）。 |
-| **杭州创新孵化中心 (HIIC)** | 2024 年杭实集团在香港科学园设立，连接 200+ 项目、帮助 14 家浙江企业签署 MoU。InvestHK + HKSTP 联合新闻稿。 |
-| **杭州生物科技港交所 IPO** | Ted Medicine（2025.6，HK$4.11 亿）+ Diagens Biotechnology（2026.3，US$1.01 亿）。 |
+| 来源 | 链接 | 说明 |
+|------|------|------|
+| **i-RNA 创始人 Ruby Jing Zhao & Dr. Ting Ling 访谈**（2026.7.22） | [Yau & Wong 律所](https://yauandwong.com/resources/hkstp-incubio-application-tips-featuring-i-rna) | 从 2025.7 提交 → 2025.11 有条件录取 → 2026.3 最终批准 → 2026.6 入驻。四年里程碑计划是"最具挑战性的部分"；面试是"深思熟虑的对话"而非考试；主动与 IncuBio 团队沟通至关重要。 |
+| **高光制药 (HighTide, 2511.HK)** | [HKSTP 新闻稿](https://www.hkstp.org/en/park-life/news-and-events/news/hkstp-applauds-hightide-therapeutics-ipo-and-first-clinical-trial-development-in-the-city-for-the) | 深圳创立（2011），2023.6 入驻科学园，2023.12 港交所 18A 章上市。 |
+| **晶泰科技 (XtalPi, 2228.HK)** | 港交所上市文件 ([HKEX](https://www.hkex.com.hk)) | 深圳/河套起步的 AI 制药独角兽，2024.6 港交所上市。亦以领投方身份出现在 HKSTP 生态新闻中。 |
+| **英矽智能 (Insilico Medicine, 3696.HK)** | [HKSTP 新闻稿](https://www.hkstp.org/en/park-life/news-and-events/news/hkstp-congratulates-park-company-insilico-medicine-on-successful-listing-on-hkex) | 河套深圳园区设 AI 自动化实验室，2025.12 港交所上市（HK$22.77 亿，2025 年生物医药 IPO 最大规模）。 |
+| **丹娜生物 (DanausGT)** | ⚠️ The Standard 原文链接已失效 (404)；见 [HKSTP IncuBio 2.0 升级公告](https://www.hkstp.org/en/park-life/news-and-events/news/hkstp-launches-upgraded-incubio-2) | 母公司无锡，创始人王海峰博士（哈工大本→延世博士→哈佛博后→诺华→药明康德→创业），IncuBio 入驻企业。 |
+| **博安生物 (BrainAurora)** | [HKSTP 新闻稿](https://www.hkstp.org/en/park-life/news-and-events/news/hkstp-celebrates-brainauroras-successful-hkex-listing-strengthening-hong-kongs-innovation-ecosystem) | 内地背景，认知障碍数字疗法，2025.1 港交所上市。 |
+| **Agilis Robotics** | [China Daily HK PDF](https://www.chinadailyhk.com/upload/main/pdf/2025/07/31/89185185f314cc038ee26267ec108b38.pdf)（2025.7.31 印刷版） | 完成世界首例机器人辅助膀胱肿瘤整块切除；明确计划 2-3 年内利用 18A 章上市。 |
+| **杭州创新孵化中心 (HIIC)** | ⚠️ 联合新闻稿链接未定位（InvestHK 站内搜索） | 2024 年杭实集团在香港科学园设立，连接 200+ 项目、帮助 14 家浙江企业签署 MoU。 |
+| **杭州生物科技港交所 IPO** | Diagens: [PR Newswire](https://www.prnewswire.com/news-releases/diagens-biotechnology-raises-us101-million-in-hong-kong-ipo-shares-more-than-double-on-first-day-of-trading-302729852.html) / [HKEX](https://www.hkex.com.hk/eng/market/sec_tradinfo/tradarng/tradarng_news/currentmonth/e2526a_260325.htm) · Ted Medicine: ⚠️ 链接未定位 | Diagens Biotechnology（2026.3，US$1.01 亿）+ Ted Medicine（2025.6，HK$4.11 亿）。 |
 
 ### 税务与公司注册实操
 
-| 来源 | 说明 |
-|------|------|
-| 浙江政务服务网 — "企业开办一件事" | 杭州 OPC 在线注册入口：[gswsdj.zjzwfw.gov.cn](https://gswsdj.zjzwfw.gov.cn/entrance.html) |
-| 浙里办 APP | 移动端注册 + 电子签名 + 电子营业执照 |
-| 知乎/小红书 — OPC 注册经验帖 | 多源交叉验证，已标注 `[经验]`。具体帖子因时效和算法推荐可能已变化，建议搜索"杭州一人公司注册""杭州 OPC 代理记账"获取最新一手经验。 |
-| 代理记账市场报价 | 杭州本地代理 2025-2026 年小规模纳税人月报价 ¥200-500，年度审计 ¥2,000-5,000。来源：多个财税服务比价平台交叉验证。 |
+| 来源 | 链接 | 说明 |
+|------|------|------|
+| 浙江政务服务网 — "企业开办一件事" | [gswsdj.zjzwfw.gov.cn](https://gswsdj.zjzwfw.gov.cn/entrance.html) | 杭州 OPC 在线注册入口 |
+| 浙里办 APP | App Store / 各大应用商店搜索"浙里办" | 移动端注册 + 电子签名 + 电子营业执照 |
+| 知乎/小红书 — OPC 注册经验帖 | 站内搜索"杭州一人公司注册""杭州 OPC 代理记账" | 多源交叉验证，已标注 `[经验]`。具体帖子因时效和算法推荐可能已变化。 |
+| 代理记账市场报价 | 多个财税比价平台交叉验证 | 杭州本地代理 2025-2026 年小规模纳税人月报价 ¥200-500，年度审计 ¥2,000-5,000。 |
 
 ### 可靠性与时效说明
 
