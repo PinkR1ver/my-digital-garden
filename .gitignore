@@ -14,3 +14,4 @@ replit.nix
 /content/copilot
 /.claude
 /.tmp/
+/exports/
