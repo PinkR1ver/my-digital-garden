@@ -32,6 +32,7 @@ date: 2026-04-30
 
 - [HKSTP Incu-Bio 申请流程与材料准备](research_career/HKSTP-IncuBio-application-process.md)
 - [从杭州 OPC 到 HKSTP IncuBio — 可行性评估与实操路径](research_career/从杭州OPC到HKSTP-IncuBio.md)
+- [HKSTP IncuBio 入驻企业全景名录](research_career/HKSTP-IncuBio-企业名录.md)
 
 ## Plans and Defense
 
