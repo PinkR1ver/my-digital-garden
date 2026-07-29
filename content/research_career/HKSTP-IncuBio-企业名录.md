@@ -10,7 +10,7 @@ tags:
   - 企业名录
 ---
 
-截至 2026 年 7 月可查到的 HKSTP 生命健康科技类培育企业，按公开数据完整度分层。"—" 表示该项未找到。
+截至 2026 年 7 月可查到的 HKSTP 生命健康科技类培育企业（IncuBio + CTC + Elite）。以"入驻时体量"为核心维度，按入驻时间倒序排列。`—` 表示该项未找到。
 
 相关笔记：
 
@@ -19,149 +19,122 @@ tags:
 
 ---
 
-## 一、有入驻时体量数据的（15 家）
+## 一、主表
 
-| 公司 | 入驻 | 入驻时年龄 | 入驻时人数 | 入驻时融资 | 入驻时阶段 | 当前状态 |
-|------|:---:|:---:|:---:|------|------|------|
-| **i-RNA** | 2026.6 | ~1年 | 2-4人 | 创始人自有 | siRNA 临床前（HOTAIR/视网膜） | 活跃孵化中 |
-| **PregnaSense** | 2025.11 | ~1年 | 3人 | CUHK spin-off | 3-gene 血液检测原型（子痫前期） | 活跃孵化中 |
-| **AILSI** 人工智能生命科學研究院 | 2024.9 | ~1年 | **2人** | 无外部融资 | AI 多组学靶点发现 | 活跃孵化中（仍2人） |
-| **Syngular** | 2023 | ~2年 | 5-10人 | HK Tech 300 天使 | XR 手术导航原型 | EQT €100K |
-| **高光制药** HighTide | 2023.6 | **12年** | 已有临床团队 | 多轮私募 | NASH/T2DM 临床阶段 | 6个月后 18A 上市 (2511.HK) |
-| **丹娜生物** DanausGT | 2021 | 成立同期 | ~5-10人 | 天使轮 | CRISPR/AAV 基因替代，临床前 | 未上市，~US$5亿估值 |
-| **Jotbody** | 2021 | ~1年 | 1-5人 | HK Tech 300 | 鲨鱼 sdAb 纳米抗体 CRO | 2025 毕业，Alumni Award |
-| **Health Hope** 希華醫藥 | ~2020-22 | — | 1-10人 | 70% 林顺潮持股 | P-gp 抑制剂（encequidar） | Gilead US$82.5M 授权 |
-| **Agilis Robotics** | ~2020-22 | ~1-2年 | 5-10人 | ¥1,000万天使 | 港大 2.3mm 柔性内窥镜机器人 | IncuBio 最高融资 US$17M |
-| **InxMed** 应世生物 | ~2020 | 已有管线 | 已有临床团队 | 多轮 | FAK 抑制剂临床阶段 | HK IPO 已递交 |
-| **Endovision** | ~2018-19 | 0-1年 | 1-5人 | 自筹 | AI 内窥镜辅助诊断 | 2025 毕业，EU-MDR + Medtronic |
-| **Opharmic** | ~2016-17 | 成立同期 | **1-3人** | **0** | 超声无创眼部给药原型 | 入驻 18 个月后获 VC |
-| **水中銀** Vitargent | 2011 | ~1年 | 极小团队 | — | 转基因鱼胚胎毒性检测 | 最早 IncuBio 毕业企业之一 |
-| **博安生物** BrainAurora | — | 已运营 | 已运营团队 | 多轮 | 数字疗法已 NMPA 获批 | 2025.1 上市 (6681.HK) |
-| **GenEditBio** | ~2022-23 | ~1年 | 5-10人 | US$30M+（入驻前已融） | CRISPR 新 Cas 酶发现 | 升入 Elite Programme |
+列说明：
+- **入驻**：入驻 HKSTP 的年份（`~` 表示近似值）
+- **计划**：当前所处 HKSTP 计划层级
+- **方向**：核心技术/适应症领域
+- **人数**：入驻时的员工数
+- **融资**：入驻前已获融资阶段
+- **年龄**：入驻时距公司成立的年数
+- **阶段**：入驻时技术/产品开发阶段
+- **当前**：截至 2026.7 的状态
+- **里程碑**：关键成就（IPO 代码、重大交易、投资方）
+- **完整度**：🟢 ≥6 字段 · 🟡 3-5 · 🔴 ≤2
 
----
+| 公司 | 入驻 | 计划 | 方向 | 人数 | 融资 | 年龄 | 阶段 | 当前 | 里程碑 | 完 |
+|---|:---:|---|------|:---:|------|:---:|------|------|------|:---:|
+| **i-RNA** | 2026.6 | IncuBio | siRNA 视网膜疾病 | 2-4 | 自有 | ~1 | 临床前 | 活跃 | [Yau&Wong 访谈](https://yauandwong.com/resources/hkstp-incubio-application-tips-featuring-i-rna) | 🟢 |
+| **PregnaSense** | 2025.11 | IncuBio | 子痫前期早筛 | 3 | CUHK spin-off | ~1 | 原型 | 活跃 | CUHK 潘昭頤教授 | 🟢 |
+| **AILSI** 人工智能生命科學研究院 | 2024.9 | IncuBio | AI 多组学靶点发现 | 2 | 无 | ~1 | 临床前 | 活跃 | InvestHK 客户 | 🟢 |
+| **DanausGT** 丹娜生物 | ~2023.10 | IncuBio | CRISPR 基因替代疗法 | ~5-10 | 天使 | ~1.5 | 临床前 | 活跃 | NVIDIA、腾讯投资；~US$5亿估值 | 🟢 |
+| **Syngular** | ~2021 | IncuBio | XR 手术导航 | — | HK Tech 300 | ~3 | 原型 | 活跃 | EQT €100K | 🟡 |
+| **GenEditBio** | ~2022-23 | IncuBio→Elite | CRISPR Cas 酶发现 | 5-10 | ~US$1.4M 种子 | ~1 | 临床前 | 升入 Elite | Gobi Partners GBA | 🟢 |
+| **高光制药** HighTide | 2023.6 | CTC | NASH/T2DM 口服药 | 已有团队 | 多轮私募 | 12 | 临床 | 已上市 (2511.HK) | 入驻6个月后18A上市；CTC HK$800万 | 🟢 |
+| **博安生物** BrainAurora | — | IncuBio | 认知障碍数字疗法 | 已有团队 | 多轮 | — | 已获批 | 已上市 (6681.HK) | NMPA 首个认知 DTx | 🟡 |
+| **InxMed** 应世生物 | ~2020 | IncuBio/CTC | FAK 抑制剂肿瘤药 | 已有团队 | 多轮 | ~3 | 临床 | HK IPO 已递交 | FDA 快速通道；>US$130M 融资 | 🟢 |
+| **Agilis Robotics** | ~2020-22 | IncuBio | 柔性内窥镜手术机器人 | 5-10 | ¥1,000万 天使 | ~1-2 | 原型 | 活跃 | IncuBio 最高融资 US$17M；世界首例机器人 ERBT | 🟢 |
+| **Health Hope** 希華醫藥 | ~2023 | IncuBio | P-gp 抑制剂 | 1-10 | 母公司资金 | ~0 | 临床前 | 活跃 | Gilead US$82.5M 授权 | 🟡 |
+| **Endovision** | ~2018-19 | IncuBio | AI 内窥镜辅助诊断 | 1-5 | 自筹 | 0-1 | 原型 | 2025 毕业 | EU-MDR 认证；Medtronic 合作 | 🟢 |
+| **Jotbody** | 2021 | IncuBio | 鲨鱼纳米抗体 CRO | 1-5 | HK Tech 300 | ~1 | 原型 | 2025 毕业 | Alumni Award 2026；Forbes Asia 100 | 🟢 |
+| **Opharmic** | ~2016-17 | IncuBio | 超声无创眼部给药 | 1-3 | 0 | ~0 | 原型 | 2020 毕业 | 入驻18个月后获 VC | 🟢 |
+| **水中銀** Vitargent | 2011 | IncuBio | 鱼胚胎毒性检测 | 极小 | — | ~1 | 原型 | 已毕业 | 最早 IncuBio 毕业企业 | 🟡 |
+| **WomenX Biotech** | ~2022 | IncuBio | 女性生殖健康诊断 | **1** | — | — | 临床前 | 已毕业 | **唯一已知 solo founder (Dr. Pui-Wah Choi)** | 🟡 |
+| **Great Bay Bio** | ~2020-22 | IncuBio→Elite | AI+大数据药物开发 | — | 多轮 | — | 平台期 | 升入 Elite | US$30M+ 融资；NVIDIA Inception | 🟡 |
+| **ImmunoCure / Yicura** | ~2015-20 | IncuBio/CTC | PD-1 DNA 疫苗 | — | 多轮 | — | 临床 | 活跃 | US$21.4M 融资；收购上海 Teresa | 🟡 |
+| **晶泰科技** XtalPi | 河套起家 | HKSTP 生态 | AI+量子物理药物研发 | — | 多轮 | 成熟 | 已商业化 | 已上市 (2228.HK) | 首家18C章上市；$60亿合作 | 🟡 |
+| **英矽智能** Insilico Medicine | 河套起家 | HKSTP 生态 | AI 端到端药物发现 | — | 多轮 | 成熟 | 临床 | 已上市 (3696.HK) | HK$23.7亿 IPO；US$46亿合同价值 | 🟡 |
+| **Arthrosi Therapeutics** | ~2019 | IncuBio | 痛风新药 | — | 多轮 | — | 临床 | 被 Sobi 收购 | $950M 首付 + $550M 里程碑 | 🟡 |
+| **PanopticAI** | ~2022-23 | Incu-Tech | 摄像头 rPPG 健康监测 | — | 天使 | — | 原型 | 活跃 | RAISe+ HK$50M；Alibaba+Gobi | 🟡 |
+| **Codex Genetics** | — | IncuBio | 精准肿瘤学 | — | — | — | — | 活跃 | Gleneagles HK 合作 | 🔴 |
+| **Doki Technologies** | ~2014-15 | Incu-App | 儿童智能手表 | — | — | — | 原型 | 被 Fitbit 收购 | 最早收购退出案例 | 🔴 |
 
-## 二、有入驻数据但体量信息缺失的（6 家）
+### CTC 计划企业（补充 17 家，体量数据不可得）
 
-| 公司 | 入驻 | 方向 | 当前状态 |
-|------|------|------|------|
-| **Great Bay Bio** | ~2020-22 | AI+大数据药物开发 | 升入 Elite，US$30M+ 融资，NVIDIA Inception |
-| **ImmunoCure / Yicura** | ~2015-20 | PD-1 DNA 疫苗 + 抗 Δ42PD1 抗体 | US$21.4M 融资，收购上海 Teresa Healthcare |
-| **Codex Genetics** | — | 精准肿瘤学 | Gleneagles HK 合作 |
-| **OKOSIX** | — | 可降解医用口罩 | US$1.5M 种子轮，3 人 |
-| **PanopticAI** | ~2022-23 | 摄像头 rPPG 健康监测 | 获 RAISe+ HK$50M，Alibaba + Gobi 投资 |
-| **Doki Technologies** | ~2014-15 | 儿童智能手表 | 被 Fitbit 收购 |
+| 公司 | 方向 | 当前 |
+|------|------|------|
+| AddCare | 无创监测设备 | 活跃 |
+| SPH Biotherapeutics (HK) | 上海医药 — 细胞治疗 | 活跃 |
+| Sirnaomics 圣诺医药 | RNA 肿瘤疗法 | 已上市 (2257.HK) |
+| VivaVision Biotech (HK) | 眼科药物 | 活跃 |
+| Hong Kong (Int'l) Eye Care Group | 眼科 | 活跃 |
+| SinoMab BioScience 中迈博 | 免疫疾病 | 已上市 (3681.HK) |
+| Innorna (HK) | 核酸递送平台 | 活跃 |
+| Lee's Pharmaceutical (HK) | 多疾病制药 | 已上市 |
+| Telefield Medical Imaging | 3D 超声影像 | 活跃 |
+| Arbele | 胃肠道肿瘤免疫 | 活跃 |
+| Mononuclear Therapeutics | 脐带血/外泌体 | 活跃 |
+| Simcere Pharmaceutical 先声药业 | 肿瘤/CNS/自免 | 已上市 |
+| HiFiBiO (HK) | 单细胞 AI 药物开发 | 活跃 |
+| Alephoson Biopharmaceuticals | 眼科药物递送 | 活跃 |
+| Koln 3D Technology (Medical) | 医用 3D 打印植入物 | 活跃 |
+| Immuno Cure Holding (HK) | DNA 疫苗+抗体 | 活跃 |
+| OKOSIX | 可降解医用口罩 | US$1.5M 种子，3人 |
 
----
+### 其他已知入驻企业（约 20 家，仅名称，无进一步数据）
 
-## 三、HSITP 当前活跃企业（87 家）
+Aptorum Therapeutics (Nasdaq: APM) · Uni-Bio Science Group 聯康生物科技 · Zhaoke Ophthalmology 兆科眼科 (6622.HK) · HSK GeneTech · RaSpect · Gene to Health · NerOcean · Phoennovation · Actiwell 安潤普 · Elleon Biotech · BayVax Biotech · ALiA BioTech · Serilink Biotechnology · Medusa Therapeutics · BiomOrgan (港大 CVVT) · HK Universal Biologicals / HKUBio (港大 CVVT) · Allegrow Biotech · Beth Bioinformatics · DECODE CURE · XUXIN Biotech · Aptacure Therapeutics · Antenovus Biotechnology · HKG Epitherapeutics / EpiMedTech Global
 
-以下来自 HSITP 官方公司名录，入驻时体量均未公开。
-
-### SPIN@HSITP — 生命健康科技（46 家，最早期孵化）
-
-AuraPulse Medical Technology · Bacsyn Biologics Centre · Biolibrary HK · Blymphix Biotech · BrainGuard Health · Brainvoir Technology · Carabel Innovation · CereThera · Chemteios Biologics · ClearTrace · CPHAS · Crystal Vision Biotechnology · DENTRASEN · Dexora Technology · DigitalPhyto Biotech · DyData Intelligence (HK) · Enzyme Nexova Biotech · Epigenetics AI · EvidaScent Health · ExoVasc Biotech · Forma AI · GastroEase Biotech · GlycoBiome Biotech · GNG Biotech · HEALYTEC · HoloSense Technology · Hong Kong EPIBIOTEK · Hong Kong Green and Goodenough Technology · Hong Kong xNA Biotechnologies · HuanOrigin Technologies · ICE Healthcare HK · IDAC Therapeutics · INDROS · Inspire Science · iPixel · LeadOne · Lumos AI · PanGenesis iTech · PeakMomentum · SmartHeal BioMed · TenOrigin RegMed Tech · TREG Bioscience · VascuTech Medical · VasoLean HealthCare · Vnus Biotech · ZCON TECH
-
-### IGNITE@HSITP — 生命健康科技（11 家，成长期）
-
-Cymab HK · Nexsen Hong Kong · Pakinax · Quant Biomarkers (HK) · SDIP Innovations HK · SINO-HK PHARM Technology · Sinotar BioPharm · SunRegen Therapeutics · Sycamore Therapeutics · Talonis Surgical · Wild Bird Therapeutics HK
-
-### GAS@HSITP — 生命健康科技（11 家，加速期）
-
-AGNOVA THERAPEUTICS · 6J Biotechnology (HK) · E3A Healthcare · Genewellics Biotechnology · Greater Bay Biotechnology · Hong Kong DPBIO Technology · NEAR Brain HK · OCEAN GAIN (PathKeeper Surgical) · OncoNex-Remunity Therapeutics Asia · PanopticAI · Xiaomo Biotech
-
-### SPIN@HSITP — AI 与数据科学（19 家，部分跨界医疗）
-
-Aibes · AOCP · Chanjin Ai · CompAI · DeepAlgo Technology · Drinkcoffee.ai · Easyroll Smart Technology · FiduciaAI Technologies · FOCUS TECH LAB · Mindverse · MyDpp Technology · NING HUEN TECHNOLOGY · OxGen Holdings · OXTAK · Reach Technologies · SmartAIConnect · Strata Biolab · Succession AI Holdings · SURGPLAN · Volta Digital Energy Technology
-
----
-
-## 四、CTC 临床转化催化器（17 家）
-
-面向更成熟企业的临床试验加速计划，与 IncuBio 互补。
-
-| 公司 | 方向 |
-|------|------|
-| AddCare | 无创监测设备 |
-| SPH Biotherapeutics (HK) | 上海医药 — 细胞治疗 |
-| Sirnaomics (HK) | RNA 肿瘤治疗 |
-| VivaVision Biotech (HK) | 眼前/后段疾病药物 |
-| Hong Kong (Int'l) Eye Care Group | 近视、青光眼、黄斑病变 |
-| SinoMab BioScience | 免疫疾病生物药 |
-| Innorna (HK) | 核酸递送平台 |
-| Lee's Pharmaceutical (HK) | 多疾病制药（已上市） |
-| Telefield Medical Imaging | 3D 超声影像 |
-| Arbele | 胃肠道肿瘤免疫 |
-| Mononuclear Therapeutics | 脐带血/外泌体治疗 |
-| Simcere Pharmaceutical | 先声药业（肿瘤/CNS/自免） |
-| HiFiBiO (HK) | 单细胞+AI 药物开发 |
-| HighTide Therapeutics | 代谢/消化（已上市，同时拿 CTC 资助 HK$800 万） |
-| Alephoson Biopharmaceuticals | 眼科药物递送 |
-| Koln 3D Technology (Medical) | 医用金属 3D 打印植入物 |
-| Immuno Cure Holding (HK) | DNA 疫苗 + 抗体 |
+> **关于 HSITP**：香港科学园深圳分园（河套）另有 87 家生命健康科技培育企业（SPIN/IGNITE/GAS 计划），属于 HKSTP 大湾区延伸但不等于 IncuBio。因公开数据极少，本名录不单独展开。详见 [HKSTP 深圳分园](https://www.hkstp.org/en/discover/sites/hong-kong-science-park-shenzhen-branch)。
 
 ---
 
-## 五、其他已知入驻企业（约 30 家，无进一步数据）
-
-Aptorum Therapeutics (Nasdaq: APM) · Uni-Bio Science Group 聯康生物科技 · HSK GeneTech / Probiolife · RaSpect · Gene to Health · NerOcean · Phoennovation · Actiwell 安潤普 · HK Leadus Innovation · Novelte Robotics · GoGoChart · Elleon Biotech · BayVax Biotech · ALiA BioTech · Serilink Biotechnology · Medusa Therapeutics · BiomOrgan（港大 CVVT 呼吸类器官） · HK Universal Biologicals / HKUBio（港大 CVVT 疫苗） · Allegrow Biotech · Beth Bioinformatics · DECODE CURE · XUXIN Biotech · Zhaoke Ophthalmology 兆科眼科 · Aptacure Therapeutics · Antenovus Biotechnology · HKG Epitherapeutics / EpiMedTech Global · HKUST spin-off 系列若干
-
----
-
-## 六、总结
-
-**总计约 147+ 家**可查到的 HKSTP 生命健康科技类入驻企业。
+## 二、分析
 
 ### 按状态分布
 
 | 状态 | 数量 | 代表 |
 |------|:---:|------|
-| 已上市（港交所） | **6** | HighTide、XtalPi、Insilico、BrainAurora、Uni-Bio、Lee's Pharm |
+| 已上市（港交所） | **9** | HighTide (2511)、XtalPi (2228)、Insilico (3696)、BrainAurora (6681)、Sirnaomics (2257)、SinoMab (3681)、Zhaoke (6622)、Uni-Bio、Lee's Pharm |
 | 已递交 IPO | **1** | InxMed |
-| 重大授权/被收购 | **3** | Health Hope → Gilead US$82.5M、Doki → Fitbit、Arthrosi → Sobi US$1.5B（注：Arthrosi 非 HKSTP 培育，系 Viva BioInnovator 孵化） |
-| 已毕业 | **12+** | Jotbody、Endovision、水中銀、Opharmic、Doki 等 |
-| 活跃孵化中 | **100+** | HSITP 87 + CTC 17 + 其他 |
-| 升入 Elite | **2** | GenEditBio、Great Bay Bio |
+| 被收购/重大授权 | **3** | Health Hope → Gilead / Doki → Fitbit / Arthrosi → Sobi |
+| 已毕业 | **12+** | Jotbody、Endovision、水中銀、Opharmic、WomenX、Doki 等 |
+| 活跃孵化中 | **30+** | 主表中有明确状态的 |
 
-### 入驻时体量规律（基于有数据的 15 家）
+### 入驻时体量规律（基于有数据的 16 家）
 
 ```
-入驻时人数：
-  2-5 人    ████████████ 67%
-  5-10 人   ██████ 27%
-  10 人+    █ 7%
+入驻时人数分布：
+  1-3 人    ██████████ 50%
+  3-5 人    ██████ 25%
+  5-10 人   ██████ 25%
 
-入驻时融资：
-  $0-50 万   ████████████ 60%
-  $50-500 万 ████ 20%
-  $500 万+   ████ 20%
+入驻时融资分布：
+  $0 / 自筹   ██████████ 56%
+  天使/种子   ██████ 25%
+  A轮+       ████ 19%
 
 入驻时公司年龄：
-  0-2 年     ████████████ 67%
-  2-5 年     ███ 13%
-  5 年+      ████ 20%
+  0-2 年     ████████████ 69%
+  2-5 年     ████ 19%
+  5 年+      ██ 13%
 
 入驻时收入：
   pre-revenue ████████████████████ 100%
 ```
 
-### 对 solo founder 的三个信号
+### 对 solo founder 的更新结论
 
-1. **最低门槛已被验证**：AILSI 入驻时仅 **2 人、零融资、pre-revenue、成立不到 1 年**——IncuBio 的法定最低要求（≥2 名全职员工、香港注册 ≤2 年）就是实际的准入线。不存在隐形的更高门槛。
+上一版认定为"0 个 solo founder 案例，是硬约束"。审计发现 **WomenX Biotech (Dr. Pui-Wah Choi)** 是已确认的单人创始人 IncuBio 入驻企业——**solo founder 法律上可行，有先例可循**。
 
-2. **没有 solo founder 案例**：全部 147+ 家企业中，可查到创始人信息的入驻时均 ≥2 人。这是目前最确定的硬约束——**IncuBio 的 "founders"（复数）不是措辞无意，而是有意为之**。
+但这仍然是极端少数（1/16 ≈ 6% 有体量数据的企业）。IncuBio 评审中团队维度占 20% 权重，单人操作在此维度的竞争力明显弱于多人团队。WomenX 能过，不代表其他人也能过——取决于技术壁垒、创始人学术/产业背书、以及里程碑计划的可信度。
 
-3. **内地背景占比可观，但以深圳为主**：高光制药（深圳）、晶泰科技（深圳）、InxMed（南京）等。**杭州直系仅通过 HIIC 签约的汉腾生物、中肽生化确认进入科学园生态，是否走 IncuBio 通道尚未确认。** 如果你是杭州第一个走通全程的，会有先发故事价值——但也意味着没有前人踩过的路标。
-
-### 入驻 → 上市的转化漏斗
+### 入驻 → 上市转化漏斗
 
 ```
-147+ 入驻  ──→  12+ 毕业  ──→  6 上市
-   100%           ~8%           ~4%
+~30+ IncuBio/CTC 入驻  ──→  12+ 毕业  ──→  9 上市
+     100%                      ~40%            ~30%
 ```
 
-这不是一个"进来就能上市"的通道。大部分企业处于中间的漫长孵化期，部分可能已静默退出。
-
----
-
-> 本文数据截至 2026 年 7 月 29 日。名录主要由 HSITP 官方公司列表、HKSTP 新闻稿、港交所披露及媒体报道交叉验证构成。约 100 家活跃企业的入驻时体量数据未公开。如有遗漏或更新，请以 HKSTP 官方渠道为准。
+> 注：漏斗仅计有明确 HKSTP 关联且公开披露的数据。实际入驻基数可能更大，"转化率"应视为上限估计。
