@@ -12,11 +12,6 @@ tags:
 
 截至 2026 年 7 月可查到的 HKSTP 生命健康科技类培育企业（IncuBio + CTC + Elite）。以"入驻时体量"为核心维度，按入驻时间倒序排列。`—` 表示该项未找到。
 
-相关笔记：
-
-- [从杭州 OPC 到 HKSTP IncuBio — 可行性评估与实操路径](从杭州OPC到HKSTP-IncuBio.md)
-- [HKSTP Incu-Bio 申请流程与材料准备](HKSTP-IncuBio-application-process.md)
-
 ---
 
 ## 一、主表
@@ -30,35 +25,33 @@ tags:
 - **年龄**：入驻时距公司成立的年数
 - **阶段**：入驻时技术/产品开发阶段
 - **当前**：截至 2026.7 的状态
-- **里程碑**：关键成就（IPO 代码、重大交易、投资方）
-- **完整度**：🟢 ≥6 字段 · 🟡 3-5 · 🔴 ≤2
 
-| 公司 | 入驻 | 计划 | 方向 | 人数 | 融资 | 年龄 | 阶段 | 当前 | 里程碑 | 完 |
-|---|:---:|---|------|:---:|------|:---:|------|------|------|:---:|
-| **i-RNA** | 2026.6 | IncuBio | siRNA 视网膜疾病 | 2-4 | 自有 | ~1 | 临床前 | 活跃 | [Yau&Wong 访谈](https://yauandwong.com/resources/hkstp-incubio-application-tips-featuring-i-rna) | 🟢 |
-| **PregnaSense** | 2025.11 | IncuBio | 子痫前期早筛 | 3 | CUHK spin-off | ~1 | 原型 | 活跃 | CUHK 潘昭頤教授 | 🟢 |
-| **AILSI** 人工智能生命科學研究院 | 2024.9 | IncuBio | AI 多组学靶点发现 | 2 | 无 | ~1 | 临床前 | 活跃 | InvestHK 客户 | 🟢 |
-| **DanausGT** 丹娜生物 | ~2023.10 | IncuBio | CRISPR 基因替代疗法 | ~5-10 | 天使 | ~1.5 | 临床前 | 活跃 | NVIDIA、腾讯投资；~US$5亿估值 | 🟢 |
-| **Syngular** | ~2021 | IncuBio | XR 手术导航 | — | HK Tech 300 | ~3 | 原型 | 活跃 | EQT €100K | 🟡 |
-| **GenEditBio** | ~2022-23 | IncuBio→Elite | CRISPR Cas 酶发现 | 5-10 | ~US$1.4M 种子 | ~1 | 临床前 | 升入 Elite | Gobi Partners GBA | 🟢 |
-| **高光制药** HighTide | 2023.6 | CTC | NASH/T2DM 口服药 | 已有团队 | 多轮私募 | 12 | 临床 | 已上市 (2511.HK) | 入驻6个月后18A上市；CTC HK$800万 | 🟢 |
-| **博安生物** BrainAurora | — | IncuBio | 认知障碍数字疗法 | 已有团队 | 多轮 | — | 已获批 | 已上市 (6681.HK) | NMPA 首个认知 DTx | 🟡 |
-| **InxMed** 应世生物 | ~2020 | IncuBio/CTC | FAK 抑制剂肿瘤药 | 已有团队 | 多轮 | ~3 | 临床 | HK IPO 已递交 | FDA 快速通道；>US$130M 融资 | 🟢 |
-| **Agilis Robotics** | ~2020-22 | IncuBio | 柔性内窥镜手术机器人 | 5-10 | ¥1,000万 天使 | ~1-2 | 原型 | 活跃 | IncuBio 最高融资 US$17M；世界首例机器人 ERBT | 🟢 |
-| **Health Hope** 希華醫藥 | ~2023 | IncuBio | P-gp 抑制剂 | 1-10 | 母公司资金 | ~0 | 临床前 | 活跃 | Gilead US$82.5M 授权 | 🟡 |
-| **Endovision** | ~2018-19 | IncuBio | AI 内窥镜辅助诊断 | 1-5 | 自筹 | 0-1 | 原型 | 2025 毕业 | EU-MDR 认证；Medtronic 合作 | 🟢 |
-| **Jotbody** | 2021 | IncuBio | 鲨鱼纳米抗体 CRO | 1-5 | HK Tech 300 | ~1 | 原型 | 2025 毕业 | Alumni Award 2026；Forbes Asia 100 | 🟢 |
-| **Opharmic** | ~2016-17 | IncuBio | 超声无创眼部给药 | 1-3 | 0 | ~0 | 原型 | 2020 毕业 | 入驻18个月后获 VC | 🟢 |
-| **水中銀** Vitargent | 2011 | IncuBio | 鱼胚胎毒性检测 | 极小 | — | ~1 | 原型 | 已毕业 | 最早 IncuBio 毕业企业 | 🟡 |
-| **WomenX Biotech** | ~2022 | IncuBio | 女性生殖健康诊断 | **1** | — | — | 临床前 | 已毕业 | **唯一已知 solo founder (Dr. Pui-Wah Choi)** | 🟡 |
-| **Great Bay Bio** | ~2020-22 | IncuBio→Elite | AI+大数据药物开发 | — | 多轮 | — | 平台期 | 升入 Elite | US$30M+ 融资；NVIDIA Inception | 🟡 |
-| **ImmunoCure / Yicura** | ~2015-20 | IncuBio/CTC | PD-1 DNA 疫苗 | — | 多轮 | — | 临床 | 活跃 | US$21.4M 融资；收购上海 Teresa | 🟡 |
-| **晶泰科技** XtalPi | 河套起家 | HKSTP 生态 | AI+量子物理药物研发 | — | 多轮 | 成熟 | 已商业化 | 已上市 (2228.HK) | 首家18C章上市；$60亿合作 | 🟡 |
-| **英矽智能** Insilico Medicine | 河套起家 | HKSTP 生态 | AI 端到端药物发现 | — | 多轮 | 成熟 | 临床 | 已上市 (3696.HK) | HK$23.7亿 IPO；US$46亿合同价值 | 🟡 |
-| **Arthrosi Therapeutics** | ~2019 | IncuBio | 痛风新药 | — | 多轮 | — | 临床 | 被 Sobi 收购 | $950M 首付 + $550M 里程碑 | 🟡 |
-| **PanopticAI** | ~2022-23 | Incu-Tech | 摄像头 rPPG 健康监测 | — | 天使 | — | 原型 | 活跃 | RAISe+ HK$50M；Alibaba+Gobi | 🟡 |
-| **Codex Genetics** | — | IncuBio | 精准肿瘤学 | — | — | — | — | 活跃 | Gleneagles HK 合作 | 🔴 |
-| **Doki Technologies** | ~2014-15 | Incu-App | 儿童智能手表 | — | — | — | 原型 | 被 Fitbit 收购 | 最早收购退出案例 | 🔴 |
+| 公司 | 入驻 | 计划 | 方向 | 人数 | 融资 | 年龄 | 阶段 | 当前 |
+|---|:---:|---|------|:---:|------|:---:|------|------|
+| **i-RNA** | 2026.6 | IncuBio | siRNA 视网膜疾病 | 2-4 | 自有 | ~1 | 临床前 | 活跃 |
+| **PregnaSense** | 2025.11 | IncuBio | 子痫前期早筛 | 3 | CUHK spin-off | ~1 | 原型 | 活跃 |
+| **AILSI** 人工智能生命科學研究院 | 2024.9 | IncuBio | AI 多组学靶点发现 | 2 | 无 | ~1 | 临床前 | 活跃 |
+| **DanausGT** 丹娜生物 | ~2023.10 | IncuBio | CRISPR 基因替代疗法 | ~5-10 | 天使 | ~1.5 | 临床前 | 活跃 |
+| **Syngular** | ~2021 | IncuBio | XR 手术导航 | — | HK Tech 300 | ~3 | 原型 | 活跃 |
+| **GenEditBio** | ~2022-23 | IncuBio→Elite | CRISPR Cas 酶发现 | 5-10 | ~US$1.4M 种子 | ~1 | 临床前 | 升入 Elite |
+| **高光制药** HighTide | 2023.6 | CTC | NASH/T2DM 口服药 | 已有团队 | 多轮私募 | 12 | 临床 | 已上市 (2511.HK) |
+| **博安生物** BrainAurora | — | IncuBio | 认知障碍数字疗法 | 已有团队 | 多轮 | — | 已获批 | 已上市 (6681.HK) |
+| **InxMed** 应世生物 | ~2020 | IncuBio/CTC | FAK 抑制剂肿瘤药 | 已有团队 | 多轮 | ~3 | 临床 | HK IPO 已递交 |
+| **Agilis Robotics** | ~2020-22 | IncuBio | 柔性内窥镜手术机器人 | 5-10 | ¥1,000万 天使 | ~1-2 | 原型 | 活跃 |
+| **Health Hope** 希華醫藥 | ~2023 | IncuBio | P-gp 抑制剂 | 1-10 | 母公司资金 | ~0 | 临床前 | 活跃 |
+| **Endovision** | ~2018-19 | IncuBio | AI 内窥镜辅助诊断 | 1-5 | 自筹 | 0-1 | 原型 | 2025 毕业 |
+| **Jotbody** | 2021 | IncuBio | 鲨鱼纳米抗体 CRO | 1-5 | HK Tech 300 | ~1 | 原型 | 2025 毕业 |
+| **Opharmic** | ~2016-17 | IncuBio | 超声无创眼部给药 | 1-3 | 0 | ~0 | 原型 | 2020 毕业 |
+| **水中銀** Vitargent | 2011 | IncuBio | 鱼胚胎毒性检测 | 极小 | — | ~1 | 原型 | 已毕业 |
+| **WomenX Biotech** | ~2022 | IncuBio | 女性生殖健康诊断 | **1** | — | — | 临床前 | 已毕业 |
+| **Great Bay Bio** | ~2020-22 | IncuBio→Elite | AI+大数据药物开发 | — | 多轮 | — | 平台期 | 升入 Elite |
+| **ImmunoCure / Yicura** | ~2015-20 | IncuBio/CTC | PD-1 DNA 疫苗 | — | 多轮 | — | 临床 | 活跃 |
+| **晶泰科技** XtalPi | 河套起家 | HKSTP 生态 | AI+量子物理药物研发 | — | 多轮 | 成熟 | 已商业化 | 已上市 (2228.HK) |
+| **英矽智能** Insilico Medicine | 河套起家 | HKSTP 生态 | AI 端到端药物发现 | — | 多轮 | 成熟 | 临床 | 已上市 (3696.HK) |
+| **Arthrosi Therapeutics** | ~2019 | IncuBio | 痛风新药 | — | 多轮 | — | 临床 | 被 Sobi 收购 |
+| **PanopticAI** | ~2022-23 | Incu-Tech | 摄像头 rPPG 健康监测 | — | 天使 | — | 原型 | 活跃 |
+| **Codex Genetics** | — | IncuBio | 精准肿瘤学 | — | — | — | — | 活跃 |
+| **Doki Technologies** | ~2014-15 | Incu-App | 儿童智能手表 | — | — | — | 原型 | 被 Fitbit 收购 |
 
 ### CTC 计划企业（补充 17 家，体量数据不可得）
 
@@ -124,11 +117,6 @@ Aptorum Therapeutics (Nasdaq: APM) · Uni-Bio Science Group 聯康生物科技 �
   pre-revenue ████████████████████ 100%
 ```
 
-### 对 solo founder 的更新结论
-
-上一版认定为"0 个 solo founder 案例，是硬约束"。审计发现 **WomenX Biotech (Dr. Pui-Wah Choi)** 是已确认的单人创始人 IncuBio 入驻企业——**solo founder 法律上可行，有先例可循**。
-
-但这仍然是极端少数（1/16 ≈ 6% 有体量数据的企业）。IncuBio 评审中团队维度占 20% 权重，单人操作在此维度的竞争力明显弱于多人团队。WomenX 能过，不代表其他人也能过——取决于技术壁垒、创始人学术/产业背书、以及里程碑计划的可信度。
 
 ### 入驻 → 上市转化漏斗
 
