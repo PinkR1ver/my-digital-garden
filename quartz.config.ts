@@ -15,7 +15,7 @@ const config: QuartzConfig = {
       provider: "plausible",
     },
     locale: "en-US",
-    baseUrl: "www.pinktalk.online",
+    baseUrl: "pinktalk.online",
     ignorePatterns: ["private", "templates", ".obsidian", "arch", "**/attachments/**/*.md"],
     defaultDateType: "created",
     theme: {
