@@ -47,4 +47,38 @@ const wrongKeys = generateKeyPairSync("rsa", {
 })
 assert.throws(() => decryptMarkdown(encrypted, wrongKeys.privateKey))
 
+// passphrase-protected private key (PBES2 encrypted PKCS#8)
+const passphraseKey = generateKeyPairSync("rsa", {
+  modulusLength: 2048,
+  publicKeyEncoding: { type: "spki", format: "pem" },
+  privateKeyEncoding: {
+    type: "pkcs8",
+    format: "pem",
+    cipher: "aes-256-cbc",
+    passphrase: "524865",
+  },
+})
+assert.equal(passphraseKey.privateKey.includes("BEGIN ENCRYPTED PRIVATE KEY"), true)
+const passphrasePlaintext = `---
+title: Passphrase test
+secret: true
+pub: |
+${passphraseKey.publicKey
+  .trim()
+  .split("\n")
+  .map((line) => `  ${line}`)
+  .join("\n")}
+---
+
+## Secret with passphrase
+
+Passphrase protected body 密钥.
+`
+const passphraseEncrypted = encryptMarkdown(passphrasePlaintext)
+assert.equal(passphraseEncrypted.includes("Passphrase protected body"), false)
+const passphraseDecrypted = decryptMarkdown(passphraseEncrypted, passphraseKey.privateKey, "524865")
+assert.equal(matter(passphraseDecrypted).content, matter(passphrasePlaintext).content)
+assert.throws(() => decryptMarkdown(passphraseEncrypted, passphraseKey.privateKey, "wrong"))
+assert.throws(() => decryptMarkdown(passphraseEncrypted, passphraseKey.privateKey))
+
 console.log("secret-note tests passed")
