@@ -1,23 +1,10 @@
 import assert from "node:assert/strict"
-import { generateKeyPairSync } from "node:crypto"
 import matter from "gray-matter"
 import { decryptMarkdown, encryptMarkdown } from "../scripts/secret-note.mjs"
-
-const { publicKey, privateKey } = generateKeyPairSync("rsa", {
-  modulusLength: 2048,
-  publicKeyEncoding: { type: "spki", format: "pem" },
-  privateKeyEncoding: { type: "pkcs8", format: "pem" },
-})
 
 const plaintext = `---
 title: Private test
 secret: true
-pub: |
-${publicKey
-  .trim()
-  .split("\n")
-  .map((line) => `  ${line}`)
-  .join("\n")}
 tags:
   - private-test
 ---
@@ -27,58 +14,27 @@ tags:
 This exact phrase must not survive encryption: swordfish-秘密.
 `
 
-const encrypted = encryptMarkdown(plaintext)
+const encrypted = encryptMarkdown(plaintext, "524865")
 assert.equal(encrypted.includes("swordfish-秘密"), false)
 const envelope = matter(encrypted)
 assert.equal(envelope.data.secret, true)
-assert.equal(envelope.data.secret_version, 1)
-assert.equal(envelope.data.secret_algorithm, "RSA-OAEP-256+A256GCM")
+assert.equal(envelope.data.secret_version, 2)
+assert.equal(envelope.data.secret_algorithm, "PBKDF2-SHA256+A256GCM")
+assert.equal(envelope.data.secret_wrapped_key, undefined)
+assert.equal(envelope.data.pub, undefined)
+assert.equal(typeof envelope.data.secret_salt, "string")
+assert.equal(typeof envelope.data.secret_iv, "string")
+assert.equal(typeof envelope.data.secret_ciphertext, "string")
 assert.equal(envelope.content.trim(), "")
 
-const decrypted = decryptMarkdown(encrypted, privateKey)
+const decrypted = decryptMarkdown(encrypted, "524865")
 assert.equal(matter(decrypted).content, matter(plaintext).content)
 assert.equal(matter(decrypted).data.secret, true)
 assert.equal(matter(decrypted).data.secret_ciphertext, undefined)
 
-const wrongKeys = generateKeyPairSync("rsa", {
-  modulusLength: 2048,
-  publicKeyEncoding: { type: "spki", format: "pem" },
-  privateKeyEncoding: { type: "pkcs8", format: "pem" },
-})
-assert.throws(() => decryptMarkdown(encrypted, wrongKeys.privateKey))
-
-// passphrase-protected private key (PBES2 encrypted PKCS#8)
-const passphraseKey = generateKeyPairSync("rsa", {
-  modulusLength: 2048,
-  publicKeyEncoding: { type: "spki", format: "pem" },
-  privateKeyEncoding: {
-    type: "pkcs8",
-    format: "pem",
-    cipher: "aes-256-cbc",
-    passphrase: "524865",
-  },
-})
-assert.equal(passphraseKey.privateKey.includes("BEGIN ENCRYPTED PRIVATE KEY"), true)
-const passphrasePlaintext = `---
-title: Passphrase test
-secret: true
-pub: |
-${passphraseKey.publicKey
-  .trim()
-  .split("\n")
-  .map((line) => `  ${line}`)
-  .join("\n")}
----
-
-## Secret with passphrase
-
-Passphrase protected body 密钥.
-`
-const passphraseEncrypted = encryptMarkdown(passphrasePlaintext)
-assert.equal(passphraseEncrypted.includes("Passphrase protected body"), false)
-const passphraseDecrypted = decryptMarkdown(passphraseEncrypted, passphraseKey.privateKey, "524865")
-assert.equal(matter(passphraseDecrypted).content, matter(passphrasePlaintext).content)
-assert.throws(() => decryptMarkdown(passphraseEncrypted, passphraseKey.privateKey, "wrong"))
-assert.throws(() => decryptMarkdown(passphraseEncrypted, passphraseKey.privateKey))
+assert.throws(() => decryptMarkdown(encrypted, "wrong-passphrase"))
+assert.throws(() => encryptMarkdown(plaintext, ""))
+assert.throws(() => encryptMarkdown(plaintext.replace("secret: true", ""), "524865"))
+assert.throws(() => encryptMarkdown(encrypted, "524865"))
 
 console.log("secret-note tests passed")

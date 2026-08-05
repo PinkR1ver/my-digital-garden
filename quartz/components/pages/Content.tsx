@@ -18,7 +18,7 @@ const Content: QuartzComponent = (props: QuartzComponentProps) => {
         <section
           class="secret-note-lock"
           data-secret-note
-          data-secret-wrapped-key={frontmatter.secret_wrapped_key}
+          data-secret-salt={frontmatter.secret_salt}
           data-secret-iv={frontmatter.secret_iv}
           data-secret-ciphertext={frontmatter.secret_ciphertext}
         >
@@ -27,43 +27,23 @@ const Content: QuartzComponent = (props: QuartzComponentProps) => {
           </div>
           <h2>This note is encrypted</h2>
           <p class="secret-note-explainer">
-            Choose the matching private key (and passphrase, if it has one) to decrypt and render
-            the Markdown locally.
+            Enter the passphrase to decrypt and render the Markdown locally.
           </p>
           <form class="secret-note-form">
-            <label class="secret-note-label" for="secret-key-file">
-              Private key file (PKCS#8 PEM)
-            </label>
-            <input
-              class="secret-key-file"
-              id="secret-key-file"
-              type="file"
-              accept=".pem,.key,text/plain"
-            />
-            <label class="secret-note-label" for="secret-key-text">
-              Or paste the private key
-            </label>
-            <textarea
-              class="secret-key-text"
-              id="secret-key-text"
-              autocomplete="off"
-              autocapitalize="off"
-              spellcheck={false}
-              placeholder="-----BEGIN (ENCRYPTED) PRIVATE KEY-----"
-            />
             <label class="secret-note-label" for="secret-passphrase">
-              Passphrase (only for encrypted private keys)
+              Passphrase
             </label>
             <input
               class="secret-passphrase"
               id="secret-passphrase"
               type="password"
               autocomplete="off"
+              autocapitalize="off"
               spellcheck={false}
             />
             <button type="submit">Unlock note</button>
             <p class="secret-note-privacy">
-              The key stays in this tab. It is not uploaded or saved in browser storage.
+              The passphrase stays in this tab. It is not uploaded or saved in browser storage.
             </p>
           </form>
           <p class="secret-note-status" role="status" aria-live="polite"></p>
