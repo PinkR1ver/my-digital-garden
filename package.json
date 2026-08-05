@@ -15,7 +15,11 @@
     "docs": "npx quartz build --serve -d docs",
     "check": "tsc --noEmit && npx prettier . --check",
     "format": "npx prettier . --write",
-    "test": "tsx ./quartz/util/path.test.ts && tsx ./quartz/depgraph.test.ts && tsx ./quartz/components/scripts/mermaid.inline.test.ts && tsx ./quartz/components/scripts/slides.inline.test.ts && tsx ./quartz/components/report.test.ts",
+    "test": "tsx ./quartz/util/path.test.ts && tsx ./quartz/depgraph.test.ts && tsx ./quartz/components/scripts/mermaid.inline.test.ts && tsx ./quartz/components/scripts/slides.inline.test.ts && tsx ./quartz/components/report.test.ts && node ./test/secret-note.test.mjs",
+    "test:secret": "node ./test/secret-note.test.mjs",
+    "secret:keygen": "node ./scripts/secret-note.mjs keygen",
+    "secret:encrypt": "node ./scripts/secret-note.mjs encrypt",
+    "secret:decrypt": "node ./scripts/secret-note.mjs decrypt",
     "profile": "0x -D prof ./quartz/bootstrap-cli.mjs build --concurrency=1"
   },
   "engines": {
