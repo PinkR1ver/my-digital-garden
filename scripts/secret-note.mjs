@@ -33,16 +33,19 @@ function usage() {
   return `Secret note tools
 
 Usage:
-  npm run secret:keygen -- [--public <path>] [--private <path>] [--force]
+  npm run secret:keygen -- [--public <path>] [--private <path>] [--passphrase <password>] [--force]
   npm run secret:encrypt -- <note.md> [--public <public.pem>] [--output <note.md>] [--force]
-  npm run secret:decrypt -- <note.md> --private <private.pem> [--output <note.md>] [--force]
+  npm run secret:decrypt -- <note.md> --private <private.pem> [--passphrase <password>] [--output <note.md>] [--force]
 
 Defaults:
   public key:  private/secret-notes.public.pem
   private key: private/secret-notes.private.pem
 
 Keep editable plaintext under private/ and write encrypted notes to content/.
-The private/ directory is ignored by this repository.`
+The private/ directory is ignored by this repository.
+
+--passphrase protects the private key file with a password (PBES2).
+Readers must enter it in the browser to unlock the note.`
 }
 
 function parseArgs(argv) {
@@ -213,7 +216,7 @@ export function encryptMarkdown(source, publicKeyOverride) {
   return encryptedDocument(data)
 }
 
-export function decryptMarkdown(source, privateKeyPem) {
+export function decryptMarkdown(source, privateKeyPem, passphrase) {
   const parsed = matter(source)
   if (parsed.data.secret !== true || !hasEnvelope(parsed.data)) {
     throw new Error("This file is not an encrypted secret note")
@@ -225,9 +228,10 @@ export function decryptMarkdown(source, privateKeyPem) {
     throw new Error("Unsupported secret note format")
   }
 
+  const privateKeyOptions = passphrase ? { key: privateKeyPem, passphrase } : privateKeyPem
   const contentKey = privateDecrypt(
     {
-      key: createPrivateKey(privateKeyPem),
+      key: createPrivateKey(privateKeyOptions),
       padding: constants.RSA_PKCS1_OAEP_PADDING,
       oaepHash: "sha256",
     },
@@ -261,17 +265,26 @@ function keygen(options) {
     throw new Error("A key output already exists; pass --force to replace both key files")
   }
 
+  const privateKeyEncoding = { type: "pkcs8", format: "pem" }
+  if (options.passphrase) {
+    privateKeyEncoding.cipher = "aes-256-cbc"
+    privateKeyEncoding.passphrase = options.passphrase
+  }
+
   const { publicKey, privateKey } = generateKeyPairSync("rsa", {
     modulusLength: 3072,
     publicKeyEncoding: { type: "spki", format: "pem" },
-    privateKeyEncoding: { type: "pkcs8", format: "pem" },
+    privateKeyEncoding,
   })
   writeAtomic(publicPath, publicKey, { force: options.force, mode: 0o644 })
   writeAtomic(privatePath, privateKey, { force: options.force, mode: 0o600 })
   console.log(`Private key: ${privatePath}`)
   console.log(`Public key:  ${publicPath}`)
   console.log(
-    "The private key is unencrypted PKCS#8 for Web Crypto compatibility. Protect the file.",
+    options.passphrase
+      ? "The private key is encrypted with PBES2 (aes-256-cbc). " +
+          "Readers must enter the passphrase in the browser to unlock notes."
+      : "The private key is unencrypted PKCS#8 for Web Crypto compatibility. Protect the file.",
   )
 }
 
@@ -292,6 +305,7 @@ function decryptFile(inputPath, options) {
   const decrypted = decryptMarkdown(
     readFileSync(input, "utf8"),
     readFileSync(resolvePath(options.private), "utf8"),
+    options.passphrase,
   )
   writeAtomic(output, decrypted, { force: output === input || options.force, mode: 0o600 })
   console.log(`Decrypted note: ${output}`)

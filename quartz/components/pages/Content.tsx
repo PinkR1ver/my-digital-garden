@@ -27,7 +27,8 @@ const Content: QuartzComponent = (props: QuartzComponentProps) => {
           </div>
           <h2>This note is encrypted</h2>
           <p class="secret-note-explainer">
-            Choose the matching private key to decrypt and render the Markdown locally.
+            Choose the matching private key (and passphrase, if it has one) to decrypt and render
+            the Markdown locally.
           </p>
           <form class="secret-note-form">
             <label class="secret-note-label" for="secret-key-file">
@@ -48,7 +49,17 @@ const Content: QuartzComponent = (props: QuartzComponentProps) => {
               autocomplete="off"
               autocapitalize="off"
               spellcheck={false}
-              placeholder="-----BEGIN PRIVATE KEY-----"
+              placeholder="-----BEGIN (ENCRYPTED) PRIVATE KEY-----"
+            />
+            <label class="secret-note-label" for="secret-passphrase">
+              Passphrase (only for encrypted private keys)
+            </label>
+            <input
+              class="secret-passphrase"
+              id="secret-passphrase"
+              type="password"
+              autocomplete="off"
+              spellcheck={false}
             />
             <button type="submit">Unlock note</button>
             <p class="secret-note-privacy">
