@@ -2,10 +2,10 @@ import { Root as HTMLRoot } from "hast"
 import { Root as MDRoot } from "remark-parse/lib"
 import { QuartzTransformerPlugin } from "../types"
 
-export const SECRET_NOTE_VERSION = 1
-export const SECRET_NOTE_ALGORITHM = "RSA-OAEP-256+A256GCM"
+export const SECRET_NOTE_VERSION = 2
+export const SECRET_NOTE_ALGORITHM = "PBKDF2-SHA256+A256GCM"
 
-const envelopeFields = ["secret_wrapped_key", "secret_iv", "secret_ciphertext"] as const
+const envelopeFields = ["secret_salt", "secret_iv", "secret_ciphertext"] as const
 
 function hasValidEnvelope(frontmatter: Record<string, unknown>): boolean {
   return (
