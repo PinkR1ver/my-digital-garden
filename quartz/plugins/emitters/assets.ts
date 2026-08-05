@@ -8,8 +8,12 @@ import { Argv } from "../../util/ctx"
 import { QuartzConfig } from "../../cfg"
 
 const filesToCopy = async (argv: Argv, cfg: QuartzConfig) => {
-  // glob all non MD files in content folder and copy it over
-  return await glob("**", argv.directory, ["**/*.md", ...cfg.configuration.ignorePatterns])
+  // glob all non MD files in content folder and copy it over,
+  // except markdown files inside attachments/ folders which are published
+  // as raw static files (e.g. agent handoffs) instead of rendered pages
+  const ignores = cfg.configuration.ignorePatterns.filter((p) => !p.includes("attachments"))
+  const fps = await glob("**", argv.directory, ignores)
+  return fps.filter((fp) => !fp.endsWith(".md") || fp.split("/").includes("attachments"))
 }
 
 export const Assets: QuartzEmitterPlugin = () => {
