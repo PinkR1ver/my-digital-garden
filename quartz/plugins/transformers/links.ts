@@ -1,5 +1,6 @@
 import { QuartzTransformerPlugin } from "../types"
 import {
+  FilePath,
   FullSlug,
   RelativeURL,
   SimpleSlug,
@@ -8,6 +9,8 @@ import {
   simplifySlug,
   splitAnchor,
   transformLink,
+  resolveRelative,
+  slugifyFilePath,
   joinSegments,
 } from "../../util/path"
 import path from "path"
@@ -100,26 +103,38 @@ export const CrawlLinks: QuartzTransformerPlugin<Partial<Options> | undefined> =
                 // don't process external links or intra-document anchors
                 const isInternal = !(isAbsoluteUrl(dest) || dest.startsWith("#"))
                 if (isInternal) {
-                  dest = node.properties.href = transformLink(
-                    file.data.slug!,
-                    dest,
-                    transformOptions,
-                  )
+                  // links to .md files that are not rendered (e.g. under attachments/)
+                  // keep their original relative path so they resolve to the raw file,
+                  // just like image assets
+                  const [destPath, destAnchor] = splitAnchor(decodeURI(dest))
+                  const destSlug = slugifyFilePath(stripSlashes(destPath) as FilePath)
+                  if (destPath.endsWith(".md") && !ctx.allSlugs.includes(destSlug)) {
+                    dest = node.properties.href = (resolveRelative(
+                      file.data.slug!,
+                      stripSlashes(destPath) as FullSlug,
+                    ) + destAnchor) as RelativeURL
+                  } else {
+                    dest = node.properties.href = transformLink(
+                      file.data.slug!,
+                      dest,
+                      transformOptions,
+                    )
 
-                  // url.resolve is considered legacy
-                  // WHATWG equivalent https://nodejs.dev/en/api/v18/url/#urlresolvefrom-to
-                  const url = new URL(dest, "https://base.com/" + stripSlashes(curSlug, true))
-                  const canonicalDest = url.pathname
-                  let [destCanonical, _destAnchor] = splitAnchor(canonicalDest)
-                  if (destCanonical.endsWith("/")) {
-                    destCanonical += "index"
+                    // url.resolve is considered legacy
+                    // WHATWG equivalent https://nodejs.dev/en/api/v18/url/#urlresolvefrom-to
+                    const url = new URL(dest, "https://base.com/" + stripSlashes(curSlug, true))
+                    const canonicalDest = url.pathname
+                    let [destCanonical, _destAnchor] = splitAnchor(canonicalDest)
+                    if (destCanonical.endsWith("/")) {
+                      destCanonical += "index"
+                    }
+
+                    // need to decodeURIComponent here as WHATWG URL percent-encodes everything
+                    const full = decodeURIComponent(stripSlashes(destCanonical, true)) as FullSlug
+                    const simple = simplifySlug(full)
+                    outgoing.add(simple)
+                    node.properties["data-slug"] = full
                   }
-
-                  // need to decodeURIComponent here as WHATWG URL percent-encodes everything
-                  const full = decodeURIComponent(stripSlashes(destCanonical, true)) as FullSlug
-                  const simple = simplifySlug(full)
-                  outgoing.add(simple)
-                  node.properties["data-slug"] = full
                 }
 
                 // rewrite link internals if prettylinks is on
