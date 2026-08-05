@@ -80,6 +80,12 @@ site.
 
 ## Opt-in Note Exports
 
+- `secret: true` marks an encrypted note. Its committed body is a hybrid
+  RSA-OAEP/AES-256-GCM envelope; the browser renders its Markdown only after the
+  matching private key is supplied locally. Plaintext authoring copies and
+  private keys belong under ignored `private/`. See
+  `.agents/docs/secret-notes.md` for the workflow and security boundary.
+
 - `print: true` in note frontmatter shows the existing print action.
 - `report: true` keeps the normal Quartz reading layout on screen, automatically
   shows the print action, and applies the A4 report typography, tables, figures,

@@ -1,4 +1,5 @@
 export { FrontMatter } from "./frontmatter"
+export { SecretNotes } from "./secret"
 export { GitHubFlavoredMarkdown } from "./gfm"
 export { CreatedModifiedDate } from "./lastmod"
 export { Latex } from "./latex"

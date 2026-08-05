@@ -93,6 +93,13 @@ declare module "vfile" {
         print: boolean
         slides: boolean
         report: boolean
+        secret: boolean
+        pub: string
+        secret_version: number
+        secret_algorithm: string
+        secret_wrapped_key: string
+        secret_iv: string
+        secret_ciphertext: string
         enableToc: string
         cssclasses: string[]
       }>

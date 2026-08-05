@@ -68,8 +68,9 @@ const config: QuartzConfig = {
       Plugin.TableOfContents(),
       Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
       Plugin.Description(),
+      Plugin.SecretNotes(),
     ],
-    filters: [Plugin.RemoveDrafts()],
+    filters: [Plugin.SecretNotesGuard(), Plugin.RemoveDrafts()],
     emitters: [
       Plugin.AliasRedirects(),
       Plugin.ComponentResources({ fontOrigin: "googleFonts" }),
