@@ -51,6 +51,43 @@ in `.agents/`.
 - For TypeScript, config, layout, or component changes, run `npm run check` when
   feasible.
 
+## Parallel Session Isolation
+
+This repository may be edited by multiple agent sessions at the same time.
+Branches alone do not isolate uncommitted or untracked files: sessions that use
+the same working directory still share one filesystem and can see, overwrite,
+build, or accidentally stage each other's work.
+
+- Every new note task or feature task must start on its own dedicated branch
+  **and** in its own dedicated `git worktree` before any task file is created or
+  edited.
+- Use `notes/<short-slug>` for note-only work and `feature/<short-slug>` for
+  application, Quartz, automation, or other code changes. An agent-specific
+  prefix such as `agent/<short-slug>` is also acceptable when required by its
+  publishing workflow.
+- Create the worktree from the latest intended base branch. Note work normally
+  targets `content/master`; full-site or Quartz work targets root `v4`.
+- Do not switch branches in the primary/shared working directory when another
+  session may be active. Do not assume an untracked file belongs to the branch
+  currently shown by `git status`.
+- Run builds, formatters, generators, and previews inside the task worktree, not
+  the shared primary worktree. A Quartz build deletes and regenerates `public/`,
+  so running it in a shared directory can disrupt another session even though
+  `public/` is ignored by Git.
+- Before staging or merging, inspect `git status`, `git diff`, and
+  `git worktree list`. Stage explicit paths only; never absorb files from a
+  different session merely because they are visible in the worktree.
+- When a note must be recorded in both repositories, use isolated worktrees for
+  both: commit the canonical note in `content/` first, then integrate the same
+  scoped content change into the root repository. Do not mix the two indexes.
+- If a task is discovered to have started in the shared worktree, stop before
+  moving, cleaning, resetting, or committing its files. Establish ownership
+  with the user or other session, then migrate it to an isolated worktree
+  without discarding changes.
+- Remove a task worktree only after its changes are committed or intentionally
+  abandoned, and only after confirming it contains no unrelated or untracked
+  work.
+
 ## Current Project Facts
 
 - Site title: `🎣 JudeW's Knowledge Brain`

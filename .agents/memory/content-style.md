@@ -30,6 +30,15 @@
 - User preference: when adding references to notes, use inline citation links in
   the body that jump to a lightweight bibliography entry. Prefer numeric
   citations such as `[1]`, `[2]`, `[3]` in the body.
+- 2026-08-05: Software product development records live under
+  `content/computer_sci/dev/<project>/`. Each project has a local MOC and uses
+  category-scoped sequential titles prefixed by the product name:
+  `Product Name｜Research NNN｜...`, `Product Name｜Report NNN｜...`,
+  `Product Name｜Decision NNN｜...`, and `Product Name｜Update NNN｜...`.
+  Development research should read
+  as a project record rather than a transplanted response: retain mechanisms,
+  evidence boundaries, measurements, and open questions; remove conversational
+  conclusions, sales-like recommendations, and implied final decisions.
 - 2026-07-23: Research notes should be written as durable knowledge objects, not
   as polished chat responses transplanted into Markdown. Avoid response-shaped
   structures such as "先说结论", exhaustive FAQ-style coverage, "适合/不适合",

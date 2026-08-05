@@ -35,4 +35,4 @@ date: 2024-05-21
 
 * [Software Development](computer_sci/dev/dev_MOC.md)
 * [Conway's Law](computer_sci/software_arch/conway_law.md)
-* [Git Worktree in Vibe Coding](computer_sci/vibe_coding/git_worktree_introduction.md)
+* [Git Branch、HEAD 与 Worktree：多 Session 并行的心智模型](computer_sci/vibe_coding/git_worktree_introduction.md)

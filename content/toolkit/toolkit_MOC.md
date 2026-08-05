@@ -16,6 +16,7 @@ date: 2026-04-30
 
 ## Shell and Terminal
 
+- [SSH + Ghostty 剪贴板未共享排查](toolkit/ssh_ghostty_clipboard_troubleshooting.md)
 - [CS2 on X11 4:3 Stretch with GNOME Top Bar](toolkit/linux_desktop/cs2_x11_4_3_stretch.md)
 - [How to deal with the error 35 by using proxy in curl](toolkit/curl/curl_set_proxy_error35.md)
 - [Helix Quick Learn](toolkit/helix/helix_cli_shortcuts.md)
@@ -24,6 +25,10 @@ date: 2026-04-30
 ## Paperless
 
 - [How to run paperless-ngx in windows](toolkit/paperless_ngx/How_to_run_paperless-ngx_in_windows.md)
+
+## Writing & AI Tools
+
+- [给 AI 生成的文档「去 AI 味」——工具与方法](toolkit/humanize_ai_writing_tools.md)
 
 ## Temporary Scripts and Study Aids
 
