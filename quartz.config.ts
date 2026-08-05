@@ -16,7 +16,7 @@ const config: QuartzConfig = {
     },
     locale: "en-US",
     baseUrl: "www.pinktalk.online",
-    ignorePatterns: ["private", "templates", ".obsidian", "arch"],
+    ignorePatterns: ["private", "templates", ".obsidian", "arch", "**/attachments/**/*.md"],
     defaultDateType: "created",
     theme: {
       cdnCaching: true,

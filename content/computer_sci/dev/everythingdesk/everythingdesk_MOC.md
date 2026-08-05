@@ -23,7 +23,7 @@ Product Name｜Update NNN｜变更主题
 ## Research
 
 - [Everything Desk｜Research 001｜实时信息架构与前端增量更新](computer_sci/dev/everythingdesk/research_001_realtime_information_architecture.md)
-  - [Everything Desk｜Research 001A｜Agent Handoff：实时信息架构](computer_sci/dev/everythingdesk/research_001_agent_handoff.md)
+  - [Agent Handoff（raw markdown）](https://www.pinktalk.online/computer_sci/dev/everythingdesk/attachments/research_001_agent_handoff.md)
 
 ## Reports
 

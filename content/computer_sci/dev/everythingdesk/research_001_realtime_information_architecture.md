@@ -19,7 +19,7 @@ tags:
 | Status | Exploratory |
 | Scope | 全球新闻、多资产价格、宏观数据、实时曲线与多 Panel Workspace |
 | Evidence snapshot | 2026-08-05 |
-| Agent handoff | [Everything Desk｜Research 001A｜Agent Handoff：实时信息架构](computer_sci/dev/everythingdesk/research_001_agent_handoff.md) |
+| Agent handoff | [Agent Handoff（raw markdown）](https://www.pinktalk.online/computer_sci/dev/everythingdesk/attachments/research_001_agent_handoff.md) |
 
 ## Summary
 
