@@ -1,17 +1,160 @@
 ---
 title: 给 AI 生成的文档「去 AI 味」——工具与方法
-secret: true
-date: 2026-08-05T00:00:00.000Z
+date: 2026-08-05
 tags:
   - ai-writing
   - tooling
   - documentation
   - vibe-coding
-secret_version: 2
-secret_algorithm: PBKDF2-SHA256+A256GCM
-secret_salt: d26T7lDO0opZHB06dvWgUQ==
-secret_iv: IaNrrNsHBo4/ocoh
-secret_ciphertext: >-
-  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
 ---
 
+## 问题在哪
+
+用 LLM 写文档有一个反复出现的抱怨：读起来不像人写的。
+
+这种「AI 味」来自两个源头。一个是**统计层面**的——某些词、句式、标点在 LLM 输出中出现的频率远高于人类写作（delve、tapestry、em dash、curly quotes、段落开头的 "However," 等等）。RLHF 训练加剧了这个问题：模型被训练成「有帮助的助手」，于是学会了固定的开场白（"Certainly!"、"Great question!"）、固定的结尾（"I hope this helps!"）、固定的过渡（"It is worth noting that..."）。
+
+另一个是**结构层面**的。LLM 生成的文本有可预测的组织模式：段落长度均匀、句式节奏单一、bullet list 密度高、先给结论再展开、开头结尾对称呼应。人类写作的节奏是不规则的——短句突然打断长句，有些段落只有一个句子，有些话题说着说着就跑偏了又被拉回来。
+
+这两个层面的特征已经被检测文献大量量化了。从 Wikipedia 社区维护的 "[Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_AI_Cleanup/AI_artificial_intelligence_in_Wikipedia)" 指南，到 arXiv 上 50+ 篇关于 AI text detection 的论文（perplexity、burstiness、stylometry、RLHF artifact detection），再到 GPTZero、Grammarly、Pangram 等商业检测器的工程实践——我们其实已经知道「什么东西让文本读起来像 AI」。
+
+Github 上出现了一批工具，试图把这些知识变成可操作的 agent skill——安装一个 skill，让 Claude Code / Cursor / Codex 在生成文档时自动避开这些痕迹。这些工具在方法论上有本质分歧，值得梳理。
+
+## 两种哲学
+
+### Prompt 驱动：让 LLM 自己对照清单改写
+
+这一派的逻辑是：LLM 本身知道什么是 AI 味（它见过足够多的例子），只需要给它一份详细的「AI 写作特征清单」，它就能对照自查、自行改写。
+
+- 不需要任何运行时依赖，只有一个 Markdown 文件
+- 改写的质量完全取决于宿主 LLM 的指令跟随能力
+- 无法量化「改得怎么样」——没有评分，没有 gate
+
+**代表**：
+
+| 项目 | Stars | 模式数 | 特点 |
+|---|---|---|---|
+| [blader/humanizer](https://github.com/blader/humanizer) | 33.7k | 33 | Wikipedia 直接翻译，最流行，有 voice calibration |
+| [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) | 15.2k | ~100 | 8 条硬规则，最激进（杀光所有副词） |
+| [harshaneel/humanize](https://github.com/harshaneel/humanize) | 332 | 9 levers | 50+ 篇论文驱动，有 forensic scorer (ai-check) |
+
+### 检测器驱动：用独立引擎先量化，再改写
+
+这一派的逻辑是：不能让 LLM 自己评自己——需要一个独立的、确定性的检测引擎，先算出「AI 味」的数值评分，再让 LLM 有针对性地改写。改写后重新跑检测，不通过就继续改。
+
+- 检测引擎可以用代码实现（正则、stylometry、统计指标），结果可复现
+- 可以集成到 CI/CD，作为文档质量门控
+- 误报是个现实问题——非母语写作者尤其容易触发
+
+**代表**：
+
+| 项目 | Stars | 检测引擎 | 特点 |
+|---|---|---|---|
+| [conorbronsdon/avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) | 2.8k | Node.js (47 类规则, 0-100 评分) | 最全面的规则目录（61 prose + 47 engine），覆盖 70+ 平台 |
+| [theclaymethod/unslop](https://github.com/theclaymethod/unslop) | 48 | Python (3 层扫描器: 短语→结构→轮廓, 313+77+6) | 工程最精良，440 用例 eval suite，有 voice teaching pipeline |
+| [brandonwise/humanizer](https://github.com/brandonwise/humanizer) | 108 | Node.js CLI (500+ 词汇, burstiness/TTR/Flesch-Kincaid) | 统计引擎最完善，同时输出 pattern score + uniformity score |
+
+## 核心工具深度对比
+
+### blader/humanizer —— 社区共识的基线
+
+33.7k stars 让它成为事实标准。核心是一份 ~8K token 的 SKILL.md，直接翻译 Wikipedia 的 "Signs of AI writing" 指南。33 个模式分四类：Content（虚高意义、模糊归因）、Language（AI 高频词汇、copula 回避）、Style（em dash 硬禁止、加粗滥用、curly quotes）、Communication（chatbot 痕迹、讨好语气）。
+
+两轮改写流程：初稿 → 「这段文字哪里最像 AI 写的？」→ 终稿。有一个关键约束：**改写不得添加原文没有的事实、人名、日期、引用**——意见是 voice，事实不是。
+
+它还有一个 「What NOT to flag」章节，列出了 13 种容易被误判为 AI 但其实不是的特征——比如非母语写作者常用的某些句式。这个误报意识在其他工具里很少见。
+
+### hardikpandya/stop-slop —— 最激进、最 opinionated
+
+只有 8 条规则，每条都是硬命令。最极端的一条：**杀光所有副词**——不只是 "really" "just" "literally"，而是所有 -ly 结尾的词全部干掉。另外几条也很有辨识度：禁止 Wh- 句子开头（"What makes this hard is..." → 直接说出那个具体的东西），禁止虚主语（"The data tells us..." → 谁说的？数据不会说话），禁止旁观的叙述者视角（"Nobody designed this" → "You don't sit down one day and decide to..."）。
+
+它的 false agency 检测是这一批工具里最好的——专门抓「无生命物体执行人类动作」的句式。但没有任何定制空间，只有一种声音（作者自己的），「杀光副词」这个规则在医学、法律、学术文本上会毁掉内容。
+
+### conorbronsdon/avoid-ai-writing —— 目录最全，引擎可运行
+
+61 个 prose 模式 + 47 个 engine 类型 + 112 词条三层替换表——规则数量是 humanizer 的两倍多。独有特性是区分了 Tier 1A（AI 频率标记，如 delve、tapestry）和 Tier 1B（简洁性编辑，如 utilize → use）。1A 是作者证据，1B 只是写得啰嗦——这个区分在哲学上很精细：不能因为改掉了冗余词就让文档看起来更像 AI。
+
+附带一个零依赖的 Node.js 检测引擎，可以单独跑，输出 0-100 的数值评分、HUMAN_ONLY/MIXED/AI_ONLY 分类、以及逐句高亮。引擎本身的文档用这个引擎自评，CI 会检查评分不漂移。
+
+主要代价是 SKILL.md 太大（~40K tokens），是所有工具里上下文开销最大的。
+
+### harshaneel/humanize —— 学术驱动，从检测文献反推改写规则
+
+The most intellectually grounded of the bunch。50+ 篇同行评审论文（arXiv 到 2026 年 4 月），把 9 个改写「杠杆」映射到 9 个检测信号：
+
+1. **Perplexity injection**（单词层面）——GPT-4 的 perplexity 大约在 20-30，人类写作在 80-100
+2. **Burstiness enforcement**（句子层面）——AI 的 burstiness 在 0.2-0.4，人类在 0.6-1.2。有一条可计数的硬规则：输出超过 80 词的文本中，最长句与最短句的长度差必须超过 20 词，且落在 10-20 词区间的句子不能超过一半
+3. **Hedge surgery**——砍掉 "it is worth noting"、"generally speaking" 等
+4. **Structural flattening**——拆除 templated rhetorical scaffolding
+5. **Specificity insertion**——"experts believe" → 具体人名、数据、日期
+6. **Voice and register**——包括 Slack/async register collapse 检测（AI 写的 Slack 消息读起来像 polished status report）
+7. **AI-transition removal**——However, Furthermore, Moreover, In addition...
+8. **Punctuation normalization**——em dash, semicolon, mid-sentence colon, curly quotes
+9. **RLHF voice strip**——最关键的杠杆（per arXiv 2605.19516），消除 instruction-tuning 带来的「助手语气」
+
+附带一个独立的 `ai-check` skill，做 9 维法医评分（0-27），输出五级判定 + AI 编辑比例估计。但这本质上是 LLM 模拟的检测——是语言模型假装自己是检测器，不是真检测。所以它也做了 Binoculars 的独立交叉验证。
+
+### theclaymethod/unslop —— 工程化最深，检测即宪法
+
+48 颗星但工程复杂度远超其他。核心设计：「检测承载信任」——检测必须是确定性的、可 benchmark 的、CI 可集成的。
+
+三层 Python 扫描器（stdlib only）：
+
+- **Phrase 层**：313 个 banned phrase，每个都带 contextual gating——"navigate" 对水手是合法的，"leverage" 当 3:1 比率用时也合法，但 "navigate challenges" 或 "leverage synergies" 会被抓
+- **Structure 层**：77 个结构模式 + 文档级 metrics（sentence_burstiness、paragraph_cv、triad_density、bold_colon_listicle_count、connective_paragraph_openers 等）
+- **Silhouette 层**：6 个 idea-arrangement tells——这是 unslop 最独特的贡献。检测的不是词或句式，而是**思想排列方式**：`callback_content`（开头出现的词在中段消失、结尾又回来——最强的单个信号）、`preview_fulfillment`（开头内容词原样出现在正文段首）、`role_entropy_bits`（cue-opener 角色像模板一样轮转）
+
+440 个 eval case，24 个 machine-readable gate，mutation-proof——删掉一个 scanner pattern，coverage gate 就会挂。
+
+Voice 系统也最完善：从聊天记录 harvest → stylometric fingerprint（character 3-gram, function-word delta, MTLD, impostor z-score）→ voice card → mimic under gates → refine loop。任何 mimic 如果重新引入了 slop，不管 voice 匹配多好都会被拒。
+
+代价是学习成本最高：需要 Python 环境，需要理解扫描器架构，voice 系统需要先收集聊天记录。
+
+## 中文生态
+
+中文社区的工具集中在通用散文领域：
+
+| 项目 | Stars | 定位 |
+|---|---|---|
+| [op7418/Humanizer-zh](https://github.com/op7418/Humanizer-zh) | 14.7k | blader/humanizer 的官方中文翻译，24 个模式 |
+| [Zeng-xiangkai/humanizer-document-zh](https://github.com/Zeng-xiangkai/humanizer-document-zh) | 3 | 中文学术论文/报告专用，28 模式 + 4 层自检（L1 硬规则 → L4 "活人感"），借鉴了软件测试的分层思路 |
+| [yiancode/noai-flavor](https://github.com/yiancode/noai-flavor) | 17 | 反 AI 模式库 + text/前端双轨提示词 |
+| [WhispeRre/zhoushuren-writing-studio](https://github.com/WhispeRre/zhoushuren-writing-studio) | 1 | 完整编辑工作流（公众号/笔记/观点），带 human-voice.md 和发布前 QA 门控 |
+
+一个明显的空白：**中文技术文档 / API 文档 / README 的专用去 AI 味工具不存在**。现有的 `--voice technical` 预设都是为英文文档设计的。
+
+## 文档写作的特殊约束
+
+技术文档的「去 AI 味」和通用散文有本质区别。散文可以砍掉所有 "However,"，但技术文档里 "Note that..." 是一个有实际功能的信号——它告诉读者接下来是一条边界条件或注意事项。散文可以要求长短句交替，但 API 参考文档的句式节奏受到信息密度的刚性约束。
+
+另一个隐藏问题是**代码注释和 commit message**——LLM 生成的注释容易写成 mini-essay（"This function is designed to..." → 删掉 "is designed to"，直接说做什么）。`HugoLopes45/llmstrip` 是目前唯一明确处理这个场景的工具：区分了 prose mode 和 code mode，可以集成 git hook 和 CI gate。
+
+## 几条未解决的张力
+
+**检测到底该多严？** 误报是一个没有好答案的问题。Stanford 的研究显示，商业检测器对非母语英语写作者的误报率超过 60%。avoid-ai-writing 的 README 明确说「这些信号有用，但不应该成为决策的唯一依据」——然后它还是提供了 0-100 的数值评分。评分的存在本身就会诱使人们把它当成判决。
+
+**声音定制 vs 规则刚性。** stop-slop 的「杀光副词」来自作者的写作偏好。humanizer 的 voice calibration 允许样本覆盖规则（包括 em dash 禁令）。unslop 的 voice system 更进一步——从聊天记录学你的声音，但任何引入 slop 的 mimic 都会被 gate 拦住。问题是：如果你的自然写作本身就包含一些「AI 味」特征呢？比如你确实喜欢用 em dash 和 "However," 开头——到底是你的 voice，还是你的 writing tic？
+
+**学术严谨 vs 可操作性。** harshaneel/humanize 是理论上最扎实的——每个改写规则都绑定到一个具体的 detection signal，有论文支撑。但它也是最难用的——你需要理解 perplexity、burstiness、RLHF artifact 这些概念才能用到位。相反，blader/humanizer 的理论基础就是 Wikipedia 的一个社区页面，但它是安装量最大的。
+
+**有没有可能，去 AI 味这件事本身就制造了一种新的 AI 味？** 如果足够多的人用相同的一组规则改写相同的文本，这些「反 AI 模式」本身会不会变成一种新的 detectable pattern？unslop 的 contribute pipeline 暗示了这种担忧——它设计了一个「wild specimen → eval row → structured PR」的流水线，因为 AI 写作的模式本身在持续演化。
+
+## 附：安装与使用
+
+所有工具的核心交付物都是一个 SKILL.md 文件，遵循 Agent Skills 规范，可以在 Claude Code、Cursor、Codex、OpenCode、Copilot、Windsurf 等 70+ 个 agent 里使用。
+
+```bash
+# 最流行的基线
+npx skills add blader/humanizer --global
+
+# 中文用户
+npx skills add op7418/Humanizer-zh --global
+
+# 如果需要检测引擎（Node.js）
+# avoid-ai-writing 和 brandonwise/humanizer 提供 CLI 评分
+
+# 如果需要 CI 门控（Python）
+# unslop 提供三层确定性扫描器
+```
+
+所有工具的作者都承认：这些方法**不能保证绕过 GPTZero、Grammarly 等商业检测器**。adversarial paraphrase 可以降低 88% 的检测率，但 learned classifier 的天花板仍然存在。这些工具的实际价值在于让**人类读者**感觉更自然，不是骗过机器。
