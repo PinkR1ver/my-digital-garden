@@ -5,6 +5,34 @@ Markdown contains only public metadata and an encrypted envelope. The browser
 receives no plaintext from the static site and decrypts only after the reader
 enters the matching passphrase.
 
+## Repository Layout
+
+The two repositories hold different copies of encrypted notes:
+
+- `Jude.W-s-Knowledge-Brain` (private): `master` keeps **plaintext** for
+  reading and editing in Obsidian. The `encrypted-notes` branch keeps the
+  **encrypted** copies and is the default local checkout. Both branches stay
+  in sync except for the envelope fields on secret notes.
+- `my-digital-garden` (public): `v4` always contains the **encrypted** copies
+  so the deployed site never ships plaintext.
+
+Because `content/` is a nested repo checked out inside the public repo's
+worktree, keeping the local `encrypted-notes` checkout active guarantees the
+public `v4` branch stays clean: its working tree already matches the encrypted
+state committed to `v4`.
+
+Authoring flow for a new secret note:
+
+1. Write plaintext in `content/` on the `encrypted-notes` branch (or in
+   `private/` and copy it in).
+2. Encrypt: `npm run secret:encrypt -- <note> --passphrase '<pw>' --output <note> --force`.
+3. Commit the encrypted copy on `encrypted-notes`; push the branch.
+4. Merge/integrate the same encrypted file into the public repo `v4`.
+5. To restore the plaintext copy on the private `master` (Obsidian-friendly),
+   decrypt and commit there too, or keep master updated from a decrypt step.
+
+Keep plaintext out of the public repo entirely.
+
 ## Cryptography
 
 - The passphrase is the only secret: no keypair files exist.
