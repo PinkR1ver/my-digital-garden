@@ -51,6 +51,8 @@ date: 2024-02-28
 
 * [🔍 Discoveries](hobbies/discoveries/discoveries_MOC.md)
 
+* [📡 FOMO](fomo/fomo_MOC.md)
+
 
 ⭐ Here to find my recent study:
 
