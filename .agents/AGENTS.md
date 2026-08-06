@@ -3,18 +3,26 @@
 This repository is Jude Wang's Quartz v4 digital garden. Agents should treat it
 as a public, long-lived knowledge base sourced from an Obsidian-style vault.
 
-## Read Order
+## Task-Driven Reading
 
-Before changing files, read these in order:
+Read only what the task needs. This agent file is loaded automatically; do not
+pre-read all docs upfront.
 
-1. `.agents/AGENTS.md`: current entry point and operating rules.
-2. `.agents/docs/project-overview.md`: stable repository structure and purpose.
-3. `.agents/docs/content-guidelines.md`: note-writing, MOC, linking, assets, and
-   privacy rules.
-4. `.agents/docs/quartz-deployment.md`: Quartz config, local build, and GitHub
-   Pages deployment details.
-5. Relevant files in `.agents/memory/` when the task depends on prior decisions
-   or user preferences.
+| Task type | Read |
+|-----------|------|
+| New note or edit existing note | `.agents/docs/content-guidelines.md` (frontmatter, links, MOC rules) |
+| New topic area or MOC restructure | above + `.agents/docs/project-overview.md` (content areas map) |
+| Secret/encrypted note | above + `.agents/docs/secret-notes.md` |
+| Quartz config, layout, deploy | `.agents/docs/quartz-deployment.md` |
+| Build, preview, or CI debugging | `.agents/docs/quartz-deployment.md` |
+| Task depends on prior decisions | relevant `.agents/memory/*.md` files (scan titles, read matching ones) |
+
+Before any file change, run `git status --short --branch` and look at the
+nearest MOC and one or two neighboring notes for style.
+
+After completing work, write one short memory file to `.agents/memory/` only
+if you learned something reusable: a user preference, a decision, or a
+non-obvious fact. Do not record what the repo already documents.
 
 ## Folder Roles
 
@@ -45,9 +53,10 @@ in `.agents/`.
   for the changed page. Do not commit or push until the user explicitly says to
   commit/push.
 - When committing note changes, always check both repos: `content/` (notes
-  only, branch `master`, remote `PinkR1ver/Jude.W-s-Knowledge-Brain`) and the
-  root (full Quartz site, branch `v4`, remote `PinkR1ver/my-digital-garden`).
-  Commit content/ first, then root. See `.agents/docs/project-overview.md`.
+  only, default branch `encrypted-notes`, remote `PinkR1ver/Jude.W-s-Knowledge-Brain`,
+  plaintext backup on `master`) and the root (full Quartz site, branch `v4`,
+  remote `PinkR1ver/my-digital-garden`). Commit content/ first, then root.
+  See `.agents/docs/project-overview.md`.
 - For TypeScript, config, layout, or component changes, run `npm run check` when
   feasible.
 
@@ -66,7 +75,7 @@ build, or accidentally stage each other's work.
   prefix such as `agent/<short-slug>` is also acceptable when required by its
   publishing workflow.
 - Create the worktree from the latest intended base branch. Note work normally
-  targets `content/master`; full-site or Quartz work targets root `v4`.
+  targets `content/encrypted-notes`; full-site or Quartz work targets root `v4`.
 - Do not switch branches in the primary/shared working directory when another
   session may be active. Do not assume an untracked file belongs to the branch
   currently shown by `git status`.
