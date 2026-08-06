@@ -1,6 +1,6 @@
 ---
-title: Git Branch、HEAD 与 Worktree：多 Session 并行的心智模型
-description: 解释 commit、branch、HEAD、index 与 worktree 的关系，以及多个 Agent session 如何用独立 branch 和 worktree 避免互相覆盖
+title: Git Branch、HEAD 与 Worktree：多个 Agent 同时干活不打架
+description: 解释 commit、branch、HEAD、index 与 worktree 的关系，以及怎样让多个 Agent session 各干各的互不覆盖
 date: 2026-01-13
 updated: 2026-08-05
 tags:
