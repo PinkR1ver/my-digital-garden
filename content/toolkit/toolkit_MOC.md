@@ -18,6 +18,7 @@ date: 2026-04-30
 
 - [SSH + Ghostty 剪贴板未共享排查](toolkit/ssh_ghostty_clipboard_troubleshooting.md)
 - [CS2 on X11 4:3 Stretch with GNOME Top Bar](toolkit/linux_desktop/cs2_x11_4_3_stretch.md)
+- [在 Ubuntu 上运行 FIFA 11：Wine、DXVK、手柄与双机 LAN](toolkit/linux_desktop/fifa11_on_ubuntu_wine.md)
 - [How to deal with the error 35 by using proxy in curl](toolkit/curl/curl_set_proxy_error35.md)
 - [Helix Quick Learn](toolkit/helix/helix_cli_shortcuts.md)
 - [oh-my-zsh theme powerlevel10k set conda env](toolkit/zsh/oh-my-zsh/p10k/p10k_set_anaconda_env.md)
