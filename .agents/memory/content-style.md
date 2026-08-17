@@ -39,6 +39,7 @@
   as a project record rather than a transplanted response: retain mechanisms,
   evidence boundaries, measurements, and open questions; remove conversational
   conclusions, sales-like recommendations, and implied final decisions.
+- 2026-08-16: When the user says a note "feels unprofessional", the expected workflow is: clone the upstream source, dispatch multiple parallel subagents to decompose the project structure/modularization with file-level evidence, run audit subagents mid-task to cross-check the decomposers' claims against source, then rewrite the note and run a final audit that checks BOTH facts (numbers against source, not README marketing) and AI/response flavor. The user wants frequent audits, not one pass. Correct README/marketing numbers against the actual source (screens, brokers, connectors, tool counts, live-trading gating) rather than repeating them.
 - 2026-07-23: Research notes should be written as durable knowledge objects, not
   as polished chat responses transplanted into Markdown. Avoid response-shaped
   structures such as "先说结论", exhaustive FAQ-style coverage, "适合/不适合",
