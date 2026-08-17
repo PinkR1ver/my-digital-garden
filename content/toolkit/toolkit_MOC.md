@@ -23,6 +23,10 @@ date: 2026-04-30
 - [Helix Quick Learn](toolkit/helix/helix_cli_shortcuts.md)
 - [oh-my-zsh theme powerlevel10k set conda env](toolkit/zsh/oh-my-zsh/p10k/p10k_set_anaconda_env.md)
 
+## Finance
+
+- [FinceptTerminal 入门笔记](toolkit/fincept_terminal.md)
+
 ## Paperless
 
 - [How to run paperless-ngx in windows](toolkit/paperless_ngx/How_to_run_paperless-ngx_in_windows.md)

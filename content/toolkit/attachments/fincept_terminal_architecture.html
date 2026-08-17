@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FinceptTerminal 架构 · DataHub 枢纽</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #eff1f5;
+      --color-ink:     #4c4f69;
+      --color-muted:   #6c6f85;
+      --color-accent:  #8839ef;
+      --font-sans:     "Bricolage Grotesque", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      --font-serif:    "DM Serif Display", "Songti SC", "Noto Serif CJK SC", serif;
+      --font-mono:     "JetBrains Mono", "Noto Sans Mono CJK SC", ui-monospace, monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1000px; width: 100%; }
+    .eyebrow { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 0.5rem; }
+    h1 { font-family: var(--font-serif); font-size: clamp(1.4rem, 2.2vw + 0.7rem, 1.8rem); font-weight: 400; letter-spacing: -0.01em; line-height: 1.2; color: var(--color-ink); margin-bottom: 1.25rem; }
+    svg { width: 100%; display: block; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">Architecture · Data plane</p>
+    <h1>FinceptTerminal 架构 · DataHub 枢纽</h1>
+
+    <svg viewBox="0 0 1000 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="fincept-arch-title fincept-arch-desc">
+      <title id="fincept-arch-title">FinceptTerminal 架构 · DataHub 枢纽</title>
+      <desc id="fincept-arch-desc">FinceptTerminal 组件连接图：Screens 和 Services 通过 DataHub 发布-订阅解耦，Services 向下分发到 Network、Python、Trading 三个适配器，MCP 向 Services 派发工具调用，DataHub 将缓存写入 Storage。</desc>
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#6c6f85"/></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#8839ef"/></marker>
+        <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1e66f5"/></marker>
+      </defs>
+
+      <rect width="100%" height="100%" fill="#eff1f5"/>
+
+      <!-- ===== 箭头（先画，在节点之下）===== -->
+      <!-- 1. Screens → DataHub · subscribe（虚线，异步） -->
+      <path d="M 200,72 H 268 Q 276,72 276,80 V 110 Q 276,118 284,118 H 360" fill="none" stroke="#6c6f85" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+
+      <!-- 2. Services → DataHub · publish（accent，主流程） -->
+      <path d="M 96,240 V 158 Q 96,150 104,150 H 360" fill="none" stroke="#8839ef" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+
+      <!-- 3. DataHub → Storage · cache -->
+      <line x1="450" y1="188" x2="450" y2="460" stroke="#6c6f85" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+      <!-- 4. Services → Network · fetch -->
+      <path d="M 200,256 H 612 Q 620,256 620,248 V 80 Q 620,72 628,72 H 680" fill="none" stroke="#6c6f85" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+      <!-- 5. Services → Python · run -->
+      <path d="M 200,272 H 628 Q 636,272 636,264 V 220 Q 636,212 644,212 H 680" fill="none" stroke="#6c6f85" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+      <!-- 6. Services → Trading · route -->
+      <path d="M 200,288 H 644 Q 652,288 652,296 V 344 Q 652,352 660,352 H 680" fill="none" stroke="#6c6f85" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+      <!-- 7. MCP → Services · tool dispatch（虚线） -->
+      <line x1="144" y1="440" x2="144" y2="304" stroke="#6c6f85" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+
+      <!-- ===== 箭头标签（带不透明遮罩，6-10px 间距）===== -->
+      <rect x="290" y="98" width="64" height="12" rx="2" fill="#eff1f5"/>
+      <text x="322" y="108" fill="#6c6f85" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.06em">SUBSCRIBE</text>
+
+      <rect x="208" y="130" width="48" height="12" rx="2" fill="#eff1f5"/>
+      <text x="232" y="140" fill="#8839ef" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.06em">PUBLISH</text>
+
+      <rect x="458" y="312" width="48" height="12" rx="2" fill="#eff1f5"/>
+      <text x="482" y="322" fill="#6c6f85" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.06em">CACHE</text>
+
+      <rect x="628" y="154" width="44" height="12" rx="2" fill="#eff1f5"/>
+      <text x="650" y="164" fill="#6c6f85" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.06em">FETCH</text>
+
+      <rect x="644" y="228" width="32" height="12" rx="2" fill="#eff1f5"/>
+      <text x="660" y="238" fill="#6c6f85" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.06em">RUN</text>
+
+      <rect x="660" y="300" width="40" height="12" rx="2" fill="#eff1f5"/>
+      <text x="680" y="310" fill="#6c6f85" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.06em">ROUTE</text>
+
+      <rect x="100" y="364" width="36" height="12" rx="2" fill="#eff1f5"/>
+      <text x="118" y="374" fill="#6c6f85" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.06em">TOOL</text>
+
+      <!-- ===== 节点 ===== -->
+      <!-- Screens · backend -->
+      <rect x="40" y="40" width="160" height="64" rx="6" fill="#eff1f5"/>
+      <rect x="40" y="40" width="160" height="64" rx="6" fill="#ffffff" stroke="#4c4f69" stroke-width="1"/>
+      <rect x="48" y="46" width="28" height="12" rx="2" fill="transparent" stroke="rgba(76,79,105,0.40)" stroke-width="0.8"/>
+      <text x="62" y="55" fill="#4c4f69" font-size="7" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.08em">UI</text>
+      <text x="120" y="76" fill="#4c4f69" font-size="12" font-weight="600" font-family="'Bricolage Grotesque', sans-serif" text-anchor="middle">Screens</text>
+      <text x="120" y="92" fill="#6c6f85" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">52 · lazy</text>
+
+      <!-- Services · backend -->
+      <rect x="40" y="240" width="160" height="64" rx="6" fill="#eff1f5"/>
+      <rect x="40" y="240" width="160" height="64" rx="6" fill="#ffffff" stroke="#4c4f69" stroke-width="1"/>
+      <rect x="48" y="246" width="28" height="12" rx="2" fill="transparent" stroke="rgba(76,79,105,0.40)" stroke-width="0.8"/>
+      <text x="62" y="255" fill="#4c4f69" font-size="7" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.08em">SVC</text>
+      <text x="120" y="276" fill="#4c4f69" font-size="12" font-weight="600" font-family="'Bricolage Grotesque', sans-serif" text-anchor="middle">Services</text>
+      <text x="120" y="292" fill="#6c6f85" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">43 · domain</text>
+
+      <!-- MCP · backend -->
+      <rect x="40" y="440" width="160" height="64" rx="6" fill="#eff1f5"/>
+      <rect x="40" y="440" width="160" height="64" rx="6" fill="#ffffff" stroke="#4c4f69" stroke-width="1"/>
+      <rect x="48" y="446" width="28" height="12" rx="2" fill="transparent" stroke="rgba(76,79,105,0.40)" stroke-width="0.8"/>
+      <text x="62" y="455" fill="#4c4f69" font-size="7" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.08em">MCP</text>
+      <text x="120" y="476" fill="#4c4f69" font-size="12" font-weight="600" font-family="'Bricolage Grotesque', sans-serif" text-anchor="middle">MCP</text>
+      <text x="120" y="492" fill="#6c6f85" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">36 groups</text>
+
+      <!-- DataHub · FOCAL -->
+      <rect x="360" y="100" width="180" height="88" rx="6" fill="#eff1f5"/>
+      <rect x="360" y="100" width="180" height="88" rx="6" fill="rgba(136,57,239,0.08)" stroke="#8839ef" stroke-width="1"/>
+      <rect x="368" y="106" width="28" height="12" rx="2" fill="transparent" stroke="rgba(136,57,239,0.50)" stroke-width="0.8"/>
+      <text x="382" y="115" fill="#8839ef" font-size="7" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.08em">HUB</text>
+      <text x="450" y="140" fill="#4c4f69" font-size="13" font-weight="600" font-family="'Bricolage Grotesque', sans-serif" text-anchor="middle">DataHub</text>
+      <text x="450" y="158" fill="#6c6f85" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">pub/sub · TTL</text>
+
+      <!-- Storage · store -->
+      <rect x="360" y="460" width="180" height="64" rx="6" fill="#eff1f5"/>
+      <rect x="360" y="460" width="180" height="64" rx="6" fill="rgba(76,79,105,0.05)" stroke="#6c6f85" stroke-width="1"/>
+      <rect x="368" y="466" width="28" height="12" rx="2" fill="transparent" stroke="rgba(108,111,133,0.50)" stroke-width="0.8"/>
+      <text x="382" y="475" fill="#6c6f85" font-size="7" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.08em">DB</text>
+      <text x="450" y="496" fill="#4c4f69" font-size="12" font-weight="600" font-family="'Bricolage Grotesque', sans-serif" text-anchor="middle">Storage</text>
+      <text x="450" y="512" fill="#6c6f85" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">SQLite · AES-GCM</text>
+
+      <!-- Network · external -->
+      <rect x="680" y="40" width="160" height="64" rx="6" fill="#eff1f5"/>
+      <rect x="680" y="40" width="160" height="64" rx="6" fill="rgba(76,79,105,0.03)" stroke="rgba(76,79,105,0.30)" stroke-width="1"/>
+      <rect x="688" y="46" width="28" height="12" rx="2" fill="transparent" stroke="rgba(76,79,105,0.22)" stroke-width="0.8"/>
+      <text x="702" y="55" fill="#6c6f85" font-size="7" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.08em">NET</text>
+      <text x="760" y="76" fill="#4c4f69" font-size="12" font-weight="600" font-family="'Bricolage Grotesque', sans-serif" text-anchor="middle">Network</text>
+      <text x="760" y="92" fill="#6c6f85" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">HTTP · WS · cloud</text>
+
+      <!-- Python · external -->
+      <rect x="680" y="180" width="160" height="64" rx="6" fill="#eff1f5"/>
+      <rect x="680" y="180" width="160" height="64" rx="6" fill="rgba(76,79,105,0.03)" stroke="rgba(76,79,105,0.30)" stroke-width="1"/>
+      <rect x="688" y="186" width="28" height="12" rx="2" fill="transparent" stroke="rgba(76,79,105,0.22)" stroke-width="0.8"/>
+      <text x="702" y="195" fill="#6c6f85" font-size="7" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.08em">PY</text>
+      <text x="760" y="216" fill="#4c4f69" font-size="12" font-weight="600" font-family="'Bricolage Grotesque', sans-serif" text-anchor="middle">Python</text>
+      <text x="760" y="232" fill="#6c6f85" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">QProcess · uv</text>
+
+      <!-- Trading · backend -->
+      <rect x="680" y="320" width="160" height="64" rx="6" fill="#eff1f5"/>
+      <rect x="680" y="320" width="160" height="64" rx="6" fill="#ffffff" stroke="#4c4f69" stroke-width="1"/>
+      <rect x="688" y="326" width="28" height="12" rx="2" fill="transparent" stroke="rgba(76,79,105,0.40)" stroke-width="0.8"/>
+      <text x="702" y="335" fill="#4c4f69" font-size="7" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.08em">TRD</text>
+      <text x="760" y="356" fill="#4c4f69" font-size="12" font-weight="600" font-family="'Bricolage Grotesque', sans-serif" text-anchor="middle">Trading</text>
+      <text x="760" y="372" fill="#6c6f85" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">22 brokers · paper/live</text>
+
+      <!-- ===== 底部注释 ===== -->
+      <text x="40" y="536" fill="#6c6f85" font-size="8.5" font-family="'Bricolage Grotesque', 'PingFang SC', sans-serif" font-style="italic">Data plane 是这套架构的枢纽——one-fetch/many-subscribers + TTL 缓存，而不是「每个屏幕各自发 HTTP」。</text>
+
+      <!-- ===== Legend ===== -->
+      <line x1="40" y1="548" x2="960" y2="548" stroke="rgba(76,79,105,0.10)" stroke-width="0.8"/>
+      <text x="40" y="566" fill="#6c6f85" font-size="8" font-family="'JetBrains Mono', monospace" letter-spacing="0.18em">LEGEND</text>
+
+      <rect x="40" y="572" width="14" height="10" rx="2" fill="rgba(136,57,239,0.08)" stroke="#8839ef" stroke-width="1"/>
+      <text x="60" y="580" fill="#6c6f85" font-size="8.5" font-family="'Bricolage Grotesque', sans-serif">Focal / hub</text>
+
+      <rect x="156" y="572" width="14" height="10" rx="2" fill="#ffffff" stroke="#4c4f69" stroke-width="1"/>
+      <text x="176" y="580" fill="#6c6f85" font-size="8.5" font-family="'Bricolage Grotesque', sans-serif">Module</text>
+
+      <rect x="256" y="572" width="14" height="10" rx="2" fill="rgba(76,79,105,0.05)" stroke="#6c6f85" stroke-width="1"/>
+      <text x="276" y="580" fill="#6c6f85" font-size="8.5" font-family="'Bricolage Grotesque', sans-serif">Store</text>
+
+      <rect x="340" y="572" width="14" height="10" rx="2" fill="rgba(76,79,105,0.03)" stroke="rgba(76,79,105,0.30)" stroke-width="1"/>
+      <text x="360" y="580" fill="#6c6f85" font-size="8.5" font-family="'Bricolage Grotesque', sans-serif">External</text>
+
+      <line x1="448" y1="577" x2="476" y2="577" stroke="#6c6f85" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+      <text x="484" y="580" fill="#6c6f85" font-size="8.5" font-family="'Bricolage Grotesque', sans-serif">subscribe / dispatch</text>
+
+      <line x1="616" y1="577" x2="644" y2="577" stroke="#8839ef" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+      <text x="652" y="580" fill="#6c6f85" font-size="8.5" font-family="'Bricolage Grotesque', sans-serif">publish</text>
+
+      <line x1="716" y1="577" x2="744" y2="577" stroke="#6c6f85" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <text x="752" y="580" fill="#6c6f85" font-size="8.5" font-family="'Bricolage Grotesque', sans-serif">call / fetch</text>
+    </svg>
+  </div>
+</body>
+</html>
