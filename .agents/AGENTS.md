@@ -42,6 +42,14 @@ in `.agents/`.
 - Normal note work should stay in `content/`; Quartz internals under `quartz/`
   should be changed only when the task explicitly requires it.
 - Preserve the author's bilingual, Obsidian-style, MOC-driven note system.
+- New or rewritten Chinese prose notes should be checked against the
+  `humanizer-zh` skill at `.agents/skills/humanizer-zh/`. Read its `SKILL.md`
+  first. Treat it as a pattern checklist, not a word blacklist; most of its
+  rules carry explicit do-not-change exceptions, so verify each hit in context
+  before editing. Two boundaries matter for this repo: frontmatter, code
+  blocks, inline code, link targets, and table data are protected, and the
+  skill serves human readers only — never use it to evade AI detectors. Apply
+  this to new work only; do not sweep or retrofit existing notes.
 - Do not move ignored/private material into public content without explicit user
   approval.
 - Before editing, run `git status --short --branch` and inspect nearby notes or

@@ -58,3 +58,7 @@ date: 2024-01-17
 - [Model Context Protocol MCP](computer_sci/llm/agent/model_context_protocol_mcp.md)
 - [Motion MCP：把视频工作室接进 Agent](computer_sci/llm/agent/motion_so_mcp.md)
 - [Embed vs. Transform](computer_sci/llm/appendix/embed_vs_transform.md)
+
+## Models and Paradigms
+
+- [Jev 与 System One：把"决策"从文本生成里拆出来](computer_sci/llm/jev_system_one.md)

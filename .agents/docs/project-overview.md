@@ -55,15 +55,26 @@ published as a static website.
 
 `content/` is a **nested git repository** (not a submodule) that tracks notes independently:
 
-| Repo | Remote | Branch |
-| :--- | :--- | :--- |
-| Root (Quartz site) | `github.com/PinkR1ver/my-digital-garden` | `v4` |
-| `content/` (notes only) | `github.com/PinkR1ver/Jude.W-s-Knowledge-Brain` | `master` |
+| Repo | Remote | Branch | Holds |
+| :--- | :--- | :--- | :--- |
+| Root (Quartz site) | `github.com/PinkR1ver/my-digital-garden` | `v4` | the site; its `content/` copy is always the **encrypted** state |
+| `content/` (notes only) | `github.com/PinkR1ver/Jude.W-s-Knowledge-Brain` | `encrypted-notes` | **default local checkout** — note work targets this branch |
+| `content/` (notes only) | same repo | `master` | **plaintext** mirror, for reading and editing in Obsidian |
 
 When committing and pushing, **always check both repos**:
 
-1. Run `git status` in `content/` first — stage and commit any note changes, push to `master`
-2. Run `git status` in the root — stage and commit any note + infrastructure changes, push to `v4`
+1. Run `git status` in `content/` first — stage and commit note changes on
+   `encrypted-notes`, and push that branch. Note PRs merge into
+   `encrypted-notes`, not `master`.
+2. Keep the plaintext `master` mirror in sync from `encrypted-notes`. Ordinary
+   notes are byte-identical on both branches; only notes with `secret: true`
+   differ, and only in the encrypted envelope. See `.agents/docs/secret-notes.md`.
+3. Run `git status` in the root — stage and commit any note + infrastructure
+   changes, push to `v4`.
+
+Note: GitHub's *default* branch for the private notes repo is `master`, but the
+default **local checkout** and the branch note PRs target is `encrypted-notes`.
+Do not use the GitHub default as a signal for where note work goes.
 
 ### Why?
 
