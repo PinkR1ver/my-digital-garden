@@ -26,6 +26,17 @@
   - `.agents/docs/project-overview.md` previously listed only `master` and said
     to push note work there; corrected on 2026-09-23. `origin/HEAD` still points
     at `master`, so do not infer the working branch from it.
-- 2026-09-23: The content repo was 4 commits ahead on `encrypted-notes` versus
-  `master` (note PRs #8/#9 merged into `encrypted-notes` only). Expect `master`
-  to lag; that is the documented plaintext-mirror flow, not a divergence bug.
+- 2026-10-18: Jude's two standing sync rules for this repo:
+  1. **Pull the primary working directory to latest** after note work lands on
+     `v4`, so Obsidian sees new notes. Check `git status` first — untracked
+     files (e.g. vendored skills) do not block a pull but are easy to forget
+     when staging later.
+  2. **Keep the content repo's two branches in sync.** `encrypted-notes` and
+     `master` must end at the same commit. Verify with
+     `git rev-list --left-right --count origin/encrypted-notes...origin/master`
+     and expect `0  0`.
+- 2026-10-18: Corrected an earlier claim here. I had recorded that `master`
+  lagged `encrypted-notes` by 4 commits. Re-checked against the **remote**, both
+  were at `84315de` (0/0) — the divergence I saw was stale local data, and
+  note PRs do merge plaintext copies forward to `master`. Do not infer branch
+  drift from local refs alone; compare against `origin/`.

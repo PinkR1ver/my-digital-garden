@@ -65,6 +65,15 @@ in `.agents/`.
   plaintext backup on `master`) and the root (full Quartz site, branch `v4`,
   remote `PinkR1ver/my-digital-garden`). Commit content/ first, then root.
   See `.agents/docs/project-overview.md`.
+- Two standing sync rules that apply after note work lands:
+  1. **Pull the primary working directory to the latest `v4`** so Obsidian sees
+     the new notes. Check `git status` before pulling, and remember that
+     untracked files installed during the task (skills, lockfiles) still need
+     their own commit.
+  2. **Leave the content repo's `encrypted-notes` and `master` at the same
+     commit.** Verify against the remote, not local refs:
+     `git -C content rev-list --left-right --count origin/encrypted-notes...origin/master`
+     must print `0 0`. Note PRs merge plaintext forward to `master`.
 - For TypeScript, config, layout, or component changes, run `npm run check` when
   feasible.
 
