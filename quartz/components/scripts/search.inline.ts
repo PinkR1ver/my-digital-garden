@@ -142,6 +142,8 @@ function highlightHTML(searchTerm: string, el: HTMLElement) {
   return html.body
 }
 
+bindAgentLife()
+
 document.addEventListener("nav", async (e: CustomEventMap["nav"]) => {
   const currentSlug = e.detail.url
   const data = await fetchData
@@ -435,8 +437,16 @@ document.addEventListener("nav", async (e: CustomEventMap["nav"]) => {
 
   document.addEventListener("keydown", shortcutHandler)
   window.addCleanup(() => document.removeEventListener("keydown", shortcutHandler))
-  searchIcon?.addEventListener("click", () => showSearch("basic"))
-  window.addCleanup(() => searchIcon?.removeEventListener("click", () => showSearch("basic")))
+  const openFromIcon = () => showSearch("basic")
+  const openFromIconKey = (event: KeyboardEvent) => {
+    if (event.key !== "Enter" && event.key !== " ") return
+    event.preventDefault()
+    openFromIcon()
+  }
+  searchIcon?.addEventListener("click", openFromIcon)
+  searchIcon?.addEventListener("keydown", openFromIconKey)
+  window.addCleanup(() => searchIcon?.removeEventListener("click", openFromIcon))
+  window.addCleanup(() => searchIcon?.removeEventListener("keydown", openFromIconKey))
   searchBar?.addEventListener("input", onType)
   window.addCleanup(() => searchBar?.removeEventListener("input", onType))
 
@@ -465,4 +475,66 @@ async function fillDocument(data: { [key: FullSlug]: ContentDetails }) {
   }
 
   return await Promise.all(promises)
+}
+
+function bindAgentLife() {
+  const w = window as Window & { __searchAgentLife?: boolean }
+  if (w.__searchAgentLife) return
+  w.__searchAgentLife = true
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+
+  let px = window.innerWidth * 0.7
+  let py = window.innerHeight * 0.3
+  let lastMove = 0
+  document.addEventListener(
+    "pointermove",
+    (event) => {
+      px = event.clientX
+      py = event.clientY
+      lastMove = performance.now()
+    },
+    { passive: true },
+  )
+
+  const blink = () => {
+    document.querySelectorAll(".search-agent").forEach((node) => {
+      const el = node as HTMLElement
+      if (el.getBoundingClientRect().width < 2) return
+      el.classList.add("is-blinking")
+      window.setTimeout(() => el.classList.remove("is-blinking"), 150)
+    })
+    window.setTimeout(blink, 2400 + Math.random() * 2200)
+  }
+  window.setTimeout(blink, 900)
+
+  const gaze = new WeakMap<Element, { x: number; y: number }>()
+  const tick = (now: number) => {
+    const tracking = now - lastMove < 700
+    document.querySelectorAll(".search-agent").forEach((node) => {
+      const el = node as HTMLElement
+      const box = el.getBoundingClientRect()
+      if (box.width < 2) return
+      const cx = box.left + box.width / 2
+      const cy = box.top + box.height / 2
+      let x = 0.32 + Math.sin(now / 1300) * 0.38
+      let y = -0.42 + Math.cos(now / 1600) * 0.22
+      if (tracking) {
+        x = Math.max(-1, Math.min(1, (px - cx) / (box.width * 1.6)))
+        y = Math.max(-1, Math.min(1, (py - cy) / (box.height * 1.6)))
+      }
+      const prev = gaze.get(el) ?? { x: 0.35, y: -0.45 }
+      const next = { x: prev.x + (x - prev.x) * 0.18, y: prev.y + (y - prev.y) * 0.18 }
+      gaze.set(el, next)
+      el.style.setProperty("--look-x", next.x.toFixed(3))
+      el.style.setProperty("--look-y", next.y.toFixed(3))
+      el
+        .querySelector(".agent-look")
+        ?.setAttribute(
+          "transform",
+          `translate(${(next.x * 4.4).toFixed(2)} ${(next.y * 3.6).toFixed(2)})`,
+        )
+    })
+    requestAnimationFrame(tick)
+  }
+  requestAnimationFrame(tick)
 }
